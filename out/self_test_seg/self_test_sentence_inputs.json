@@ -1,0 +1,36 @@
+{
+  "target_segments": 5,
+  "sentences": [
+    {
+      "idx": 0,
+      "sentenceId": "P0001_L0001_S0001",
+      "text": "s1",
+      "weight": 1.0
+    },
+    {
+      "idx": 1,
+      "sentenceId": "P0001_L0001_S0002",
+      "text": "s2",
+      "weight": 2.0
+    },
+    {
+      "idx": 2,
+      "sentenceId": "P0001_L0001_S0003",
+      "text": "s3",
+      "weight": 3.0
+    },
+    {
+      "idx": 3,
+      "sentenceId": "P0001_L0001_S0004",
+      "text": "s4",
+      "weight": 4.0
+    },
+    {
+      "idx": 4,
+      "sentenceId": "P0001_L0001_S0005",
+      "text": "s5",
+      "weight": 5.0
+    }
+  ],
+  "params": {}
+}

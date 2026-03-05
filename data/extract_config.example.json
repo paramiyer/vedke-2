@@ -1,0 +1,10 @@
+{
+  "pdf": "data/ganapatiaccent.pdf",
+  "pages": "1,2",
+  "out": "out/ganapati/pages_trimmed",
+  "prefix": "page",
+  "trim": {
+    "top_ratio": 0.08,
+    "bottom_ratio": 0.06
+  }
+}

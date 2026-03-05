@@ -1,0 +1,141 @@
+{
+  "target_segments": 4,
+  "original_K": 7,
+  "filtered_K": 4,
+  "filtered_out": [
+    {
+      "original_idx": 1,
+      "sentenceId": "P0001_L0001_S0002",
+      "text": "Visit www.example.com now",
+      "reasons": [
+        "ASCII_RATIO_GE_0_25",
+        "EMAIL_OR_URL",
+        "NO_DEVANAGARI_WITH_ALPHA"
+      ],
+      "ascii_ratio": 0.92
+    },
+    {
+      "original_idx": 3,
+      "sentenceId": "P0001_L0001_S0004",
+      "text": "Email: test@example.com",
+      "reasons": [
+        "ASCII_RATIO_GE_0_25",
+        "EMAIL_OR_URL",
+        "NO_DEVANAGARI_WITH_ALPHA"
+      ],
+      "ascii_ratio": 0.956522
+    },
+    {
+      "original_idx": 5,
+      "sentenceId": "P0001_L0001_S0006",
+      "text": "12345",
+      "reasons": [
+        "ASCII_RATIO_GE_0_25",
+        "NUMERIC_ONLY_MARKER"
+      ],
+      "ascii_ratio": 1.0
+    }
+  ],
+  "mapping": [
+    {
+      "filtered_idx": 0,
+      "original_idx": 0,
+      "sentenceId": "P0001_L0001_S0001"
+    },
+    {
+      "filtered_idx": 1,
+      "original_idx": 2,
+      "sentenceId": "P0001_L0001_S0003"
+    },
+    {
+      "filtered_idx": 2,
+      "original_idx": 4,
+      "sentenceId": "P0001_L0001_S0005"
+    },
+    {
+      "filtered_idx": 3,
+      "original_idx": 6,
+      "sentenceId": "P0001_L0001_S0007"
+    }
+  ],
+  "sentences": [
+    {
+      "idx": 0,
+      "sentenceId": "P0001_L0001_S0001",
+      "text": "ॐ गणपतये नमः।",
+      "weight": 1.0,
+      "start_ms_trimmed": 0.0,
+      "end_ms_trimmed": 1008.0,
+      "trim_leading_ms": 64.0,
+      "start_ms_original": 64.0,
+      "end_ms_original": 1072.0,
+      "duration_ms": 1008.0,
+      "silence_width_ms": 368.0,
+      "rms_db_at_end": -65.9511,
+      "contrast_db": 7.976,
+      "confidence": 0.54578,
+      "mapping_original_idx": 0
+    },
+    {
+      "idx": 1,
+      "sentenceId": "P0001_L0001_S0003",
+      "text": "देवाय नमः॥",
+      "weight": 3.0,
+      "start_ms_trimmed": 1008.0,
+      "end_ms_trimmed": 2448.0,
+      "trim_leading_ms": 64.0,
+      "start_ms_original": 1072.0,
+      "end_ms_original": 2512.0,
+      "duration_ms": 1440.0,
+      "silence_width_ms": 352.0,
+      "rms_db_at_end": -66.1216,
+      "contrast_db": 14.1075,
+      "confidence": 0.492626,
+      "mapping_original_idx": 2
+    },
+    {
+      "idx": 2,
+      "sentenceId": "P0001_L0001_S0005",
+      "text": "अग्निमीळे पुरोहितम्।",
+      "weight": 5.0,
+      "start_ms_trimmed": 2448.0,
+      "end_ms_trimmed": 5360.0,
+      "trim_leading_ms": 64.0,
+      "start_ms_original": 2512.0,
+      "end_ms_original": 5424.0,
+      "duration_ms": 2912.0,
+      "silence_width_ms": 368.0,
+      "rms_db_at_end": -66.6288,
+      "contrast_db": 6.8727,
+      "confidence": 0.54451,
+      "mapping_original_idx": 4
+    },
+    {
+      "idx": 3,
+      "sentenceId": "P0001_L0001_S0007",
+      "text": "त्वमेव प्रत्यक्षं तत्त्वमसि॥",
+      "weight": 7.0,
+      "start_ms_trimmed": 5360.0,
+      "end_ms_trimmed": 9886.0,
+      "trim_leading_ms": 64.0,
+      "start_ms_original": 5424.0,
+      "end_ms_original": 9950.0,
+      "duration_ms": 4526.0,
+      "silence_width_ms": 288.0,
+      "rms_db_at_end": -112.1931,
+      "contrast_db": 36.9525,
+      "confidence": 0.417596,
+      "mapping_original_idx": 6
+    }
+  ],
+  "params": {
+    "pause_bonus_danda": 1.2,
+    "pause_bonus_double_danda": 1.5,
+    "alpha_svara": 0.15,
+    "min_seg_ms": 900.0,
+    "max_seg_ms": 20000.0,
+    "boundary_silence_window_ms": 200,
+    "duration_prior_strength": 1.0
+  },
+  "trim_leading_ms": 64.0
+}

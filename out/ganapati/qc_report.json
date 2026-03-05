@@ -1,0 +1,11 @@
+{
+  "sentences_missing_end_punct": [
+    "P0003_L0002_S0005",
+    "P0004_L0018_S0029",
+    "P0004_L0019_S0029",
+    "P0004_L0020_S0029",
+    "P0004_L0022_S0029"
+  ],
+  "parse_fail_tokenIds": [],
+  "duplicate_tokenIds": []
+}

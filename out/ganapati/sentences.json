@@ -1,0 +1,4795 @@
+[
+  {
+    "sentenceId": "P0002_L0004_S0001",
+    "page": 2,
+    "line": 4,
+    "sentence": 1,
+    "tokenIds": [
+      "P0002_L0004_S0001_T0005",
+      "P0002_L0004_S0001_T0006",
+      "P0002_L0004_S0001_T0007",
+      "P0002_L0004_S0001_T0008",
+      "P0002_L0004_S0001_T0009",
+      "P0002_L0004_S0001_T0010"
+    ],
+    "tokens": [
+      "ॐ",
+      "भ॒द्रं",
+      "कर्णे॑भिः",
+      "श‍ृणु॒याम॑",
+      "देवाः",
+      "।"
+    ],
+    "text": "ॐ भ॒द्रं कर्णे॑भिः श‍ृणु॒याम॑ देवाः।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0002_L0004_S0001_T0010",
+    "wordCount": 5,
+    "punctCount": 1,
+    "svaraCount": 3,
+    "svaraRatio": 0.6,
+    "widthSumWords": 103.281,
+    "widthSumAll": 108.83200000000001,
+    "bbox": {
+      "x0": 36.0,
+      "y0": 188.545,
+      "x1": 163.23999999999998,
+      "y1": 209.94799999999998
+    }
+  },
+  {
+    "sentenceId": "P0002_L0004_S0002",
+    "page": 2,
+    "line": 4,
+    "sentence": 2,
+    "tokenIds": [
+      "P0002_L0004_S0002_T0011",
+      "P0002_L0004_S0002_T0012",
+      "P0002_L0004_S0002_T0013"
+    ],
+    "tokens": [
+      "भ॒द्रं",
+      "प॑श्येमा॒क्षभि॒र्यज॑त्राः",
+      "।"
+    ],
+    "text": "भ॒द्रं प॑श्येमा॒क्षभि॒र्यज॑त्राः।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0002_L0004_S0002_T0013",
+    "wordCount": 2,
+    "punctCount": 1,
+    "svaraCount": 2,
+    "svaraRatio": 1.0,
+    "widthSumWords": 85.334,
+    "widthSumAll": 90.885,
+    "bbox": {
+      "x0": 166.195,
+      "y0": 188.545,
+      "x1": 263.35699999999997,
+      "y1": 209.94799999999998
+    }
+  },
+  {
+    "sentenceId": "P0002_L0005_S0003",
+    "page": 2,
+    "line": 5,
+    "sentence": 3,
+    "tokenIds": [
+      "P0002_L0005_S0003_T0014",
+      "P0002_L0005_S0003_T0015",
+      "P0002_L0005_S0003_T0016"
+    ],
+    "tokens": [
+      "स्थि॒रैरङ्गै᳚स्तुष्टु॒वाꣳ",
+      "स॑स्त॒नूभिः॑",
+      "।"
+    ],
+    "text": "स्थि॒रैरङ्गै᳚स्तुष्टु॒वाꣳ स॑स्त॒नूभिः॑।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0002_L0005_S0003_T0016",
+    "wordCount": 2,
+    "punctCount": 1,
+    "svaraCount": 2,
+    "svaraRatio": 1.0,
+    "widthSumWords": 105.507,
+    "widthSumAll": 111.058,
+    "bbox": {
+      "x0": 36.0,
+      "y0": 206.996,
+      "x1": 156.225,
+      "y1": 229.17000000000002
+    }
+  },
+  {
+    "sentenceId": "P0002_L0005_S0004",
+    "page": 2,
+    "line": 5,
+    "sentence": 4,
+    "tokenIds": [
+      "P0002_L0005_S0004_T0017",
+      "P0002_L0005_S0004_T0018",
+      "P0002_L0005_S0004_T0019",
+      "P0002_L0005_S0004_T0020"
+    ],
+    "tokens": [
+      "व्यशे॑म",
+      "दे॒वहि॑तं॒",
+      "यदायुः॑",
+      "।"
+    ],
+    "text": "व्यशे॑म दे॒वहि॑तं॒ यदायुः॑।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0002_L0005_S0004_T0020",
+    "wordCount": 3,
+    "punctCount": 1,
+    "svaraCount": 3,
+    "svaraRatio": 1.0,
+    "widthSumWords": 78.245,
+    "widthSumAll": 83.796,
+    "bbox": {
+      "x0": 159.181,
+      "y0": 206.996,
+      "x1": 257.824,
+      "y1": 228.399
+    }
+  },
+  {
+    "sentenceId": "P0002_L0006_S0005",
+    "page": 2,
+    "line": 6,
+    "sentence": 5,
+    "tokenIds": [
+      "P0002_L0006_S0005_T0021",
+      "P0002_L0006_S0005_T0022",
+      "P0002_L0006_S0005_T0023",
+      "P0002_L0006_S0005_T0024",
+      "P0002_L0006_S0005_T0025"
+    ],
+    "tokens": [
+      "स्व॒स्ति",
+      "न॒",
+      "इन्द्रो॑",
+      "वृ॒द्धश्र॑वाः",
+      "।"
+    ],
+    "text": "स्व॒स्ति न॒ इन्द्रो॑ वृ॒द्धश्र॑वाः।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0002_L0006_S0005_T0025",
+    "wordCount": 4,
+    "punctCount": 1,
+    "svaraCount": 4,
+    "svaraRatio": 1.0,
+    "widthSumWords": 83.18,
+    "widthSumAll": 88.73100000000001,
+    "bbox": {
+      "x0": 36.0,
+      "y0": 225.446,
+      "x1": 143.081,
+      "y1": 246.849
+    }
+  },
+  {
+    "sentenceId": "P0002_L0006_S0006",
+    "page": 2,
+    "line": 6,
+    "sentence": 6,
+    "tokenIds": [
+      "P0002_L0006_S0006_T0026",
+      "P0002_L0006_S0006_T0027",
+      "P0002_L0006_S0006_T0028",
+      "P0002_L0006_S0006_T0029",
+      "P0002_L0006_S0006_T0030"
+    ],
+    "tokens": [
+      "स्व॒स्ति",
+      "नः॑",
+      "पू॒षा",
+      "वि॒श्ववे॑दाः",
+      "।"
+    ],
+    "text": "स्व॒स्ति नः॑ पू॒षा वि॒श्ववे॑दाः।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0002_L0006_S0006_T0030",
+    "wordCount": 4,
+    "punctCount": 1,
+    "svaraCount": 4,
+    "svaraRatio": 1.0,
+    "widthSumWords": 85.55600000000001,
+    "widthSumAll": 91.10700000000001,
+    "bbox": {
+      "x0": 146.036,
+      "y0": 225.446,
+      "x1": 252.23499999999999,
+      "y1": 246.849
+    }
+  },
+  {
+    "sentenceId": "P0002_L0007_S0007",
+    "page": 2,
+    "line": 7,
+    "sentence": 7,
+    "tokenIds": [
+      "P0002_L0007_S0007_T0031",
+      "P0002_L0007_S0007_T0032",
+      "P0002_L0007_S0007_T0033",
+      "P0002_L0007_S0007_T0034"
+    ],
+    "tokens": [
+      "स्व॒स्ति",
+      "न॒स्तार्क्ष्यो॒",
+      "अरि॑ष्टनेमिः",
+      "।"
+    ],
+    "text": "स्व॒स्ति न॒स्तार्क्ष्यो॒ अरि॑ष्टनेमिः।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0002_L0007_S0007_T0034",
+    "wordCount": 3,
+    "punctCount": 1,
+    "svaraCount": 3,
+    "svaraRatio": 1.0,
+    "widthSumWords": 101.125,
+    "widthSumAll": 106.676,
+    "bbox": {
+      "x0": 36.0,
+      "y0": 243.897,
+      "x1": 154.808,
+      "y1": 265.3
+    }
+  },
+  {
+    "sentenceId": "P0002_L0007_S0008",
+    "page": 2,
+    "line": 7,
+    "sentence": 8,
+    "tokenIds": [
+      "P0002_L0007_S0008_T0035",
+      "P0002_L0007_S0008_T0036",
+      "P0002_L0007_S0008_T0037",
+      "P0002_L0007_S0008_T0038"
+    ],
+    "tokens": [
+      "स्व॒स्ति",
+      "नो॒",
+      "बृह॒स्पति॑र्दधातु",
+      "॥"
+    ],
+    "text": "स्व॒स्ति नो॒ बृह॒स्पति॑र्दधातु॥",
+    "endsWith": "॥",
+    "endPunctTokenId": "P0002_L0007_S0008_T0038",
+    "wordCount": 3,
+    "punctCount": 1,
+    "svaraCount": 3,
+    "svaraRatio": 1.0,
+    "widthSumWords": 88.987,
+    "widthSumAll": 97.82799999999999,
+    "bbox": {
+      "x0": 157.764,
+      "y0": 243.897,
+      "x1": 266.593,
+      "y1": 265.3
+    }
+  },
+  {
+    "sentenceId": "P0002_L0008_S0009",
+    "page": 2,
+    "line": 8,
+    "sentence": 9,
+    "tokenIds": [
+      "P0002_L0008_S0009_T0039",
+      "P0002_L0008_S0009_T0040",
+      "P0002_L0008_S0009_T0041",
+      "P0002_L0008_S0009_T0042",
+      "P0002_L0008_S0009_T0043"
+    ],
+    "tokens": [
+      "ॐ",
+      "शान्तिः॒",
+      "शान्तिः॒",
+      "शान्तिः॑",
+      "॥"
+    ],
+    "text": "ॐ शान्तिः॒ शान्तिः॒ शान्तिः॑॥",
+    "endsWith": "॥",
+    "endPunctTokenId": "P0002_L0008_S0009_T0043",
+    "wordCount": 4,
+    "punctCount": 1,
+    "svaraCount": 3,
+    "svaraRatio": 0.75,
+    "widthSumWords": 95.20100000000001,
+    "widthSumAll": 104.042,
+    "bbox": {
+      "x0": 36.0,
+      "y0": 262.348,
+      "x1": 161.655,
+      "y1": 283.75100000000003
+    }
+  },
+  {
+    "sentenceId": "P0002_L0009_S0010",
+    "page": 2,
+    "line": 9,
+    "sentence": 10,
+    "tokenIds": [
+      "P0002_L0009_S0010_T0044",
+      "P0002_L0009_S0010_T0045",
+      "P0002_L0009_S0010_T0046",
+      "P0002_L0009_S0010_T0047"
+    ],
+    "tokens": [
+      "ॐ",
+      "नम॑स्ते",
+      "ग॒णप॑तये",
+      "।"
+    ],
+    "text": "ॐ नम॑स्ते ग॒णप॑तये।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0002_L0009_S0010_T0047",
+    "wordCount": 3,
+    "punctCount": 1,
+    "svaraCount": 2,
+    "svaraRatio": 0.6666666666666666,
+    "widthSumWords": 70.461,
+    "widthSumAll": 76.012,
+    "bbox": {
+      "x0": 36.0,
+      "y0": 283.389,
+      "x1": 119.078,
+      "y1": 304.79200000000003
+    }
+  },
+  {
+    "sentenceId": "P0002_L0009_S0011",
+    "page": 2,
+    "line": 9,
+    "sentence": 11,
+    "tokenIds": [
+      "P0002_L0009_S0011_T0048",
+      "P0002_L0009_S0011_T0049",
+      "P0002_L0009_S0011_T0050",
+      "P0002_L0009_S0011_T0051"
+    ],
+    "tokens": [
+      "त्वमे॒व",
+      "प्र॒त्यक्षं॒",
+      "तत्त्व॑मसि",
+      "।"
+    ],
+    "text": "त्वमे॒व प्र॒त्यक्षं॒ तत्त्व॑मसि।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0002_L0009_S0011_T0051",
+    "wordCount": 3,
+    "punctCount": 1,
+    "svaraCount": 3,
+    "svaraRatio": 1.0,
+    "widthSumWords": 80.876,
+    "widthSumAll": 86.427,
+    "bbox": {
+      "x0": 122.033,
+      "y0": 283.389,
+      "x1": 220.01399999999998,
+      "y1": 304.79200000000003
+    }
+  },
+  {
+    "sentenceId": "P0002_L0010_S0012",
+    "page": 2,
+    "line": 10,
+    "sentence": 12,
+    "tokenIds": [
+      "P0002_L0010_S0012_T0052",
+      "P0002_L0010_S0012_T0053",
+      "P0002_L0010_S0012_T0054",
+      "P0002_L0010_S0012_T0055",
+      "P0002_L0010_S0012_T0056",
+      "P0002_L0010_S0012_T0057"
+    ],
+    "tokens": [
+      "त्वमे॒व",
+      "के",
+      "॒वलं",
+      "॒",
+      "कर्ता॑ऽसि",
+      "।"
+    ],
+    "text": "त्वमे॒व के ॒वलं ॒ कर्ता॑ऽसि।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0002_L0010_S0012_T0057",
+    "wordCount": 5,
+    "punctCount": 1,
+    "svaraCount": 4,
+    "svaraRatio": 0.8,
+    "widthSumWords": 74.995,
+    "widthSumAll": 80.546,
+    "bbox": {
+      "x0": 36.0,
+      "y0": 301.84,
+      "x1": 130.617,
+      "y1": 323.243
+    }
+  },
+  {
+    "sentenceId": "P0002_L0010_S0013",
+    "page": 2,
+    "line": 10,
+    "sentence": 13,
+    "tokenIds": [
+      "P0002_L0010_S0013_T0058",
+      "P0002_L0010_S0013_T0059",
+      "P0002_L0010_S0013_T0060",
+      "P0002_L0010_S0013_T0061",
+      "P0002_L0010_S0013_T0062",
+      "P0002_L0010_S0013_T0063"
+    ],
+    "tokens": [
+      "त्वमे॒व",
+      "के",
+      "॒वलं",
+      "॒",
+      "धर्ता॑ऽसि",
+      "।"
+    ],
+    "text": "त्वमे॒व के ॒वलं ॒ धर्ता॑ऽसि।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0002_L0010_S0013_T0063",
+    "wordCount": 5,
+    "punctCount": 1,
+    "svaraCount": 4,
+    "svaraRatio": 0.8,
+    "widthSumWords": 74.07,
+    "widthSumAll": 79.621,
+    "bbox": {
+      "x0": 133.573,
+      "y0": 301.84,
+      "x1": 227.265,
+      "y1": 323.243
+    }
+  },
+  {
+    "sentenceId": "P0002_L0010_S0014",
+    "page": 2,
+    "line": 10,
+    "sentence": 14,
+    "tokenIds": [
+      "P0002_L0010_S0014_T0064",
+      "P0002_L0010_S0014_T0065",
+      "P0002_L0010_S0014_T0066",
+      "P0002_L0010_S0014_T0067",
+      "P0002_L0010_S0014_T0068",
+      "P0002_L0010_S0014_T0069"
+    ],
+    "tokens": [
+      "त्वमे॒व",
+      "के",
+      "॒वलं",
+      "॒",
+      "हर्ता॑ऽसि",
+      "।"
+    ],
+    "text": "त्वमे॒व के ॒वलं ॒ हर्ता॑ऽसि।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0002_L0010_S0014_T0069",
+    "wordCount": 5,
+    "punctCount": 1,
+    "svaraCount": 4,
+    "svaraRatio": 0.8,
+    "widthSumWords": 73.19800000000001,
+    "widthSumAll": 78.74900000000001,
+    "bbox": {
+      "x0": 230.221,
+      "y0": 301.84,
+      "x1": 323.03999999999996,
+      "y1": 323.243
+    }
+  },
+  {
+    "sentenceId": "P0002_L0011_S0015",
+    "page": 2,
+    "line": 11,
+    "sentence": 15,
+    "tokenIds": [
+      "P0002_L0011_S0015_T0070",
+      "P0002_L0011_S0015_T0071",
+      "P0002_L0011_S0015_T0072",
+      "P0002_L0011_S0015_T0073",
+      "P0002_L0011_S0015_T0074"
+    ],
+    "tokens": [
+      "त्वमेव",
+      "सर्वं",
+      "खल्विदं॑",
+      "ब्रह्मा॒सि",
+      "।"
+    ],
+    "text": "त्वमेव सर्वं खल्विदं॑ ब्रह्मा॒सि।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0002_L0011_S0015_T0074",
+    "wordCount": 4,
+    "punctCount": 1,
+    "svaraCount": 2,
+    "svaraRatio": 0.5,
+    "widthSumWords": 92.14999999999999,
+    "widthSumAll": 97.701,
+    "bbox": {
+      "x0": 36.0,
+      "y0": 320.29,
+      "x1": 148.873,
+      "y1": 341.69300000000004
+    }
+  },
+  {
+    "sentenceId": "P0002_L0011_S0016",
+    "page": 2,
+    "line": 11,
+    "sentence": 16,
+    "tokenIds": [
+      "P0002_L0011_S0016_T0075",
+      "P0002_L0011_S0016_T0076",
+      "P0002_L0011_S0016_T0077",
+      "P0002_L0011_S0016_T0078"
+    ],
+    "tokens": [
+      "त्वं",
+      "साक्षादात्मा॑ऽसि",
+      "नि॒त्यम्",
+      "॥"
+    ],
+    "text": "त्वं साक्षादात्मा॑ऽसि नि॒त्यम्॥",
+    "endsWith": "॥",
+    "endPunctTokenId": "P0002_L0011_S0016_T0078",
+    "wordCount": 3,
+    "punctCount": 1,
+    "svaraCount": 2,
+    "svaraRatio": 0.6666666666666666,
+    "widthSumWords": 106.695,
+    "widthSumAll": 106.695,
+    "bbox": {
+      "x0": 151.829,
+      "y0": 320.29,
+      "x1": 264.087,
+      "y1": 341.69300000000004
+    }
+  },
+  {
+    "sentenceId": "P0002_L0011_S0017",
+    "page": 2,
+    "line": 11,
+    "sentence": 17,
+    "tokenIds": [
+      "P0002_L0011_S0017_T0079",
+      "P0002_L0011_S0017_T0080"
+    ],
+    "tokens": [
+      "१",
+      "॥"
+    ],
+    "text": "१॥",
+    "endsWith": "॥",
+    "endPunctTokenId": "P0002_L0011_S0017_T0080",
+    "wordCount": 0,
+    "punctCount": 2,
+    "svaraCount": 0,
+    "svaraRatio": 0.0,
+    "widthSumWords": 0.0,
+    "widthSumAll": 14.617,
+    "bbox": {
+      "x0": 267.047,
+      "y0": 320.29,
+      "x1": 281.66400000000004,
+      "y1": 341.69300000000004
+    }
+  },
+  {
+    "sentenceId": "P0002_L0012_S0018",
+    "page": 2,
+    "line": 12,
+    "sentence": 18,
+    "tokenIds": [
+      "P0002_L0012_S0018_T0081",
+      "P0002_L0012_S0018_T0082",
+      "P0002_L0012_S0018_T0083"
+    ],
+    "tokens": [
+      "ऋ॑तं",
+      "व॒च्मि",
+      "।"
+    ],
+    "text": "ऋ॑तं व॒च्मि।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0002_L0012_S0018_T0083",
+    "wordCount": 2,
+    "punctCount": 1,
+    "svaraCount": 2,
+    "svaraRatio": 1.0,
+    "widthSumWords": 37.084,
+    "widthSumAll": 42.635000000000005,
+    "bbox": {
+      "x0": 36.0,
+      "y0": 341.331,
+      "x1": 83.993,
+      "y1": 362.73400000000004
+    }
+  },
+  {
+    "sentenceId": "P0002_L0012_S0019",
+    "page": 2,
+    "line": 12,
+    "sentence": 19,
+    "tokenIds": [
+      "P0002_L0012_S0019_T0084",
+      "P0002_L0012_S0019_T0085",
+      "P0002_L0012_S0019_T0086"
+    ],
+    "tokens": [
+      "स॑त्यं",
+      "व॒च्मि",
+      "॥"
+    ],
+    "text": "स॑त्यं व॒च्मि॥",
+    "endsWith": "॥",
+    "endPunctTokenId": "P0002_L0012_S0019_T0086",
+    "wordCount": 2,
+    "punctCount": 1,
+    "svaraCount": 2,
+    "svaraRatio": 1.0,
+    "widthSumWords": 39.518,
+    "widthSumAll": 48.359,
+    "bbox": {
+      "x0": 86.948,
+      "y0": 341.331,
+      "x1": 140.526,
+      "y1": 362.73400000000004
+    }
+  },
+  {
+    "sentenceId": "P0002_L0012_S0020",
+    "page": 2,
+    "line": 12,
+    "sentence": 20,
+    "tokenIds": [
+      "P0002_L0012_S0020_T0087",
+      "P0002_L0012_S0020_T0088"
+    ],
+    "tokens": [
+      "२",
+      "॥"
+    ],
+    "text": "२॥",
+    "endsWith": "॥",
+    "endPunctTokenId": "P0002_L0012_S0020_T0088",
+    "wordCount": 0,
+    "punctCount": 2,
+    "svaraCount": 0,
+    "svaraRatio": 0.0,
+    "widthSumWords": 0.0,
+    "widthSumAll": 14.617,
+    "bbox": {
+      "x0": 143.485,
+      "y0": 341.331,
+      "x1": 158.102,
+      "y1": 362.73400000000004
+    }
+  },
+  {
+    "sentenceId": "P0002_L0013_S0021",
+    "page": 2,
+    "line": 13,
+    "sentence": 21,
+    "tokenIds": [
+      "P0002_L0013_S0021_T0089",
+      "P0002_L0013_S0021_T0090",
+      "P0002_L0013_S0021_T0091",
+      "P0002_L0013_S0021_T0092"
+    ],
+    "tokens": [
+      "अ॒व",
+      "त्वं॒",
+      "माम्",
+      "।"
+    ],
+    "text": "अ॒व त्वं॒ माम्।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0002_L0013_S0021_T0092",
+    "wordCount": 3,
+    "punctCount": 1,
+    "svaraCount": 2,
+    "svaraRatio": 0.6666666666666666,
+    "widthSumWords": 49.191,
+    "widthSumAll": 49.191,
+    "bbox": {
+      "x0": 36.0,
+      "y0": 362.372,
+      "x1": 94.364,
+      "y1": 383.77500000000003
+    }
+  },
+  {
+    "sentenceId": "P0002_L0013_S0022",
+    "page": 2,
+    "line": 13,
+    "sentence": 22,
+    "tokenIds": [
+      "P0002_L0013_S0022_T0093",
+      "P0002_L0013_S0022_T0094",
+      "P0002_L0013_S0022_T0095"
+    ],
+    "tokens": [
+      "अव॑",
+      "व॒क्तारम्᳚",
+      "।"
+    ],
+    "text": "अव॑ व॒क्तारम्᳚।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0002_L0013_S0022_T0095",
+    "wordCount": 2,
+    "punctCount": 1,
+    "svaraCount": 2,
+    "svaraRatio": 1.0,
+    "widthSumWords": 47.879000000000005,
+    "widthSumAll": 53.43000000000001,
+    "bbox": {
+      "x0": 97.321,
+      "y0": 362.372,
+      "x1": 159.631,
+      "y1": 383.77500000000003
+    }
+  },
+  {
+    "sentenceId": "P0002_L0013_S0023",
+    "page": 2,
+    "line": 13,
+    "sentence": 23,
+    "tokenIds": [
+      "P0002_L0013_S0023_T0096",
+      "P0002_L0013_S0023_T0097",
+      "P0002_L0013_S0023_T0098"
+    ],
+    "tokens": [
+      "अव॑",
+      "श्रो॒तारम्᳚",
+      "।"
+    ],
+    "text": "अव॑ श्रो॒तारम्᳚।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0002_L0013_S0023_T0098",
+    "wordCount": 2,
+    "punctCount": 1,
+    "svaraCount": 2,
+    "svaraRatio": 1.0,
+    "widthSumWords": 49.764,
+    "widthSumAll": 55.315000000000005,
+    "bbox": {
+      "x0": 162.586,
+      "y0": 362.372,
+      "x1": 226.78099999999998,
+      "y1": 383.77500000000003
+    }
+  },
+  {
+    "sentenceId": "P0002_L0013_S0024",
+    "page": 2,
+    "line": 13,
+    "sentence": 24,
+    "tokenIds": [
+      "P0002_L0013_S0024_T0099",
+      "P0002_L0013_S0024_T0100",
+      "P0002_L0013_S0024_T0101"
+    ],
+    "tokens": [
+      "अव॑",
+      "दा॒तारम्᳚",
+      "।"
+    ],
+    "text": "अव॑ दा॒तारम्᳚।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0002_L0013_S0024_T0101",
+    "wordCount": 2,
+    "punctCount": 1,
+    "svaraCount": 2,
+    "svaraRatio": 1.0,
+    "widthSumWords": 47.84,
+    "widthSumAll": 53.391000000000005,
+    "bbox": {
+      "x0": 229.736,
+      "y0": 362.372,
+      "x1": 292.006,
+      "y1": 383.77500000000003
+    }
+  },
+  {
+    "sentenceId": "P0002_L0013_S0025",
+    "page": 2,
+    "line": 13,
+    "sentence": 25,
+    "tokenIds": [
+      "P0002_L0013_S0025_T0102",
+      "P0002_L0013_S0025_T0103",
+      "P0002_L0013_S0025_T0104"
+    ],
+    "tokens": [
+      "अव॑",
+      "धा॒तारम्᳚",
+      "।"
+    ],
+    "text": "अव॑ धा॒तारम्᳚।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0002_L0013_S0025_T0104",
+    "wordCount": 2,
+    "punctCount": 1,
+    "svaraCount": 2,
+    "svaraRatio": 1.0,
+    "widthSumWords": 48.902,
+    "widthSumAll": 54.453,
+    "bbox": {
+      "x0": 294.962,
+      "y0": 362.372,
+      "x1": 358.295,
+      "y1": 383.77500000000003
+    }
+  },
+  {
+    "sentenceId": "P0002_L0014_S0026",
+    "page": 2,
+    "line": 14,
+    "sentence": 26,
+    "tokenIds": [
+      "P0002_L0014_S0026_T0105",
+      "P0002_L0014_S0026_T0106",
+      "P0002_L0014_S0026_T0107"
+    ],
+    "tokens": [
+      "अवानूचानम॑व",
+      "शि॒ष्यम्",
+      "।"
+    ],
+    "text": "अवानूचानम॑व शि॒ष्यम्।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0002_L0014_S0026_T0107",
+    "wordCount": 2,
+    "punctCount": 1,
+    "svaraCount": 2,
+    "svaraRatio": 1.0,
+    "widthSumWords": 89.732,
+    "widthSumAll": 89.732,
+    "bbox": {
+      "x0": 36.0,
+      "y0": 380.823,
+      "x1": 128.688,
+      "y1": 402.226
+    }
+  },
+  {
+    "sentenceId": "P0002_L0014_S0027",
+    "page": 2,
+    "line": 14,
+    "sentence": 27,
+    "tokenIds": [
+      "P0002_L0014_S0027_T0108",
+      "P0002_L0014_S0027_T0109",
+      "P0002_L0014_S0027_T0110"
+    ],
+    "tokens": [
+      "अव॑",
+      "प॒श्चात्ता᳚त्",
+      "।"
+    ],
+    "text": "अव॑ प॒श्चात्ता᳚त्।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0002_L0014_S0027_T0110",
+    "wordCount": 2,
+    "punctCount": 1,
+    "svaraCount": 2,
+    "svaraRatio": 1.0,
+    "widthSumWords": 57.107,
+    "widthSumAll": 57.107,
+    "bbox": {
+      "x0": 131.644,
+      "y0": 380.823,
+      "x1": 194.967,
+      "y1": 402.226
+    }
+  },
+  {
+    "sentenceId": "P0002_L0014_S0028",
+    "page": 2,
+    "line": 14,
+    "sentence": 28,
+    "tokenIds": [
+      "P0002_L0014_S0028_T0111",
+      "P0002_L0014_S0028_T0112",
+      "P0002_L0014_S0028_T0113"
+    ],
+    "tokens": [
+      "अव॑",
+      "पु॒रस्ता᳚त्",
+      "।"
+    ],
+    "text": "अव॑ पु॒रस्ता᳚त्।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0002_L0014_S0028_T0113",
+    "wordCount": 2,
+    "punctCount": 1,
+    "svaraCount": 2,
+    "svaraRatio": 1.0,
+    "widthSumWords": 54.385,
+    "widthSumAll": 54.385,
+    "bbox": {
+      "x0": 197.923,
+      "y0": 380.823,
+      "x1": 258.524,
+      "y1": 402.226
+    }
+  },
+  {
+    "sentenceId": "P0002_L0014_S0029",
+    "page": 2,
+    "line": 14,
+    "sentence": 29,
+    "tokenIds": [
+      "P0002_L0014_S0029_T0114",
+      "P0002_L0014_S0029_T0115"
+    ],
+    "tokens": [
+      "अवोत्त॒रात्ता᳚त्",
+      "।"
+    ],
+    "text": "अवोत्त॒रात्ता᳚त्।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0002_L0014_S0029_T0115",
+    "wordCount": 1,
+    "punctCount": 1,
+    "svaraCount": 1,
+    "svaraRatio": 1.0,
+    "widthSumWords": 58.656,
+    "widthSumAll": 58.656,
+    "bbox": {
+      "x0": 261.48,
+      "y0": 380.823,
+      "x1": 320.136,
+      "y1": 402.226
+    }
+  },
+  {
+    "sentenceId": "P0002_L0015_S0030",
+    "page": 2,
+    "line": 15,
+    "sentence": 30,
+    "tokenIds": [
+      "P0002_L0015_S0030_T0116",
+      "P0002_L0015_S0030_T0117",
+      "P0002_L0015_S0030_T0118"
+    ],
+    "tokens": [
+      "अव॑",
+      "दक्षि॒णात्ता᳚त्",
+      "।"
+    ],
+    "text": "अव॑ दक्षि॒णात्ता᳚त्।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0002_L0015_S0030_T0118",
+    "wordCount": 2,
+    "punctCount": 1,
+    "svaraCount": 2,
+    "svaraRatio": 1.0,
+    "widthSumWords": 66.55499999999999,
+    "widthSumAll": 66.55499999999999,
+    "bbox": {
+      "x0": 36.0,
+      "y0": 399.274,
+      "x1": 108.772,
+      "y1": 420.677
+    }
+  },
+  {
+    "sentenceId": "P0002_L0015_S0031",
+    "page": 2,
+    "line": 15,
+    "sentence": 31,
+    "tokenIds": [
+      "P0002_L0015_S0031_T0119",
+      "P0002_L0015_S0031_T0120",
+      "P0002_L0015_S0031_T0121"
+    ],
+    "tokens": [
+      "अव॑",
+      "चो॒र्ध्वात्ता᳚त्",
+      "।"
+    ],
+    "text": "अव॑ चो॒र्ध्वात्ता᳚त्।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0002_L0015_S0031_T0121",
+    "wordCount": 2,
+    "punctCount": 1,
+    "svaraCount": 2,
+    "svaraRatio": 1.0,
+    "widthSumWords": 63.844,
+    "widthSumAll": 63.844,
+    "bbox": {
+      "x0": 111.728,
+      "y0": 399.274,
+      "x1": 181.78900000000002,
+      "y1": 420.677
+    }
+  },
+  {
+    "sentenceId": "P0002_L0015_S0032",
+    "page": 2,
+    "line": 15,
+    "sentence": 32,
+    "tokenIds": [
+      "P0002_L0015_S0032_T0122",
+      "P0002_L0015_S0032_T0123"
+    ],
+    "tokens": [
+      "अवाध॒रात्ता᳚त्",
+      "।"
+    ],
+    "text": "अवाध॒रात्ता᳚त्।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0002_L0015_S0032_T0123",
+    "wordCount": 1,
+    "punctCount": 1,
+    "svaraCount": 1,
+    "svaraRatio": 1.0,
+    "widthSumWords": 57.626,
+    "widthSumAll": 57.626,
+    "bbox": {
+      "x0": 184.746,
+      "y0": 399.274,
+      "x1": 242.372,
+      "y1": 420.677
+    }
+  },
+  {
+    "sentenceId": "P0002_L0016_S0033",
+    "page": 2,
+    "line": 16,
+    "sentence": 33,
+    "tokenIds": [
+      "P0002_L0016_S0033_T0124",
+      "P0002_L0016_S0033_T0125",
+      "P0002_L0016_S0033_T0126",
+      "P0002_L0016_S0033_T0127",
+      "P0002_L0016_S0033_T0128",
+      "P0002_L0016_S0033_T0129"
+    ],
+    "tokens": [
+      "सर्वतो",
+      "मां",
+      "पाहि",
+      "पाहि॑",
+      "सम॒न्तात्",
+      "॥"
+    ],
+    "text": "सर्वतो मां पाहि पाहि॑ सम॒न्तात्॥",
+    "endsWith": "॥",
+    "endPunctTokenId": "P0002_L0016_S0033_T0129",
+    "wordCount": 5,
+    "punctCount": 1,
+    "svaraCount": 2,
+    "svaraRatio": 0.4,
+    "widthSumWords": 113.57600000000001,
+    "widthSumAll": 113.57600000000001,
+    "bbox": {
+      "x0": 36.0,
+      "y0": 417.725,
+      "x1": 164.265,
+      "y1": 439.12800000000004
+    }
+  },
+  {
+    "sentenceId": "P0002_L0016_S0034",
+    "page": 2,
+    "line": 16,
+    "sentence": 34,
+    "tokenIds": [
+      "P0002_L0016_S0034_T0130",
+      "P0002_L0016_S0034_T0131"
+    ],
+    "tokens": [
+      "३",
+      "॥"
+    ],
+    "text": "३॥",
+    "endsWith": "॥",
+    "endPunctTokenId": "P0002_L0016_S0034_T0131",
+    "wordCount": 0,
+    "punctCount": 2,
+    "svaraCount": 0,
+    "svaraRatio": 0.0,
+    "widthSumWords": 0.0,
+    "widthSumAll": 14.617,
+    "bbox": {
+      "x0": 167.225,
+      "y0": 417.725,
+      "x1": 181.842,
+      "y1": 439.12800000000004
+    }
+  },
+  {
+    "sentenceId": "P0002_L0017_S0035",
+    "page": 2,
+    "line": 17,
+    "sentence": 35,
+    "tokenIds": [
+      "P0002_L0017_S0035_T0132",
+      "P0002_L0017_S0035_T0133",
+      "P0002_L0017_S0035_T0134",
+      "P0002_L0017_S0035_T0135"
+    ],
+    "tokens": [
+      "त्वं",
+      "वाङ्मय॑स्त्वं",
+      "चिन्म॒यः",
+      "।"
+    ],
+    "text": "त्वं वाङ्मय॑स्त्वं चिन्म॒यः।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0002_L0017_S0035_T0135",
+    "wordCount": 3,
+    "punctCount": 1,
+    "svaraCount": 2,
+    "svaraRatio": 0.6666666666666666,
+    "widthSumWords": 82.336,
+    "widthSumAll": 87.887,
+    "bbox": {
+      "x0": 36.0,
+      "y0": 438.766,
+      "x1": 131.988,
+      "y1": 460.16900000000004
+    }
+  },
+  {
+    "sentenceId": "P0002_L0017_S0036",
+    "page": 2,
+    "line": 17,
+    "sentence": 36,
+    "tokenIds": [
+      "P0002_L0017_S0036_T0136",
+      "P0002_L0017_S0036_T0137",
+      "P0002_L0017_S0036_T0138"
+    ],
+    "tokens": [
+      "त्वमानन्दमय॑स्त्वं",
+      "ब्रह्म॒मयः",
+      "।"
+    ],
+    "text": "त्वमानन्दमय॑स्त्वं ब्रह्म॒मयः।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0002_L0017_S0036_T0138",
+    "wordCount": 2,
+    "punctCount": 1,
+    "svaraCount": 2,
+    "svaraRatio": 1.0,
+    "widthSumWords": 96.104,
+    "widthSumAll": 101.655,
+    "bbox": {
+      "x0": 134.945,
+      "y0": 438.766,
+      "x1": 242.09799999999998,
+      "y1": 460.16900000000004
+    }
+  },
+  {
+    "sentenceId": "P0002_L0017_S0037",
+    "page": 2,
+    "line": 17,
+    "sentence": 37,
+    "tokenIds": [
+      "P0002_L0017_S0037_T0139",
+      "P0002_L0017_S0037_T0140",
+      "P0002_L0017_S0037_T0141"
+    ],
+    "tokens": [
+      "त्वं",
+      "सच्चिदानन्दाऽद्वि॑तीयो॒ऽसि",
+      "।"
+    ],
+    "text": "त्वं सच्चिदानन्दाऽद्वि॑तीयो॒ऽसि।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0002_L0017_S0037_T0141",
+    "wordCount": 2,
+    "punctCount": 1,
+    "svaraCount": 1,
+    "svaraRatio": 0.5,
+    "widthSumWords": 104.286,
+    "widthSumAll": 109.837,
+    "bbox": {
+      "x0": 245.053,
+      "y0": 438.766,
+      "x1": 360.454,
+      "y1": 460.16900000000004
+    }
+  },
+  {
+    "sentenceId": "P0002_L0018_S0038",
+    "page": 2,
+    "line": 18,
+    "sentence": 38,
+    "tokenIds": [
+      "P0002_L0018_S0038_T0142",
+      "P0002_L0018_S0038_T0143",
+      "P0002_L0018_S0038_T0144",
+      "P0002_L0018_S0038_T0145"
+    ],
+    "tokens": [
+      "त्वं",
+      "प्र॒त्यक्षं॒",
+      "ब्रह्मा॑सि",
+      "।"
+    ],
+    "text": "त्वं प्र॒त्यक्षं॒ ब्रह्मा॑सि।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0002_L0018_S0038_T0145",
+    "wordCount": 3,
+    "punctCount": 1,
+    "svaraCount": 2,
+    "svaraRatio": 0.6666666666666666,
+    "widthSumWords": 61.742000000000004,
+    "widthSumAll": 67.293,
+    "bbox": {
+      "x0": 36.0,
+      "y0": 457.217,
+      "x1": 114.493,
+      "y1": 478.62
+    }
+  },
+  {
+    "sentenceId": "P0002_L0018_S0039",
+    "page": 2,
+    "line": 18,
+    "sentence": 39,
+    "tokenIds": [
+      "P0002_L0018_S0039_T0146",
+      "P0002_L0018_S0039_T0147",
+      "P0002_L0018_S0039_T0148",
+      "P0002_L0018_S0039_T0149"
+    ],
+    "tokens": [
+      "त्वं",
+      "ज्ञानमयो",
+      "विज्ञान॑मयो॒ऽसि",
+      "॥"
+    ],
+    "text": "त्वं ज्ञानमयो विज्ञान॑मयो॒ऽसि॥",
+    "endsWith": "॥",
+    "endPunctTokenId": "P0002_L0018_S0039_T0149",
+    "wordCount": 3,
+    "punctCount": 1,
+    "svaraCount": 1,
+    "svaraRatio": 0.3333333333333333,
+    "widthSumWords": 100.43199999999999,
+    "widthSumAll": 109.27299999999998,
+    "bbox": {
+      "x0": 117.449,
+      "y0": 457.217,
+      "x1": 235.243,
+      "y1": 478.62
+    }
+  },
+  {
+    "sentenceId": "P0002_L0018_S0040",
+    "page": 2,
+    "line": 18,
+    "sentence": 40,
+    "tokenIds": [
+      "P0002_L0018_S0040_T0150",
+      "P0002_L0018_S0040_T0151"
+    ],
+    "tokens": [
+      "४",
+      "॥"
+    ],
+    "text": "४॥",
+    "endsWith": "॥",
+    "endPunctTokenId": "P0002_L0018_S0040_T0151",
+    "wordCount": 0,
+    "punctCount": 2,
+    "svaraCount": 0,
+    "svaraRatio": 0.0,
+    "widthSumWords": 0.0,
+    "widthSumAll": 14.617,
+    "bbox": {
+      "x0": 238.203,
+      "y0": 457.217,
+      "x1": 252.82,
+      "y1": 478.62
+    }
+  },
+  {
+    "sentenceId": "P0002_L0019_S0041",
+    "page": 2,
+    "line": 19,
+    "sentence": 41,
+    "tokenIds": [
+      "P0002_L0019_S0041_T0152",
+      "P0002_L0019_S0041_T0153",
+      "P0002_L0019_S0041_T0154",
+      "P0002_L0019_S0041_T0155",
+      "P0002_L0019_S0041_T0156"
+    ],
+    "tokens": [
+      "सर्वं",
+      "जगदिदं",
+      "त्व॑त्तो",
+      "जा॒यते",
+      "।"
+    ],
+    "text": "सर्वं जगदिदं त्व॑त्तो जा॒यते।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0002_L0019_S0041_T0156",
+    "wordCount": 4,
+    "punctCount": 1,
+    "svaraCount": 2,
+    "svaraRatio": 0.5,
+    "widthSumWords": 87.579,
+    "widthSumAll": 93.13,
+    "bbox": {
+      "x0": 36.0,
+      "y0": 478.258,
+      "x1": 139.825,
+      "y1": 499.661
+    }
+  },
+  {
+    "sentenceId": "P0002_L0019_S0042",
+    "page": 2,
+    "line": 19,
+    "sentence": 42,
+    "tokenIds": [
+      "P0002_L0019_S0042_T0157",
+      "P0002_L0019_S0042_T0158",
+      "P0002_L0019_S0042_T0159",
+      "P0002_L0019_S0042_T0160"
+    ],
+    "tokens": [
+      "सर्वं",
+      "जगदिदं",
+      "त्व॑त्तस्ति॒ष्ठति",
+      "।"
+    ],
+    "text": "सर्वं जगदिदं त्व॑त्तस्ति॒ष्ठति।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0002_L0019_S0042_T0160",
+    "wordCount": 3,
+    "punctCount": 1,
+    "svaraCount": 1,
+    "svaraRatio": 0.3333333333333333,
+    "widthSumWords": 89.049,
+    "widthSumAll": 94.60000000000001,
+    "bbox": {
+      "x0": 142.781,
+      "y0": 478.258,
+      "x1": 246.021,
+      "y1": 499.661
+    }
+  },
+  {
+    "sentenceId": "P0002_L0020_S0043",
+    "page": 2,
+    "line": 20,
+    "sentence": 43,
+    "tokenIds": [
+      "P0002_L0020_S0043_T0161",
+      "P0002_L0020_S0043_T0162",
+      "P0002_L0020_S0043_T0163",
+      "P0002_L0020_S0043_T0164",
+      "P0002_L0020_S0043_T0165"
+    ],
+    "tokens": [
+      "सर्वं",
+      "जगदिदं",
+      "त्वयि",
+      "ल॑यमेष्य॒ति",
+      "।"
+    ],
+    "text": "सर्वं जगदिदं त्वयि ल॑यमेष्य॒ति।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0002_L0020_S0043_T0165",
+    "wordCount": 4,
+    "punctCount": 1,
+    "svaraCount": 1,
+    "svaraRatio": 0.25,
+    "widthSumWords": 102.051,
+    "widthSumAll": 107.602,
+    "bbox": {
+      "x0": 36.0,
+      "y0": 496.708,
+      "x1": 155.18599999999998,
+      "y1": 518.111
+    }
+  },
+  {
+    "sentenceId": "P0002_L0020_S0044",
+    "page": 2,
+    "line": 20,
+    "sentence": 44,
+    "tokenIds": [
+      "P0002_L0020_S0044_T0166",
+      "P0002_L0020_S0044_T0167",
+      "P0002_L0020_S0044_T0168",
+      "P0002_L0020_S0044_T0169",
+      "P0002_L0020_S0044_T0170"
+    ],
+    "tokens": [
+      "सर्वं",
+      "जगदिदं",
+      "त्वयि॑",
+      "प्रत्ये॒ति",
+      "।"
+    ],
+    "text": "सर्वं जगदिदं त्वयि॑ प्रत्ये॒ति।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0002_L0020_S0044_T0170",
+    "wordCount": 4,
+    "punctCount": 1,
+    "svaraCount": 2,
+    "svaraRatio": 0.5,
+    "widthSumWords": 86.81400000000001,
+    "widthSumAll": 92.36500000000001,
+    "bbox": {
+      "x0": 158.141,
+      "y0": 496.708,
+      "x1": 265.36199999999997,
+      "y1": 518.111
+    }
+  },
+  {
+    "sentenceId": "P0002_L0021_S0045",
+    "page": 2,
+    "line": 21,
+    "sentence": 45,
+    "tokenIds": [
+      "P0002_L0021_S0045_T0171",
+      "P0002_L0021_S0045_T0172",
+      "P0002_L0021_S0045_T0173",
+      "P0002_L0021_S0045_T0174"
+    ],
+    "tokens": [
+      "त्वं",
+      "भूमिरापोऽनलोऽनि॑लो",
+      "न॒भः",
+      "।"
+    ],
+    "text": "त्वं भूमिरापोऽनलोऽनि॑लो न॒भः।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0002_L0021_S0045_T0174",
+    "wordCount": 3,
+    "punctCount": 1,
+    "svaraCount": 2,
+    "svaraRatio": 0.6666666666666666,
+    "widthSumWords": 108.505,
+    "widthSumAll": 114.056,
+    "bbox": {
+      "x0": 36.0,
+      "y0": 515.159,
+      "x1": 158.57799999999997,
+      "y1": 536.562
+    }
+  },
+  {
+    "sentenceId": "P0002_L0021_S0046",
+    "page": 2,
+    "line": 21,
+    "sentence": 46,
+    "tokenIds": [
+      "P0002_L0021_S0046_T0175",
+      "P0002_L0021_S0046_T0176",
+      "P0002_L0021_S0046_T0177",
+      "P0002_L0021_S0046_T0178"
+    ],
+    "tokens": [
+      "त्वं",
+      "चत्वारि",
+      "वा᳚क्पदा॒नि",
+      "॥"
+    ],
+    "text": "त्वं चत्वारि वा᳚क्पदा॒नि॥",
+    "endsWith": "॥",
+    "endPunctTokenId": "P0002_L0021_S0046_T0178",
+    "wordCount": 3,
+    "punctCount": 1,
+    "svaraCount": 1,
+    "svaraRatio": 0.3333333333333333,
+    "widthSumWords": 74.569,
+    "widthSumAll": 83.41,
+    "bbox": {
+      "x0": 161.534,
+      "y0": 515.159,
+      "x1": 253.443,
+      "y1": 536.562
+    }
+  },
+  {
+    "sentenceId": "P0002_L0021_S0047",
+    "page": 2,
+    "line": 21,
+    "sentence": 47,
+    "tokenIds": [
+      "P0002_L0021_S0047_T0179",
+      "P0002_L0021_S0047_T0180"
+    ],
+    "tokens": [
+      "५",
+      "॥"
+    ],
+    "text": "५॥",
+    "endsWith": "॥",
+    "endPunctTokenId": "P0002_L0021_S0047_T0180",
+    "wordCount": 0,
+    "punctCount": 2,
+    "svaraCount": 0,
+    "svaraRatio": 0.0,
+    "widthSumWords": 0.0,
+    "widthSumAll": 14.617,
+    "bbox": {
+      "x0": 256.404,
+      "y0": 515.159,
+      "x1": 271.021,
+      "y1": 536.562
+    }
+  },
+  {
+    "sentenceId": "P0002_L0022_S0048",
+    "page": 2,
+    "line": 22,
+    "sentence": 48,
+    "tokenIds": [
+      "P0002_L0022_S0048_T0181",
+      "P0002_L0022_S0048_T0182",
+      "P0002_L0022_S0048_T0183"
+    ],
+    "tokens": [
+      "त्वं",
+      "गु॒णत्र॑याती॒तः",
+      "।"
+    ],
+    "text": "त्वं गु॒णत्र॑याती॒तः।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0002_L0022_S0048_T0183",
+    "wordCount": 2,
+    "punctCount": 1,
+    "svaraCount": 1,
+    "svaraRatio": 0.5,
+    "widthSumWords": 59.967,
+    "widthSumAll": 65.518,
+    "bbox": {
+      "x0": 36.0,
+      "y0": 536.2,
+      "x1": 107.086,
+      "y1": 557.6030000000001
+    }
+  },
+  {
+    "sentenceId": "P0002_L0022_S0049",
+    "page": 2,
+    "line": 22,
+    "sentence": 49,
+    "tokenIds": [
+      "P0002_L0022_S0049_T0184",
+      "P0002_L0022_S0049_T0185",
+      "P0002_L0022_S0049_T0186"
+    ],
+    "tokens": [
+      "त्वं",
+      "अवस्थात्र॑याती॒तः",
+      "।"
+    ],
+    "text": "त्वं अवस्थात्र॑याती॒तः।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0002_L0022_S0049_T0186",
+    "wordCount": 2,
+    "punctCount": 1,
+    "svaraCount": 1,
+    "svaraRatio": 0.5,
+    "widthSumWords": 74.276,
+    "widthSumAll": 79.827,
+    "bbox": {
+      "x0": 110.042,
+      "y0": 536.2,
+      "x1": 195.43699999999998,
+      "y1": 557.6030000000001
+    }
+  },
+  {
+    "sentenceId": "P0002_L0022_S0050",
+    "page": 2,
+    "line": 22,
+    "sentence": 50,
+    "tokenIds": [
+      "P0002_L0022_S0050_T0187",
+      "P0002_L0022_S0050_T0188",
+      "P0002_L0022_S0050_T0189"
+    ],
+    "tokens": [
+      "त्वं",
+      "दे॒हत्र॑याती॒तः",
+      "।"
+    ],
+    "text": "त्वं दे॒हत्र॑याती॒तः।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0002_L0022_S0050_T0189",
+    "wordCount": 2,
+    "punctCount": 1,
+    "svaraCount": 1,
+    "svaraRatio": 0.5,
+    "widthSumWords": 56.95,
+    "widthSumAll": 62.501000000000005,
+    "bbox": {
+      "x0": 198.392,
+      "y0": 536.2,
+      "x1": 266.462,
+      "y1": 557.6030000000001
+    }
+  },
+  {
+    "sentenceId": "P0003_L0001_S0001",
+    "page": 3,
+    "line": 1,
+    "sentence": 1,
+    "tokenIds": [
+      "P0003_L0001_S0001_T0001",
+      "P0003_L0001_S0001_T0002",
+      "P0003_L0001_S0001_T0003"
+    ],
+    "tokens": [
+      "त्वं",
+      "का॒लत्र॑याती॒तः",
+      "।"
+    ],
+    "text": "त्वं का॒लत्र॑याती॒तः।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0003_L0001_S0001_T0003",
+    "wordCount": 2,
+    "punctCount": 1,
+    "svaraCount": 1,
+    "svaraRatio": 0.5,
+    "widthSumWords": 63.828,
+    "widthSumAll": 69.379,
+    "bbox": {
+      "x0": 36.0,
+      "y0": 47.154,
+      "x1": 110.947,
+      "y1": 68.557
+    }
+  },
+  {
+    "sentenceId": "P0003_L0001_S0002",
+    "page": 3,
+    "line": 1,
+    "sentence": 2,
+    "tokenIds": [
+      "P0003_L0001_S0002_T0004",
+      "P0003_L0001_S0002_T0005",
+      "P0003_L0001_S0002_T0006",
+      "P0003_L0001_S0002_T0007"
+    ],
+    "tokens": [
+      "त्वं",
+      "मूलाधारस्थितो॑ऽसि",
+      "नि॒त्यम्",
+      "।"
+    ],
+    "text": "त्वं मूलाधारस्थितो॑ऽसि नि॒त्यम्।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0003_L0001_S0002_T0007",
+    "wordCount": 3,
+    "punctCount": 1,
+    "svaraCount": 2,
+    "svaraRatio": 0.6666666666666666,
+    "widthSumWords": 116.315,
+    "widthSumAll": 116.315,
+    "bbox": {
+      "x0": 113.902,
+      "y0": 47.154,
+      "x1": 235.781,
+      "y1": 68.557
+    }
+  },
+  {
+    "sentenceId": "P0003_L0001_S0003",
+    "page": 3,
+    "line": 1,
+    "sentence": 3,
+    "tokenIds": [
+      "P0003_L0001_S0003_T0008",
+      "P0003_L0001_S0003_T0009",
+      "P0003_L0001_S0003_T0010"
+    ],
+    "tokens": [
+      "त्वं",
+      "शक्तित्र॑यात्म॒कः",
+      "।"
+    ],
+    "text": "त्वं शक्तित्र॑यात्म॒कः।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0003_L0001_S0003_T0010",
+    "wordCount": 2,
+    "punctCount": 1,
+    "svaraCount": 1,
+    "svaraRatio": 0.5,
+    "widthSumWords": 68.332,
+    "widthSumAll": 73.883,
+    "bbox": {
+      "x0": 238.737,
+      "y0": 47.154,
+      "x1": 318.185,
+      "y1": 68.557
+    }
+  },
+  {
+    "sentenceId": "P0003_L0002_S0004",
+    "page": 3,
+    "line": 2,
+    "sentence": 4,
+    "tokenIds": [
+      "P0003_L0002_S0004_T0011",
+      "P0003_L0002_S0004_T0012",
+      "P0003_L0002_S0004_T0013",
+      "P0003_L0002_S0004_T0014",
+      "P0003_L0002_S0004_T0015"
+    ],
+    "tokens": [
+      "त्वां",
+      "योगिनो",
+      "ध्याय॑न्ति",
+      "नि॒त्यम्",
+      "।"
+    ],
+    "text": "त्वां योगिनो ध्याय॑न्ति नि॒त्यम्।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0003_L0002_S0004_T0015",
+    "wordCount": 4,
+    "punctCount": 1,
+    "svaraCount": 2,
+    "svaraRatio": 0.5,
+    "widthSumWords": 109.523,
+    "widthSumAll": 109.523,
+    "bbox": {
+      "x0": 36.0,
+      "y0": 65.605,
+      "x1": 153.967,
+      "y1": 87.00800000000001
+    }
+  },
+  {
+    "sentenceId": "P0003_L0002_S0005",
+    "page": 3,
+    "line": 2,
+    "sentence": 5,
+    "tokenIds": [
+      "P0003_L0002_S0005_T0016",
+      "P0003_L0002_S0005_T0017",
+      "P0003_L0002_S0005_T0018",
+      "P0003_L0002_S0005_T0019",
+      "P0003_L0002_S0005_T0020"
+    ],
+    "tokens": [
+      "त्वं",
+      "ब्रह्मा",
+      "त्वं",
+      "विष्णुस्त्वं",
+      "रुद्रस्त्वमिन्द्रस्त्वमग्निस्त्वं"
+    ],
+    "text": "त्वं ब्रह्मा त्वं विष्णुस्त्वं रुद्रस्त्वमिन्द्रस्त्वमग्निस्त्वं",
+    "endsWith": null,
+    "endPunctTokenId": null,
+    "wordCount": 5,
+    "punctCount": 0,
+    "svaraCount": 0,
+    "svaraRatio": 0.0,
+    "widthSumWords": 163.061,
+    "widthSumAll": 163.061,
+    "bbox": {
+      "x0": 156.921,
+      "y0": 65.605,
+      "x1": 330.694,
+      "y1": 87.00800000000001
+    }
+  },
+  {
+    "sentenceId": "P0003_L0003_S0005",
+    "page": 3,
+    "line": 3,
+    "sentence": 5,
+    "tokenIds": [
+      "P0003_L0003_S0005_T0021",
+      "P0003_L0003_S0005_T0022",
+      "P0003_L0003_S0005_T0023",
+      "P0003_L0003_S0005_T0024",
+      "P0003_L0003_S0005_T0025",
+      "P0003_L0003_S0005_T0026",
+      "P0003_L0003_S0005_T0027"
+    ],
+    "tokens": [
+      "वायुस्त्वं",
+      "सूर्यस्त्वं",
+      "चन्द्रमास्त्वं",
+      "ब्रह्म॒",
+      "भूर्भुवः॒",
+      "स्वरोम्",
+      "॥"
+    ],
+    "text": "वायुस्त्वं सूर्यस्त्वं चन्द्रमास्त्वं ब्रह्म॒ भूर्भुवः॒ स्वरोम्॥",
+    "endsWith": "॥",
+    "endPunctTokenId": "P0003_L0003_S0005_T0027",
+    "wordCount": 6,
+    "punctCount": 1,
+    "svaraCount": 2,
+    "svaraRatio": 0.3333333333333333,
+    "widthSumWords": 176.398,
+    "widthSumAll": 176.398,
+    "bbox": {
+      "x0": 36.0,
+      "y0": 81.545,
+      "x1": 232.462,
+      "y1": 102.94800000000001
+    }
+  },
+  {
+    "sentenceId": "P0003_L0003_S0006",
+    "page": 3,
+    "line": 3,
+    "sentence": 6,
+    "tokenIds": [
+      "P0003_L0003_S0006_T0028",
+      "P0003_L0003_S0006_T0029"
+    ],
+    "tokens": [
+      "६",
+      "॥"
+    ],
+    "text": "६॥",
+    "endsWith": "॥",
+    "endPunctTokenId": "P0003_L0003_S0006_T0029",
+    "wordCount": 0,
+    "punctCount": 2,
+    "svaraCount": 0,
+    "svaraRatio": 0.0,
+    "widthSumWords": 0.0,
+    "widthSumAll": 14.617,
+    "bbox": {
+      "x0": 235.422,
+      "y0": 81.545,
+      "x1": 250.039,
+      "y1": 102.94800000000001
+    }
+  },
+  {
+    "sentenceId": "P0003_L0004_S0007",
+    "page": 3,
+    "line": 4,
+    "sentence": 7,
+    "tokenIds": [
+      "P0003_L0004_S0007_T0030",
+      "P0003_L0004_S0007_T0031",
+      "P0003_L0004_S0007_T0032",
+      "P0003_L0004_S0007_T0033"
+    ],
+    "tokens": [
+      "ग॒णादिं᳚",
+      "पूर्व॑मुच्चा॒र्य॒",
+      "व॒र्णादिं᳚स्तदन॒न्तरम्",
+      "।"
+    ],
+    "text": "ग॒णादिं᳚ पूर्व॑मुच्चा॒र्य॒ व॒र्णादिं᳚स्तदन॒न्तरम्।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0003_L0004_S0007_T0033",
+    "wordCount": 3,
+    "punctCount": 1,
+    "svaraCount": 3,
+    "svaraRatio": 1.0,
+    "widthSumWords": 142.735,
+    "widthSumAll": 142.735,
+    "bbox": {
+      "x0": 36.0,
+      "y0": 102.586,
+      "x1": 189.753,
+      "y1": 123.989
+    }
+  },
+  {
+    "sentenceId": "P0003_L0004_S0008",
+    "page": 3,
+    "line": 4,
+    "sentence": 8,
+    "tokenIds": [
+      "P0003_L0004_S0008_T0034",
+      "P0003_L0004_S0008_T0035",
+      "P0003_L0004_S0008_T0036"
+    ],
+    "tokens": [
+      "अनुस्वारः",
+      "प॑रत॒रः",
+      "।"
+    ],
+    "text": "अनुस्वारः प॑रत॒रः।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0003_L0004_S0008_T0036",
+    "wordCount": 2,
+    "punctCount": 1,
+    "svaraCount": 1,
+    "svaraRatio": 0.5,
+    "widthSumWords": 63.407000000000004,
+    "widthSumAll": 68.958,
+    "bbox": {
+      "x0": 192.708,
+      "y0": 102.586,
+      "x1": 267.574,
+      "y1": 123.989
+    }
+  },
+  {
+    "sentenceId": "P0003_L0004_S0009",
+    "page": 3,
+    "line": 4,
+    "sentence": 9,
+    "tokenIds": [
+      "P0003_L0004_S0009_T0037",
+      "P0003_L0004_S0009_T0038"
+    ],
+    "tokens": [
+      "अर्धे᳚न्दुल॒सितम्",
+      "।"
+    ],
+    "text": "अर्धे᳚न्दुल॒सितम्।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0003_L0004_S0009_T0038",
+    "wordCount": 1,
+    "punctCount": 1,
+    "svaraCount": 1,
+    "svaraRatio": 1.0,
+    "widthSumWords": 64.649,
+    "widthSumAll": 64.649,
+    "bbox": {
+      "x0": 270.53,
+      "y0": 102.586,
+      "x1": 335.179,
+      "y1": 123.989
+    }
+  },
+  {
+    "sentenceId": "P0003_L0005_S0010",
+    "page": 3,
+    "line": 5,
+    "sentence": 10,
+    "tokenIds": [
+      "P0003_L0005_S0010_T0039",
+      "P0003_L0005_S0010_T0040",
+      "P0003_L0005_S0010_T0041"
+    ],
+    "tokens": [
+      "तारे॑ण",
+      "ऋ॒द्धम्",
+      "।"
+    ],
+    "text": "तारे॑ण ऋ॒द्धम्।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0003_L0005_S0010_T0041",
+    "wordCount": 2,
+    "punctCount": 1,
+    "svaraCount": 2,
+    "svaraRatio": 1.0,
+    "widthSumWords": 53.403,
+    "widthSumAll": 53.403,
+    "bbox": {
+      "x0": 36.0,
+      "y0": 121.037,
+      "x1": 92.367,
+      "y1": 142.44
+    }
+  },
+  {
+    "sentenceId": "P0003_L0005_S0011",
+    "page": 3,
+    "line": 5,
+    "sentence": 11,
+    "tokenIds": [
+      "P0003_L0005_S0011_T0042",
+      "P0003_L0005_S0011_T0043",
+      "P0003_L0005_S0011_T0044"
+    ],
+    "tokens": [
+      "एतत्तव",
+      "मनु॑स्वरू॒पम्",
+      "।"
+    ],
+    "text": "एतत्तव मनु॑स्वरू॒पम्।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0003_L0005_S0011_T0044",
+    "wordCount": 2,
+    "punctCount": 1,
+    "svaraCount": 1,
+    "svaraRatio": 0.5,
+    "widthSumWords": 79.89099999999999,
+    "widthSumAll": 79.89099999999999,
+    "bbox": {
+      "x0": 95.323,
+      "y0": 121.037,
+      "x1": 178.17,
+      "y1": 142.44
+    }
+  },
+  {
+    "sentenceId": "P0003_L0005_S0012",
+    "page": 3,
+    "line": 5,
+    "sentence": 12,
+    "tokenIds": [
+      "P0003_L0005_S0012_T0045",
+      "P0003_L0005_S0012_T0046",
+      "P0003_L0005_S0012_T0047"
+    ],
+    "tokens": [
+      "गकारः",
+      "पू᳚र्वरू॒पम्",
+      "।"
+    ],
+    "text": "गकारः पू᳚र्वरू॒पम्।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0003_L0005_S0012_T0047",
+    "wordCount": 2,
+    "punctCount": 1,
+    "svaraCount": 1,
+    "svaraRatio": 0.5,
+    "widthSumWords": 68.095,
+    "widthSumAll": 68.095,
+    "bbox": {
+      "x0": 181.125,
+      "y0": 121.037,
+      "x1": 252.182,
+      "y1": 142.44
+    }
+  },
+  {
+    "sentenceId": "P0003_L0005_S0013",
+    "page": 3,
+    "line": 5,
+    "sentence": 13,
+    "tokenIds": [
+      "P0003_L0005_S0013_T0048",
+      "P0003_L0005_S0013_T0049",
+      "P0003_L0005_S0013_T0050"
+    ],
+    "tokens": [
+      "अकारो",
+      "मध्य॑मरू॒पम्",
+      "।"
+    ],
+    "text": "अकारो मध्य॑मरू॒पम्।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0003_L0005_S0013_T0050",
+    "wordCount": 2,
+    "punctCount": 1,
+    "svaraCount": 1,
+    "svaraRatio": 0.5,
+    "widthSumWords": 81.488,
+    "widthSumAll": 81.488,
+    "bbox": {
+      "x0": 255.138,
+      "y0": 121.037,
+      "x1": 339.58,
+      "y1": 142.44
+    }
+  },
+  {
+    "sentenceId": "P0003_L0006_S0014",
+    "page": 3,
+    "line": 6,
+    "sentence": 14,
+    "tokenIds": [
+      "P0003_L0006_S0014_T0051",
+      "P0003_L0006_S0014_T0052"
+    ],
+    "tokens": [
+      "अनुस्वारश्चा᳚न्त्यरू॒पम्",
+      "।"
+    ],
+    "text": "अनुस्वारश्चा᳚न्त्यरू॒पम्।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0003_L0006_S0014_T0052",
+    "wordCount": 1,
+    "punctCount": 1,
+    "svaraCount": 1,
+    "svaraRatio": 1.0,
+    "widthSumWords": 88.857,
+    "widthSumAll": 88.857,
+    "bbox": {
+      "x0": 36.0,
+      "y0": 139.488,
+      "x1": 124.857,
+      "y1": 160.891
+    }
+  },
+  {
+    "sentenceId": "P0003_L0006_S0015",
+    "page": 3,
+    "line": 6,
+    "sentence": 15,
+    "tokenIds": [
+      "P0003_L0006_S0015_T0053",
+      "P0003_L0006_S0015_T0054"
+    ],
+    "tokens": [
+      "बिन्दुरुत्त॑ररू॒पम्",
+      "।"
+    ],
+    "text": "बिन्दुरुत्त॑ररू॒पम्।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0003_L0006_S0015_T0054",
+    "wordCount": 1,
+    "punctCount": 1,
+    "svaraCount": 1,
+    "svaraRatio": 1.0,
+    "widthSumWords": 67.047,
+    "widthSumAll": 67.047,
+    "bbox": {
+      "x0": 127.812,
+      "y0": 139.488,
+      "x1": 194.859,
+      "y1": 160.891
+    }
+  },
+  {
+    "sentenceId": "P0003_L0006_S0016",
+    "page": 3,
+    "line": 6,
+    "sentence": 16,
+    "tokenIds": [
+      "P0003_L0006_S0016_T0055",
+      "P0003_L0006_S0016_T0056",
+      "P0003_L0006_S0016_T0057"
+    ],
+    "tokens": [
+      "नादः॑",
+      "सन्धा॒नम्",
+      "।"
+    ],
+    "text": "नादः॑ सन्धा॒नम्।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0003_L0006_S0016_T0057",
+    "wordCount": 2,
+    "punctCount": 1,
+    "svaraCount": 2,
+    "svaraRatio": 1.0,
+    "widthSumWords": 61.324,
+    "widthSumAll": 61.324,
+    "bbox": {
+      "x0": 197.815,
+      "y0": 139.488,
+      "x1": 265.356,
+      "y1": 160.891
+    }
+  },
+  {
+    "sentenceId": "P0003_L0006_S0017",
+    "page": 3,
+    "line": 6,
+    "sentence": 17,
+    "tokenIds": [
+      "P0003_L0006_S0017_T0058",
+      "P0003_L0006_S0017_T0059",
+      "P0003_L0006_S0017_T0060"
+    ],
+    "tokens": [
+      "सꣳहि॑ता",
+      "स॒न्धिः",
+      "।"
+    ],
+    "text": "सꣳहि॑ता स॒न्धिः।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0003_L0006_S0017_T0060",
+    "wordCount": 2,
+    "punctCount": 1,
+    "svaraCount": 2,
+    "svaraRatio": 1.0,
+    "widthSumWords": 59.923,
+    "widthSumAll": 65.474,
+    "bbox": {
+      "x0": 268.313,
+      "y0": 139.488,
+      "x1": 339.705,
+      "y1": 161.662
+    }
+  },
+  {
+    "sentenceId": "P0003_L0007_S0018",
+    "page": 3,
+    "line": 7,
+    "sentence": 18,
+    "tokenIds": [
+      "P0003_L0007_S0018_T0061",
+      "P0003_L0007_S0018_T0062",
+      "P0003_L0007_S0018_T0063"
+    ],
+    "tokens": [
+      "सैषा",
+      "गणे॑शवि॒द्या",
+      "।"
+    ],
+    "text": "सैषा गणे॑शवि॒द्या।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0003_L0007_S0018_T0063",
+    "wordCount": 2,
+    "punctCount": 1,
+    "svaraCount": 1,
+    "svaraRatio": 0.5,
+    "widthSumWords": 58.432,
+    "widthSumAll": 63.983000000000004,
+    "bbox": {
+      "x0": 36.0,
+      "y0": 157.939,
+      "x1": 105.896,
+      "y1": 179.34199999999998
+    }
+  },
+  {
+    "sentenceId": "P0003_L0007_S0019",
+    "page": 3,
+    "line": 7,
+    "sentence": 19,
+    "tokenIds": [
+      "P0003_L0007_S0019_T0064",
+      "P0003_L0007_S0019_T0065",
+      "P0003_L0007_S0019_T0066"
+    ],
+    "tokens": [
+      "गण॑क",
+      "ऋ॒षिः",
+      "।"
+    ],
+    "text": "गण॑क ऋ॒षिः।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0003_L0007_S0019_T0066",
+    "wordCount": 2,
+    "punctCount": 1,
+    "svaraCount": 2,
+    "svaraRatio": 1.0,
+    "widthSumWords": 44.186,
+    "widthSumAll": 49.737,
+    "bbox": {
+      "x0": 108.852,
+      "y0": 157.939,
+      "x1": 164.49499999999998,
+      "y1": 179.34199999999998
+    }
+  },
+  {
+    "sentenceId": "P0003_L0007_S0020",
+    "page": 3,
+    "line": 7,
+    "sentence": 20,
+    "tokenIds": [
+      "P0003_L0007_S0020_T0067",
+      "P0003_L0007_S0020_T0068"
+    ],
+    "tokens": [
+      "निचृद्गाय॑त्रीच्छ॒न्दः",
+      "।"
+    ],
+    "text": "निचृद्गाय॑त्रीच्छ॒न्दः।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0003_L0007_S0020_T0068",
+    "wordCount": 1,
+    "punctCount": 1,
+    "svaraCount": 1,
+    "svaraRatio": 1.0,
+    "widthSumWords": 68.207,
+    "widthSumAll": 73.758,
+    "bbox": {
+      "x0": 167.451,
+      "y0": 157.939,
+      "x1": 244.166,
+      "y1": 179.34199999999998
+    }
+  },
+  {
+    "sentenceId": "P0003_L0008_S0021",
+    "page": 3,
+    "line": 8,
+    "sentence": 21,
+    "tokenIds": [
+      "P0003_L0008_S0021_T0069",
+      "P0003_L0008_S0021_T0070"
+    ],
+    "tokens": [
+      "गणपति॑र्देव॒ता",
+      "।"
+    ],
+    "text": "गणपति॑र्देव॒ता।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0003_L0008_S0021_T0070",
+    "wordCount": 1,
+    "punctCount": 1,
+    "svaraCount": 1,
+    "svaraRatio": 1.0,
+    "widthSumWords": 50.756,
+    "widthSumAll": 56.307,
+    "bbox": {
+      "x0": 36.0,
+      "y0": 176.389,
+      "x1": 95.274,
+      "y1": 197.792
+    }
+  },
+  {
+    "sentenceId": "P0003_L0008_S0022",
+    "page": 3,
+    "line": 8,
+    "sentence": 22,
+    "tokenIds": [
+      "P0003_L0008_S0022_T0071",
+      "P0003_L0008_S0022_T0072",
+      "P0003_L0008_S0022_T0073",
+      "P0003_L0008_S0022_T0074",
+      "P0003_L0008_S0022_T0075"
+    ],
+    "tokens": [
+      "ॐ",
+      "गं",
+      "ग॒णप॑तये",
+      "नमः",
+      "॥"
+    ],
+    "text": "ॐ गं ग॒णप॑तये नमः॥",
+    "endsWith": "॥",
+    "endPunctTokenId": "P0003_L0008_S0022_T0075",
+    "wordCount": 4,
+    "punctCount": 1,
+    "svaraCount": 1,
+    "svaraRatio": 0.25,
+    "widthSumWords": 69.873,
+    "widthSumAll": 78.714,
+    "bbox": {
+      "x0": 98.229,
+      "y0": 176.389,
+      "x1": 187.244,
+      "y1": 197.792
+    }
+  },
+  {
+    "sentenceId": "P0003_L0008_S0023",
+    "page": 3,
+    "line": 8,
+    "sentence": 23,
+    "tokenIds": [
+      "P0003_L0008_S0023_T0076",
+      "P0003_L0008_S0023_T0077"
+    ],
+    "tokens": [
+      "७",
+      "॥"
+    ],
+    "text": "७॥",
+    "endsWith": "॥",
+    "endPunctTokenId": "P0003_L0008_S0023_T0077",
+    "wordCount": 0,
+    "punctCount": 2,
+    "svaraCount": 0,
+    "svaraRatio": 0.0,
+    "widthSumWords": 0.0,
+    "widthSumAll": 14.617,
+    "bbox": {
+      "x0": 190.204,
+      "y0": 176.389,
+      "x1": 204.821,
+      "y1": 197.792
+    }
+  },
+  {
+    "sentenceId": "P0003_L0009_S0024",
+    "page": 3,
+    "line": 9,
+    "sentence": 24,
+    "tokenIds": [
+      "P0003_L0009_S0024_T0078",
+      "P0003_L0009_S0024_T0079",
+      "P0003_L0009_S0024_T0080",
+      "P0003_L0009_S0024_T0081",
+      "P0003_L0009_S0024_T0082"
+    ],
+    "tokens": [
+      "एकद॒न्ताय॑",
+      "वि॒द्महे॑",
+      "वक्रतु॒ण्डाय॑",
+      "धीमहि",
+      "।"
+    ],
+    "text": "एकद॒न्ताय॑ वि॒द्महे॑ वक्रतु॒ण्डाय॑ धीमहि।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0003_L0009_S0024_T0082",
+    "wordCount": 4,
+    "punctCount": 1,
+    "svaraCount": 3,
+    "svaraRatio": 0.75,
+    "widthSumWords": 129.026,
+    "widthSumAll": 134.577,
+    "bbox": {
+      "x0": 36.0,
+      "y0": 197.43,
+      "x1": 192.022,
+      "y1": 218.833
+    }
+  },
+  {
+    "sentenceId": "P0003_L0009_S0025",
+    "page": 3,
+    "line": 9,
+    "sentence": 25,
+    "tokenIds": [
+      "P0003_L0009_S0025_T0083",
+      "P0003_L0009_S0025_T0084",
+      "P0003_L0009_S0025_T0085",
+      "P0003_L0009_S0025_T0086"
+    ],
+    "tokens": [
+      "तन्नो॑",
+      "दन्तिः",
+      "प्रचो॒दया᳚त्",
+      "॥"
+    ],
+    "text": "तन्नो॑ दन्तिः प्रचो॒दया᳚त्॥",
+    "endsWith": "॥",
+    "endPunctTokenId": "P0003_L0009_S0025_T0086",
+    "wordCount": 3,
+    "punctCount": 1,
+    "svaraCount": 2,
+    "svaraRatio": 0.6666666666666666,
+    "widthSumWords": 89.293,
+    "widthSumAll": 89.293,
+    "bbox": {
+      "x0": 194.979,
+      "y0": 197.43,
+      "x1": 293.44,
+      "y1": 218.833
+    }
+  },
+  {
+    "sentenceId": "P0003_L0009_S0026",
+    "page": 3,
+    "line": 9,
+    "sentence": 26,
+    "tokenIds": [
+      "P0003_L0009_S0026_T0087",
+      "P0003_L0009_S0026_T0088"
+    ],
+    "tokens": [
+      "८",
+      "॥"
+    ],
+    "text": "८॥",
+    "endsWith": "॥",
+    "endPunctTokenId": "P0003_L0009_S0026_T0088",
+    "wordCount": 0,
+    "punctCount": 2,
+    "svaraCount": 0,
+    "svaraRatio": 0.0,
+    "widthSumWords": 0.0,
+    "widthSumAll": 14.617,
+    "bbox": {
+      "x0": 296.4,
+      "y0": 197.43,
+      "x1": 311.017,
+      "y1": 218.833
+    }
+  },
+  {
+    "sentenceId": "P0003_L0010_S0027",
+    "page": 3,
+    "line": 10,
+    "sentence": 27,
+    "tokenIds": [
+      "P0003_L0010_S0027_T0089",
+      "P0003_L0010_S0027_T0090",
+      "P0003_L0010_S0027_T0091",
+      "P0003_L0010_S0027_T0092"
+    ],
+    "tokens": [
+      "एकद॒न्तं",
+      "च॑तुर्ह॒स्तं॒",
+      "पा॒शम॑ङ्कुश॒धारि॑णम्",
+      "।"
+    ],
+    "text": "एकद॒न्तं च॑तुर्ह॒स्तं॒ पा॒शम॑ङ्कुश॒धारि॑णम्।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0003_L0010_S0027_T0092",
+    "wordCount": 3,
+    "punctCount": 1,
+    "svaraCount": 3,
+    "svaraRatio": 1.0,
+    "widthSumWords": 141.76500000000001,
+    "widthSumAll": 141.76500000000001,
+    "bbox": {
+      "x0": 36.0,
+      "y0": 218.472,
+      "x1": 185.859,
+      "y1": 239.875
+    }
+  },
+  {
+    "sentenceId": "P0003_L0010_S0028",
+    "page": 3,
+    "line": 10,
+    "sentence": 28,
+    "tokenIds": [
+      "P0003_L0010_S0028_T0093",
+      "P0003_L0010_S0028_T0094",
+      "P0003_L0010_S0028_T0095",
+      "P0003_L0010_S0028_T0096",
+      "P0003_L0010_S0028_T0097",
+      "P0003_L0010_S0028_T0098"
+    ],
+    "tokens": [
+      "रदं॑",
+      "च॒",
+      "वर॑दं",
+      "ह॒स्तै॒र्बि॒भ्राणं॑",
+      "मूष॒कध्व॑जम्",
+      "।"
+    ],
+    "text": "रदं॑ च॒ वर॑दं ह॒स्तै॒र्बि॒भ्राणं॑ मूष॒कध्व॑जम्।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0003_L0010_S0028_T0098",
+    "wordCount": 5,
+    "punctCount": 1,
+    "svaraCount": 5,
+    "svaraRatio": 1.0,
+    "widthSumWords": 134.395,
+    "widthSumAll": 134.395,
+    "bbox": {
+      "x0": 188.815,
+      "y0": 218.472,
+      "x1": 343.95300000000003,
+      "y1": 239.875
+    }
+  },
+  {
+    "sentenceId": "P0003_L0011_S0029",
+    "page": 3,
+    "line": 11,
+    "sentence": 29,
+    "tokenIds": [
+      "P0003_L0011_S0029_T0099",
+      "P0003_L0011_S0029_T0100",
+      "P0003_L0011_S0029_T0101",
+      "P0003_L0011_S0029_T0102",
+      "P0003_L0011_S0029_T0103",
+      "P0003_L0011_S0029_T0104",
+      "P0003_L0011_S0029_T0105"
+    ],
+    "tokens": [
+      "रक्तं",
+      "॑",
+      "ल॒म्बोद॑रं",
+      "शू॒र्प॒क॒र्णकं",
+      "॑",
+      "रक्त॒वास॑सम्",
+      "।"
+    ],
+    "text": "रक्तं ॑ ल॒म्बोद॑रं शू॒र्प॒क॒र्णकं ॑ रक्त॒वास॑सम्।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0003_L0011_S0029_T0105",
+    "wordCount": 6,
+    "punctCount": 1,
+    "svaraCount": 5,
+    "svaraRatio": 0.8333333333333334,
+    "widthSumWords": 131.59199999999998,
+    "widthSumAll": 131.59199999999998,
+    "bbox": {
+      "x0": 36.0,
+      "y0": 236.922,
+      "x1": 186.95,
+      "y1": 258.325
+    }
+  },
+  {
+    "sentenceId": "P0003_L0011_S0030",
+    "page": 3,
+    "line": 11,
+    "sentence": 30,
+    "tokenIds": [
+      "P0003_L0011_S0030_T0106",
+      "P0003_L0011_S0030_T0107",
+      "P0003_L0011_S0030_T0108",
+      "P0003_L0011_S0030_T0109",
+      "P0003_L0011_S0030_T0110"
+    ],
+    "tokens": [
+      "रक्त॑ग॒न्धानु॑लिप्ता॒ङ्गं",
+      "॒",
+      "र॒क्तपु॑ष्पैः",
+      "सु॒पूजि॑तम्",
+      "।"
+    ],
+    "text": "रक्त॑ग॒न्धानु॑लिप्ता॒ङ्गं ॒ र॒क्तपु॑ष्पैः सु॒पूजि॑तम्।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0003_L0011_S0030_T0110",
+    "wordCount": 4,
+    "punctCount": 1,
+    "svaraCount": 4,
+    "svaraRatio": 1.0,
+    "widthSumWords": 144.96800000000002,
+    "widthSumAll": 144.96800000000002,
+    "bbox": {
+      "x0": 189.906,
+      "y0": 236.922,
+      "x1": 344.62,
+      "y1": 258.325
+    }
+  },
+  {
+    "sentenceId": "P0003_L0012_S0031",
+    "page": 3,
+    "line": 12,
+    "sentence": 31,
+    "tokenIds": [
+      "P0003_L0012_S0031_T0111",
+      "P0003_L0012_S0031_T0112",
+      "P0003_L0012_S0031_T0113",
+      "P0003_L0012_S0031_T0114"
+    ],
+    "tokens": [
+      "भक्ता॑नु॒कम्पि॑नं",
+      "दे॒वं॒",
+      "ज॒गत्का॑रण॒मच्यु॑तम्",
+      "।"
+    ],
+    "text": "भक्ता॑नु॒कम्पि॑नं दे॒वं॒ ज॒गत्का॑रण॒मच्यु॑तम्।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0003_L0012_S0031_T0114",
+    "wordCount": 3,
+    "punctCount": 1,
+    "svaraCount": 3,
+    "svaraRatio": 1.0,
+    "widthSumWords": 147.822,
+    "widthSumAll": 147.822,
+    "bbox": {
+      "x0": 36.0,
+      "y0": 255.373,
+      "x1": 191.772,
+      "y1": 276.776
+    }
+  },
+  {
+    "sentenceId": "P0003_L0012_S0032",
+    "page": 3,
+    "line": 12,
+    "sentence": 32,
+    "tokenIds": [
+      "P0003_L0012_S0032_T0115",
+      "P0003_L0012_S0032_T0116",
+      "P0003_L0012_S0032_T0117",
+      "P0003_L0012_S0032_T0118",
+      "P0003_L0012_S0032_T0119",
+      "P0003_L0012_S0032_T0120"
+    ],
+    "tokens": [
+      "आवि॑र्भू॒तं",
+      "च॑",
+      "सृ॒ष्ट्या॒दौ॒",
+      "प्र॒कृतेः᳚",
+      "पुरु॒षात्प॑रम्",
+      "।"
+    ],
+    "text": "आवि॑र्भू॒तं च॑ सृ॒ष्ट्या॒दौ॒ प्र॒कृतेः᳚ पुरु॒षात्प॑रम्।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0003_L0012_S0032_T0120",
+    "wordCount": 5,
+    "punctCount": 1,
+    "svaraCount": 5,
+    "svaraRatio": 1.0,
+    "widthSumWords": 144.805,
+    "widthSumAll": 144.805,
+    "bbox": {
+      "x0": 194.727,
+      "y0": 255.373,
+      "x1": 360.591,
+      "y1": 276.776
+    }
+  },
+  {
+    "sentenceId": "P0003_L0013_S0033",
+    "page": 3,
+    "line": 13,
+    "sentence": 33,
+    "tokenIds": [
+      "P0003_L0013_S0033_T0121",
+      "P0003_L0013_S0033_T0122",
+      "P0003_L0013_S0033_T0123",
+      "P0003_L0013_S0033_T0124",
+      "P0003_L0013_S0033_T0125",
+      "P0003_L0013_S0033_T0126",
+      "P0003_L0013_S0033_T0127",
+      "P0003_L0013_S0033_T0128",
+      "P0003_L0013_S0033_T0129"
+    ],
+    "tokens": [
+      "एवं॑",
+      "ध्या॒यति॑",
+      "यो",
+      "नि॒त्यं॒",
+      "स॒",
+      "योगी॑",
+      "योगि॒नां",
+      "व॑रः",
+      "॥"
+    ],
+    "text": "एवं॑ ध्या॒यति॑ यो नि॒त्यं॒ स॒ योगी॑ योगि॒नां व॑रः॥",
+    "endsWith": "॥",
+    "endPunctTokenId": "P0003_L0013_S0033_T0129",
+    "wordCount": 8,
+    "punctCount": 1,
+    "svaraCount": 7,
+    "svaraRatio": 0.875,
+    "widthSumWords": 141.231,
+    "widthSumAll": 150.072,
+    "bbox": {
+      "x0": 36.0,
+      "y0": 273.824,
+      "x1": 224.922,
+      "y1": 295.22700000000003
+    }
+  },
+  {
+    "sentenceId": "P0003_L0013_S0034",
+    "page": 3,
+    "line": 13,
+    "sentence": 34,
+    "tokenIds": [
+      "P0003_L0013_S0034_T0130",
+      "P0003_L0013_S0034_T0131"
+    ],
+    "tokens": [
+      "९",
+      "॥"
+    ],
+    "text": "९॥",
+    "endsWith": "॥",
+    "endPunctTokenId": "P0003_L0013_S0034_T0131",
+    "wordCount": 0,
+    "punctCount": 2,
+    "svaraCount": 0,
+    "svaraRatio": 0.0,
+    "widthSumWords": 0.0,
+    "widthSumAll": 14.617,
+    "bbox": {
+      "x0": 227.881,
+      "y0": 273.824,
+      "x1": 242.498,
+      "y1": 295.22700000000003
+    }
+  },
+  {
+    "sentenceId": "P0003_L0014_S0035",
+    "page": 3,
+    "line": 14,
+    "sentence": 35,
+    "tokenIds": [
+      "P0003_L0014_S0035_T0132",
+      "P0003_L0014_S0035_T0133",
+      "P0003_L0014_S0035_T0134"
+    ],
+    "tokens": [
+      "नमो",
+      "व्रातपतये",
+      "।"
+    ],
+    "text": "नमो व्रातपतये।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0003_L0014_S0035_T0134",
+    "wordCount": 2,
+    "punctCount": 1,
+    "svaraCount": 0,
+    "svaraRatio": 0.0,
+    "widthSumWords": 51.657,
+    "widthSumAll": 57.208,
+    "bbox": {
+      "x0": 36.0,
+      "y0": 294.865,
+      "x1": 98.215,
+      "y1": 316.26800000000003
+    }
+  },
+  {
+    "sentenceId": "P0003_L0014_S0036",
+    "page": 3,
+    "line": 14,
+    "sentence": 36,
+    "tokenIds": [
+      "P0003_L0014_S0036_T0135",
+      "P0003_L0014_S0036_T0136",
+      "P0003_L0014_S0036_T0137"
+    ],
+    "tokens": [
+      "नमो",
+      "गणपतये",
+      "।"
+    ],
+    "text": "नमो गणपतये।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0003_L0014_S0036_T0137",
+    "wordCount": 2,
+    "punctCount": 1,
+    "svaraCount": 0,
+    "svaraRatio": 0.0,
+    "widthSumWords": 50.634,
+    "widthSumAll": 56.185,
+    "bbox": {
+      "x0": 101.171,
+      "y0": 294.865,
+      "x1": 162.363,
+      "y1": 316.26800000000003
+    }
+  },
+  {
+    "sentenceId": "P0003_L0014_S0037",
+    "page": 3,
+    "line": 14,
+    "sentence": 37,
+    "tokenIds": [
+      "P0003_L0014_S0037_T0138",
+      "P0003_L0014_S0037_T0139",
+      "P0003_L0014_S0037_T0140"
+    ],
+    "tokens": [
+      "नमः",
+      "प्रमथपतये",
+      "।"
+    ],
+    "text": "नमः प्रमथपतये।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0003_L0014_S0037_T0140",
+    "wordCount": 2,
+    "punctCount": 1,
+    "svaraCount": 0,
+    "svaraRatio": 0.0,
+    "widthSumWords": 56.751000000000005,
+    "widthSumAll": 62.30200000000001,
+    "bbox": {
+      "x0": 165.318,
+      "y0": 294.865,
+      "x1": 232.631,
+      "y1": 316.26800000000003
+    }
+  },
+  {
+    "sentenceId": "P0003_L0015_S0038",
+    "page": 3,
+    "line": 15,
+    "sentence": 38,
+    "tokenIds": [
+      "P0003_L0015_S0038_T0141",
+      "P0003_L0015_S0038_T0142",
+      "P0003_L0015_S0038_T0143",
+      "P0003_L0015_S0038_T0144",
+      "P0003_L0015_S0038_T0145",
+      "P0003_L0015_S0038_T0146",
+      "P0003_L0015_S0038_T0147"
+    ],
+    "tokens": [
+      "नमस्तेऽस्तु",
+      "लम्बोदरायैकदन्ताय",
+      "विघ्नविनाशिने",
+      "शिवसुताय",
+      "श्रीवरदमूर्तये॒",
+      "नमः॑",
+      "॥"
+    ],
+    "text": "नमस्तेऽस्तु लम्बोदरायैकदन्ताय विघ्नविनाशिने शिवसुताय श्रीवरदमूर्तये॒ नमः॑॥",
+    "endsWith": "॥",
+    "endPunctTokenId": "P0003_L0015_S0038_T0147",
+    "wordCount": 6,
+    "punctCount": 1,
+    "svaraCount": 2,
+    "svaraRatio": 0.3333333333333333,
+    "widthSumWords": 273.916,
+    "widthSumAll": 282.757,
+    "bbox": {
+      "x0": 36.0,
+      "y0": 310.805,
+      "x1": 340.653,
+      "y1": 332.208
+    }
+  },
+  {
+    "sentenceId": "P0003_L0015_S0039",
+    "page": 3,
+    "line": 15,
+    "sentence": 39,
+    "tokenIds": [
+      "P0003_L0015_S0039_T0148",
+      "P0003_L0015_S0039_T0149"
+    ],
+    "tokens": [
+      "१०",
+      "॥"
+    ],
+    "text": "१०॥",
+    "endsWith": "॥",
+    "endPunctTokenId": "P0003_L0015_S0039_T0149",
+    "wordCount": 0,
+    "punctCount": 2,
+    "svaraCount": 0,
+    "svaraRatio": 0.0,
+    "widthSumWords": 0.0,
+    "widthSumAll": 20.393,
+    "bbox": {
+      "x0": 343.612,
+      "y0": 310.805,
+      "x1": 364.005,
+      "y1": 332.208
+    }
+  },
+  {
+    "sentenceId": "P0003_L0016_S0040",
+    "page": 3,
+    "line": 16,
+    "sentence": 40,
+    "tokenIds": [
+      "P0003_L0016_S0040_T0150",
+      "P0003_L0016_S0040_T0151",
+      "P0003_L0016_S0040_T0152"
+    ],
+    "tokens": [
+      "एतदथर्वशीर्षं॑",
+      "योऽधी॒ते",
+      "।"
+    ],
+    "text": "एतदथर्वशीर्षं॑ योऽधी॒ते।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0003_L0016_S0040_T0152",
+    "wordCount": 2,
+    "punctCount": 1,
+    "svaraCount": 2,
+    "svaraRatio": 1.0,
+    "widthSumWords": 79.798,
+    "widthSumAll": 85.349,
+    "bbox": {
+      "x0": 36.0,
+      "y0": 331.846,
+      "x1": 129.629,
+      "y1": 353.249
+    }
+  },
+  {
+    "sentenceId": "P0003_L0016_S0041",
+    "page": 3,
+    "line": 16,
+    "sentence": 41,
+    "tokenIds": [
+      "P0003_L0016_S0041_T0153",
+      "P0003_L0016_S0041_T0154",
+      "P0003_L0016_S0041_T0155",
+      "P0003_L0016_S0041_T0156"
+    ],
+    "tokens": [
+      "स",
+      "ब्रह्मभूया॑य",
+      "क॒ल्पते",
+      "।"
+    ],
+    "text": "स ब्रह्मभूया॑य क॒ल्पते।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0003_L0016_S0041_T0156",
+    "wordCount": 3,
+    "punctCount": 1,
+    "svaraCount": 2,
+    "svaraRatio": 0.6666666666666666,
+    "widthSumWords": 71.803,
+    "widthSumAll": 77.354,
+    "bbox": {
+      "x0": 132.585,
+      "y0": 331.846,
+      "x1": 217.916,
+      "y1": 353.249
+    }
+  },
+  {
+    "sentenceId": "P0003_L0016_S0042",
+    "page": 3,
+    "line": 16,
+    "sentence": 42,
+    "tokenIds": [
+      "P0003_L0016_S0042_T0157",
+      "P0003_L0016_S0042_T0158",
+      "P0003_L0016_S0042_T0159",
+      "P0003_L0016_S0042_T0160"
+    ],
+    "tokens": [
+      "स",
+      "सर्वविघ्नै᳚र्न",
+      "बा॒ध्यते",
+      "।"
+    ],
+    "text": "स सर्वविघ्नै᳚र्न बा॒ध्यते।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0003_L0016_S0042_T0160",
+    "wordCount": 3,
+    "punctCount": 1,
+    "svaraCount": 2,
+    "svaraRatio": 0.6666666666666666,
+    "widthSumWords": 71.302,
+    "widthSumAll": 76.85300000000001,
+    "bbox": {
+      "x0": 220.872,
+      "y0": 331.846,
+      "x1": 304.33,
+      "y1": 353.249
+    }
+  },
+  {
+    "sentenceId": "P0003_L0017_S0043",
+    "page": 3,
+    "line": 17,
+    "sentence": 43,
+    "tokenIds": [
+      "P0003_L0017_S0043_T0161",
+      "P0003_L0017_S0043_T0162",
+      "P0003_L0017_S0043_T0163",
+      "P0003_L0017_S0043_T0164"
+    ],
+    "tokens": [
+      "स",
+      "सर्वतः",
+      "सुख॑मेध॒ते",
+      "।"
+    ],
+    "text": "स सर्वतः सुख॑मेध॒ते।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0003_L0017_S0043_T0164",
+    "wordCount": 3,
+    "punctCount": 1,
+    "svaraCount": 1,
+    "svaraRatio": 0.3333333333333333,
+    "widthSumWords": 68.37899999999999,
+    "widthSumAll": 73.92999999999999,
+    "bbox": {
+      "x0": 36.0,
+      "y0": 350.297,
+      "x1": 117.916,
+      "y1": 371.70000000000005
+    }
+  },
+  {
+    "sentenceId": "P0003_L0017_S0044",
+    "page": 3,
+    "line": 17,
+    "sentence": 44,
+    "tokenIds": [
+      "P0003_L0017_S0044_T0165",
+      "P0003_L0017_S0044_T0166",
+      "P0003_L0017_S0044_T0167"
+    ],
+    "tokens": [
+      "स",
+      "पञ्चमहापापा᳚त्प्रमु॒च्यते",
+      "।"
+    ],
+    "text": "स पञ्चमहापापा᳚त्प्रमु॒च्यते।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0003_L0017_S0044_T0167",
+    "wordCount": 2,
+    "punctCount": 1,
+    "svaraCount": 1,
+    "svaraRatio": 0.5,
+    "widthSumWords": 95.23899999999999,
+    "widthSumAll": 100.78999999999999,
+    "bbox": {
+      "x0": 120.872,
+      "y0": 350.297,
+      "x1": 226.68499999999997,
+      "y1": 371.70000000000005
+    }
+  },
+  {
+    "sentenceId": "P0003_L0018_S0045",
+    "page": 3,
+    "line": 18,
+    "sentence": 45,
+    "tokenIds": [
+      "P0003_L0018_S0045_T0168",
+      "P0003_L0018_S0045_T0169",
+      "P0003_L0018_S0045_T0170",
+      "P0003_L0018_S0045_T0171",
+      "P0003_L0018_S0045_T0172"
+    ],
+    "tokens": [
+      "सा॒यम॑धीया॒नो॒",
+      "दिवसकृतं",
+      "पापं॑",
+      "नाश॒यति",
+      "।"
+    ],
+    "text": "सा॒यम॑धीया॒नो॒ दिवसकृतं पापं॑ नाश॒यति।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0003_L0018_S0045_T0172",
+    "wordCount": 4,
+    "punctCount": 1,
+    "svaraCount": 3,
+    "svaraRatio": 0.75,
+    "widthSumWords": 136.27800000000002,
+    "widthSumAll": 141.829,
+    "bbox": {
+      "x0": 36.0,
+      "y0": 368.748,
+      "x1": 195.619,
+      "y1": 390.151
+    }
+  },
+  {
+    "sentenceId": "P0003_L0018_S0046",
+    "page": 3,
+    "line": 18,
+    "sentence": 46,
+    "tokenIds": [
+      "P0003_L0018_S0046_T0173",
+      "P0003_L0018_S0046_T0174",
+      "P0003_L0018_S0046_T0175",
+      "P0003_L0018_S0046_T0176",
+      "P0003_L0018_S0046_T0177"
+    ],
+    "tokens": [
+      "प्रा॒तर॑धीया॒नो॒",
+      "रात्रिकृतं",
+      "पापं॑",
+      "नाश॒यति",
+      "।"
+    ],
+    "text": "प्रा॒तर॑धीया॒नो॒ रात्रिकृतं पापं॑ नाश॒यति।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0003_L0018_S0046_T0177",
+    "wordCount": 4,
+    "punctCount": 1,
+    "svaraCount": 3,
+    "svaraRatio": 0.75,
+    "widthSumWords": 127.437,
+    "widthSumAll": 132.988,
+    "bbox": {
+      "x0": 198.575,
+      "y0": 368.748,
+      "x1": 349.351,
+      "y1": 390.151
+    }
+  },
+  {
+    "sentenceId": "P0003_L0019_S0047",
+    "page": 3,
+    "line": 19,
+    "sentence": 47,
+    "tokenIds": [
+      "P0003_L0019_S0047_T0178",
+      "P0003_L0019_S0047_T0179",
+      "P0003_L0019_S0047_T0180",
+      "P0003_L0019_S0047_T0181",
+      "P0003_L0019_S0047_T0182",
+      "P0003_L0019_S0047_T0183"
+    ],
+    "tokens": [
+      "सायं",
+      "प्रातः",
+      "प्र॑युञ्जा॒नो॒",
+      "पापोऽपा॑पो",
+      "भ॒वति",
+      "।"
+    ],
+    "text": "सायं प्रातः प्र॑युञ्जा॒नो॒ पापोऽपा॑पो भ॒वति।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0003_L0019_S0047_T0183",
+    "wordCount": 5,
+    "punctCount": 1,
+    "svaraCount": 3,
+    "svaraRatio": 0.6,
+    "widthSumWords": 131.416,
+    "widthSumAll": 136.96699999999998,
+    "bbox": {
+      "x0": 36.0,
+      "y0": 387.198,
+      "x1": 190.44199999999998,
+      "y1": 408.601
+    }
+  },
+  {
+    "sentenceId": "P0003_L0019_S0048",
+    "page": 3,
+    "line": 19,
+    "sentence": 48,
+    "tokenIds": [
+      "P0003_L0019_S0048_T0184",
+      "P0003_L0019_S0048_T0185",
+      "P0003_L0019_S0048_T0186"
+    ],
+    "tokens": [
+      "सर्वत्राधीयानोऽपवि॑घ्नो",
+      "भ॒वति",
+      "।"
+    ],
+    "text": "सर्वत्राधीयानोऽपवि॑घ्नो भ॒वति।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0003_L0019_S0048_T0186",
+    "wordCount": 2,
+    "punctCount": 1,
+    "svaraCount": 2,
+    "svaraRatio": 1.0,
+    "widthSumWords": 103.22800000000001,
+    "widthSumAll": 108.77900000000001,
+    "bbox": {
+      "x0": 193.398,
+      "y0": 387.198,
+      "x1": 308.09299999999996,
+      "y1": 408.601
+    }
+  },
+  {
+    "sentenceId": "P0003_L0020_S0049",
+    "page": 3,
+    "line": 20,
+    "sentence": 49,
+    "tokenIds": [
+      "P0003_L0020_S0049_T0187",
+      "P0003_L0020_S0049_T0188",
+      "P0003_L0020_S0049_T0189",
+      "P0003_L0020_S0049_T0190"
+    ],
+    "tokens": [
+      "धर्मार्थकाममोक्षं॑",
+      "च",
+      "वि॒न्दति",
+      "।"
+    ],
+    "text": "धर्मार्थकाममोक्षं॑ च वि॒न्दति।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0003_L0020_S0049_T0190",
+    "wordCount": 3,
+    "punctCount": 1,
+    "svaraCount": 2,
+    "svaraRatio": 0.6666666666666666,
+    "widthSumWords": 93.594,
+    "widthSumAll": 99.145,
+    "bbox": {
+      "x0": 36.0,
+      "y0": 405.649,
+      "x1": 147.278,
+      "y1": 427.052
+    }
+  },
+  {
+    "sentenceId": "P0003_L0020_S0050",
+    "page": 3,
+    "line": 20,
+    "sentence": 50,
+    "tokenIds": [
+      "P0003_L0020_S0050_T0191",
+      "P0003_L0020_S0050_T0192",
+      "P0003_L0020_S0050_T0193",
+      "P0003_L0020_S0050_T0194"
+    ],
+    "tokens": [
+      "इदमथर्वशीर्षमशिष्याय॑",
+      "न",
+      "दे॒यम्",
+      "।"
+    ],
+    "text": "इदमथर्वशीर्षमशिष्याय॑ न दे॒यम्।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0003_L0020_S0050_T0194",
+    "wordCount": 3,
+    "punctCount": 1,
+    "svaraCount": 2,
+    "svaraRatio": 0.6666666666666666,
+    "widthSumWords": 119.039,
+    "widthSumAll": 119.039,
+    "bbox": {
+      "x0": 150.234,
+      "y0": 405.649,
+      "x1": 278.445,
+      "y1": 427.052
+    }
+  },
+  {
+    "sentenceId": "P0003_L0021_S0051",
+    "page": 3,
+    "line": 21,
+    "sentence": 51,
+    "tokenIds": [
+      "P0003_L0021_S0051_T0195",
+      "P0003_L0021_S0051_T0196",
+      "P0003_L0021_S0051_T0197",
+      "P0003_L0021_S0051_T0198",
+      "P0003_L0021_S0051_T0199",
+      "P0003_L0021_S0051_T0200",
+      "P0003_L0021_S0051_T0201"
+    ],
+    "tokens": [
+      "यो",
+      "यदि",
+      "मो॑हाद्",
+      "दा॒स्यति",
+      "स",
+      "पापी॑यान्भ॒वति",
+      "।"
+    ],
+    "text": "यो यदि मो॑हाद् दा॒स्यति स पापी॑यान्भ॒वति।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0003_L0021_S0051_T0201",
+    "wordCount": 6,
+    "punctCount": 1,
+    "svaraCount": 3,
+    "svaraRatio": 0.5,
+    "widthSumWords": 145.439,
+    "widthSumAll": 150.98999999999998,
+    "bbox": {
+      "x0": 36.0,
+      "y0": 424.1,
+      "x1": 202.98399999999998,
+      "y1": 445.50300000000004
+    }
+  },
+  {
+    "sentenceId": "P0003_L0022_S0052",
+    "page": 3,
+    "line": 22,
+    "sentence": 52,
+    "tokenIds": [
+      "P0003_L0022_S0052_T0202",
+      "P0003_L0022_S0052_T0203",
+      "P0003_L0022_S0052_T0204",
+      "P0003_L0022_S0052_T0205",
+      "P0003_L0022_S0052_T0206",
+      "P0003_L0022_S0052_T0207",
+      "P0003_L0022_S0052_T0208"
+    ],
+    "tokens": [
+      "सहस्रावर्तनाद्यं",
+      "यं",
+      "काम॑मधी॒ते",
+      "तं",
+      "तमने॑न",
+      "सा॒धयेत्",
+      "॥"
+    ],
+    "text": "सहस्रावर्तनाद्यं यं काम॑मधी॒ते तं तमने॑न सा॒धयेत्॥",
+    "endsWith": "॥",
+    "endPunctTokenId": "P0003_L0022_S0052_T0208",
+    "wordCount": 6,
+    "punctCount": 1,
+    "svaraCount": 3,
+    "svaraRatio": 0.5,
+    "widthSumWords": 178.13799999999998,
+    "widthSumAll": 178.13799999999998,
+    "bbox": {
+      "x0": 36.0,
+      "y0": 442.551,
+      "x1": 226.346,
+      "y1": 463.954
+    }
+  },
+  {
+    "sentenceId": "P0003_L0022_S0053",
+    "page": 3,
+    "line": 22,
+    "sentence": 53,
+    "tokenIds": [
+      "P0003_L0022_S0053_T0209",
+      "P0003_L0022_S0053_T0210"
+    ],
+    "tokens": [
+      "११",
+      "॥"
+    ],
+    "text": "११॥",
+    "endsWith": "॥",
+    "endPunctTokenId": "P0003_L0022_S0053_T0210",
+    "wordCount": 0,
+    "punctCount": 2,
+    "svaraCount": 0,
+    "svaraRatio": 0.0,
+    "widthSumWords": 0.0,
+    "widthSumAll": 20.393,
+    "bbox": {
+      "x0": 229.305,
+      "y0": 442.551,
+      "x1": 249.698,
+      "y1": 463.954
+    }
+  },
+  {
+    "sentenceId": "P0003_L0023_S0054",
+    "page": 3,
+    "line": 23,
+    "sentence": 54,
+    "tokenIds": [
+      "P0003_L0023_S0054_T0211",
+      "P0003_L0023_S0054_T0212",
+      "P0003_L0023_S0054_T0213",
+      "P0003_L0023_S0054_T0214",
+      "P0003_L0023_S0054_T0215",
+      "P0003_L0023_S0054_T0216"
+    ],
+    "tokens": [
+      "अनेन",
+      "गणपतिम॑भिषि॒ञ्चति",
+      "स",
+      "वा॑ग्मी",
+      "भ॒वति",
+      "।"
+    ],
+    "text": "अनेन गणपतिम॑भिषि॒ञ्चति स वा॑ग्मी भ॒वति।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0003_L0023_S0054_T0216",
+    "wordCount": 5,
+    "punctCount": 1,
+    "svaraCount": 3,
+    "svaraRatio": 0.6,
+    "widthSumWords": 144.886,
+    "widthSumAll": 150.43699999999998,
+    "bbox": {
+      "x0": 36.0,
+      "y0": 463.592,
+      "x1": 201.23399999999998,
+      "y1": 484.995
+    }
+  },
+  {
+    "sentenceId": "P0003_L0024_S0055",
+    "page": 3,
+    "line": 24,
+    "sentence": 55,
+    "tokenIds": [
+      "P0003_L0024_S0055_T0217",
+      "P0003_L0024_S0055_T0218",
+      "P0003_L0024_S0055_T0219",
+      "P0003_L0024_S0055_T0220"
+    ],
+    "tokens": [
+      "चतुर्थ्यामन॑श्नन्ज॒पति",
+      "स",
+      "विद्या॑वान्भ॒वति",
+      "।"
+    ],
+    "text": "चतुर्थ्यामन॑श्नन्ज॒पति स विद्या॑वान्भ॒वति।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0003_L0024_S0055_T0220",
+    "wordCount": 3,
+    "punctCount": 1,
+    "svaraCount": 2,
+    "svaraRatio": 0.6666666666666666,
+    "widthSumWords": 148.234,
+    "widthSumAll": 153.785,
+    "bbox": {
+      "x0": 36.0,
+      "y0": 482.042,
+      "x1": 198.65599999999998,
+      "y1": 503.445
+    }
+  },
+  {
+    "sentenceId": "P0003_L0024_S0056",
+    "page": 3,
+    "line": 24,
+    "sentence": 56,
+    "tokenIds": [
+      "P0003_L0024_S0056_T0221",
+      "P0003_L0024_S0056_T0222"
+    ],
+    "tokens": [
+      "इत्यथर्व॑णवा॒क्यम्",
+      "।"
+    ],
+    "text": "इत्यथर्व॑णवा॒क्यम्।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0003_L0024_S0056_T0222",
+    "wordCount": 1,
+    "punctCount": 1,
+    "svaraCount": 1,
+    "svaraRatio": 1.0,
+    "widthSumWords": 71.513,
+    "widthSumAll": 71.513,
+    "bbox": {
+      "x0": 201.612,
+      "y0": 482.042,
+      "x1": 273.125,
+      "y1": 503.445
+    }
+  },
+  {
+    "sentenceId": "P0003_L0025_S0057",
+    "page": 3,
+    "line": 25,
+    "sentence": 57,
+    "tokenIds": [
+      "P0003_L0025_S0057_T0223",
+      "P0003_L0025_S0057_T0224",
+      "P0003_L0025_S0057_T0225",
+      "P0003_L0025_S0057_T0226",
+      "P0003_L0025_S0057_T0227"
+    ],
+    "tokens": [
+      "ब्रह्माद्यावर॑णं",
+      "वि॒द्यान्न",
+      "बिभेति",
+      "कदा॑चने॒ति",
+      "॥"
+    ],
+    "text": "ब्रह्माद्यावर॑णं वि॒द्यान्न बिभेति कदा॑चने॒ति॥",
+    "endsWith": "॥",
+    "endPunctTokenId": "P0003_L0025_S0057_T0227",
+    "wordCount": 4,
+    "punctCount": 1,
+    "svaraCount": 3,
+    "svaraRatio": 0.75,
+    "widthSumWords": 138.496,
+    "widthSumAll": 147.33700000000002,
+    "bbox": {
+      "x0": 36.0,
+      "y0": 500.493,
+      "x1": 194.62300000000002,
+      "y1": 521.896
+    }
+  },
+  {
+    "sentenceId": "P0003_L0025_S0058",
+    "page": 3,
+    "line": 25,
+    "sentence": 58,
+    "tokenIds": [
+      "P0003_L0025_S0058_T0228",
+      "P0003_L0025_S0058_T0229"
+    ],
+    "tokens": [
+      "१२",
+      "॥"
+    ],
+    "text": "१२॥",
+    "endsWith": "॥",
+    "endPunctTokenId": "P0003_L0025_S0058_T0229",
+    "wordCount": 0,
+    "punctCount": 2,
+    "svaraCount": 0,
+    "svaraRatio": 0.0,
+    "widthSumWords": 0.0,
+    "widthSumAll": 20.393,
+    "bbox": {
+      "x0": 197.583,
+      "y0": 500.493,
+      "x1": 217.976,
+      "y1": 521.896
+    }
+  },
+  {
+    "sentenceId": "P0003_L0026_S0059",
+    "page": 3,
+    "line": 26,
+    "sentence": 59,
+    "tokenIds": [
+      "P0003_L0026_S0059_T0230",
+      "P0003_L0026_S0059_T0231",
+      "P0003_L0026_S0059_T0232",
+      "P0003_L0026_S0059_T0233",
+      "P0003_L0026_S0059_T0234",
+      "P0003_L0026_S0059_T0235"
+    ],
+    "tokens": [
+      "यो",
+      "दूर्वाङ्कु॑रैर्य॒जति",
+      "स",
+      "वैश्रवणोप॑मो",
+      "भ॒वति",
+      "।"
+    ],
+    "text": "यो दूर्वाङ्कु॑रैर्य॒जति स वैश्रवणोप॑मो भ॒वति।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0003_L0026_S0059_T0235",
+    "wordCount": 5,
+    "punctCount": 1,
+    "svaraCount": 3,
+    "svaraRatio": 0.6,
+    "widthSumWords": 135.126,
+    "widthSumAll": 140.677,
+    "bbox": {
+      "x0": 36.0,
+      "y0": 521.534,
+      "x1": 191.46699999999998,
+      "y1": 542.937
+    }
+  },
+  {
+    "sentenceId": "P0003_L0027_S0060",
+    "page": 3,
+    "line": 27,
+    "sentence": 60,
+    "tokenIds": [
+      "P0003_L0027_S0060_T0236",
+      "P0003_L0027_S0060_T0237",
+      "P0003_L0027_S0060_T0238",
+      "P0003_L0027_S0060_T0239",
+      "P0003_L0027_S0060_T0240"
+    ],
+    "tokens": [
+      "यो",
+      "ला॑जैर्य॒जति",
+      "स",
+      "यशो॑वान्भ॒वति",
+      "।"
+    ],
+    "text": "यो ला॑जैर्य॒जति स यशो॑वान्भ॒वति।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0003_L0027_S0060_T0240",
+    "wordCount": 4,
+    "punctCount": 1,
+    "svaraCount": 2,
+    "svaraRatio": 0.5,
+    "widthSumWords": 117.166,
+    "widthSumAll": 122.717,
+    "bbox": {
+      "x0": 36.0,
+      "y0": 539.985,
+      "x1": 170.547,
+      "y1": 561.388
+    }
+  },
+  {
+    "sentenceId": "P0003_L0027_S0061",
+    "page": 3,
+    "line": 27,
+    "sentence": 61,
+    "tokenIds": [
+      "P0003_L0027_S0061_T0241",
+      "P0003_L0027_S0061_T0242",
+      "P0003_L0027_S0061_T0243"
+    ],
+    "tokens": [
+      "स",
+      "मेधा॑वान्भ॒वति",
+      "।"
+    ],
+    "text": "स मेधा॑वान्भ॒वति।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0003_L0027_S0061_T0243",
+    "wordCount": 2,
+    "punctCount": 1,
+    "svaraCount": 1,
+    "svaraRatio": 0.5,
+    "widthSumWords": 64.295,
+    "widthSumAll": 69.846,
+    "bbox": {
+      "x0": 173.503,
+      "y0": 539.985,
+      "x1": 249.26299999999998,
+      "y1": 561.388
+    }
+  },
+  {
+    "sentenceId": "P0004_L0001_S0001",
+    "page": 4,
+    "line": 1,
+    "sentence": 1,
+    "tokenIds": [
+      "P0004_L0001_S0001_T0001",
+      "P0004_L0001_S0001_T0002",
+      "P0004_L0001_S0001_T0003",
+      "P0004_L0001_S0001_T0004",
+      "P0004_L0001_S0001_T0005",
+      "P0004_L0001_S0001_T0006"
+    ],
+    "tokens": [
+      "यो",
+      "मोदकसहस्रे॑ण",
+      "य॒जति",
+      "स",
+      "वाञ्छितफलम॑वाप्नो॒ति",
+      "।"
+    ],
+    "text": "यो मोदकसहस्रे॑ण य॒जति स वाञ्छितफलम॑वाप्नो॒ति।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0004_L0001_S0001_T0006",
+    "wordCount": 5,
+    "punctCount": 1,
+    "svaraCount": 3,
+    "svaraRatio": 0.6,
+    "widthSumWords": 173.632,
+    "widthSumAll": 179.183,
+    "bbox": {
+      "x0": 36.0,
+      "y0": 47.154,
+      "x1": 229.97899999999998,
+      "y1": 68.557
+    }
+  },
+  {
+    "sentenceId": "P0004_L0002_S0002",
+    "page": 4,
+    "line": 2,
+    "sentence": 2,
+    "tokenIds": [
+      "P0004_L0002_S0002_T0007",
+      "P0004_L0002_S0002_T0008",
+      "P0004_L0002_S0002_T0009",
+      "P0004_L0002_S0002_T0010",
+      "P0004_L0002_S0002_T0011",
+      "P0004_L0002_S0002_T0012",
+      "P0004_L0002_S0002_T0013",
+      "P0004_L0002_S0002_T0014",
+      "P0004_L0002_S0002_T0015",
+      "P0004_L0002_S0002_T0016"
+    ],
+    "tokens": [
+      "यः",
+      "साज्य",
+      "समि॑द्भिर्य॒जति",
+      "स",
+      "सर्वं",
+      "लभते",
+      "स",
+      "स॑र्वं",
+      "ल॒भते",
+      "॥"
+    ],
+    "text": "यः साज्य समि॑द्भिर्य॒जति स सर्वं लभते स स॑र्वं ल॒भते॥",
+    "endsWith": "॥",
+    "endPunctTokenId": "P0004_L0002_S0002_T0016",
+    "wordCount": 9,
+    "punctCount": 1,
+    "svaraCount": 3,
+    "svaraRatio": 0.3333333333333333,
+    "widthSumWords": 169.502,
+    "widthSumAll": 178.34300000000002,
+    "bbox": {
+      "x0": 36.0,
+      "y0": 65.605,
+      "x1": 239.354,
+      "y1": 87.00800000000001
+    }
+  },
+  {
+    "sentenceId": "P0004_L0002_S0003",
+    "page": 4,
+    "line": 2,
+    "sentence": 3,
+    "tokenIds": [
+      "P0004_L0002_S0003_T0017",
+      "P0004_L0002_S0003_T0018"
+    ],
+    "tokens": [
+      "१३",
+      "॥"
+    ],
+    "text": "१३॥",
+    "endsWith": "॥",
+    "endPunctTokenId": "P0004_L0002_S0003_T0018",
+    "wordCount": 0,
+    "punctCount": 2,
+    "svaraCount": 0,
+    "svaraRatio": 0.0,
+    "widthSumWords": 0.0,
+    "widthSumAll": 20.393,
+    "bbox": {
+      "x0": 242.314,
+      "y0": 65.605,
+      "x1": 262.707,
+      "y1": 87.00800000000001
+    }
+  },
+  {
+    "sentenceId": "P0004_L0003_S0004",
+    "page": 4,
+    "line": 3,
+    "sentence": 4,
+    "tokenIds": [
+      "P0004_L0003_S0004_T0019",
+      "P0004_L0003_S0004_T0020",
+      "P0004_L0003_S0004_T0021",
+      "P0004_L0003_S0004_T0022",
+      "P0004_L0003_S0004_T0023"
+    ],
+    "tokens": [
+      "अष्टौ",
+      "ब्राह्मणान्सम्यग्ग्रा॑हयि॒त्वा",
+      "सूर्यवर्च॑स्वी",
+      "भ॒वति",
+      "।"
+    ],
+    "text": "अष्टौ ब्राह्मणान्सम्यग्ग्रा॑हयि॒त्वा सूर्यवर्च॑स्वी भ॒वति।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0004_L0003_S0004_T0023",
+    "wordCount": 4,
+    "punctCount": 1,
+    "svaraCount": 3,
+    "svaraRatio": 0.75,
+    "widthSumWords": 183.23200000000003,
+    "widthSumAll": 188.78300000000002,
+    "bbox": {
+      "x0": 36.0,
+      "y0": 86.646,
+      "x1": 236.607,
+      "y1": 108.049
+    }
+  },
+  {
+    "sentenceId": "P0004_L0004_S0005",
+    "page": 4,
+    "line": 4,
+    "sentence": 5,
+    "tokenIds": [
+      "P0004_L0004_S0005_T0024",
+      "P0004_L0004_S0005_T0025",
+      "P0004_L0004_S0005_T0026",
+      "P0004_L0004_S0005_T0027",
+      "P0004_L0004_S0005_T0028",
+      "P0004_L0004_S0005_T0029",
+      "P0004_L0004_S0005_T0030",
+      "P0004_L0004_S0005_T0031"
+    ],
+    "tokens": [
+      "सूर्यग्रहे",
+      "म॑हान॒द्यां",
+      "प्रतिमासन्निधौ",
+      "वा",
+      "ज॒प्त्वा",
+      "सिद्धम॑न्त्रो",
+      "भ॒वति",
+      "।"
+    ],
+    "text": "सूर्यग्रहे म॑हान॒द्यां प्रतिमासन्निधौ वा ज॒प्त्वा सिद्धम॑न्त्रो भ॒वति।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0004_L0004_S0005_T0031",
+    "wordCount": 7,
+    "punctCount": 1,
+    "svaraCount": 4,
+    "svaraRatio": 0.5714285714285714,
+    "widthSumWords": 199.67600000000002,
+    "widthSumAll": 205.227,
+    "bbox": {
+      "x0": 36.0,
+      "y0": 105.097,
+      "x1": 261.365,
+      "y1": 126.5
+    }
+  },
+  {
+    "sentenceId": "P0004_L0005_S0006",
+    "page": 4,
+    "line": 5,
+    "sentence": 6,
+    "tokenIds": [
+      "P0004_L0005_S0006_T0032",
+      "P0004_L0005_S0006_T0033"
+    ],
+    "tokens": [
+      "महाविघ्ना᳚त्प्रमु॒च्यते",
+      "।"
+    ],
+    "text": "महाविघ्ना᳚त्प्रमु॒च्यते।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0004_L0005_S0006_T0033",
+    "wordCount": 1,
+    "punctCount": 1,
+    "svaraCount": 1,
+    "svaraRatio": 1.0,
+    "widthSumWords": 75.746,
+    "widthSumAll": 81.297,
+    "bbox": {
+      "x0": 36.0,
+      "y0": 123.548,
+      "x1": 119.361,
+      "y1": 144.951
+    }
+  },
+  {
+    "sentenceId": "P0004_L0005_S0007",
+    "page": 4,
+    "line": 5,
+    "sentence": 7,
+    "tokenIds": [
+      "P0004_L0005_S0007_T0034",
+      "P0004_L0005_S0007_T0035"
+    ],
+    "tokens": [
+      "महादोषा᳚त्प्रमु॒च्यते",
+      "।"
+    ],
+    "text": "महादोषा᳚त्प्रमु॒च्यते।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0004_L0005_S0007_T0035",
+    "wordCount": 1,
+    "punctCount": 1,
+    "svaraCount": 1,
+    "svaraRatio": 1.0,
+    "widthSumWords": 74.608,
+    "widthSumAll": 80.159,
+    "bbox": {
+      "x0": 122.317,
+      "y0": 123.548,
+      "x1": 204.54,
+      "y1": 144.951
+    }
+  },
+  {
+    "sentenceId": "P0004_L0005_S0008",
+    "page": 4,
+    "line": 5,
+    "sentence": 8,
+    "tokenIds": [
+      "P0004_L0005_S0008_T0036",
+      "P0004_L0005_S0008_T0037"
+    ],
+    "tokens": [
+      "महापापा᳚त्प्रमु॒च्यते",
+      "।"
+    ],
+    "text": "महापापा᳚त्प्रमु॒च्यते।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0004_L0005_S0008_T0037",
+    "wordCount": 1,
+    "punctCount": 1,
+    "svaraCount": 1,
+    "svaraRatio": 1.0,
+    "widthSumWords": 74.609,
+    "widthSumAll": 80.16,
+    "bbox": {
+      "x0": 207.495,
+      "y0": 123.548,
+      "x1": 289.717,
+      "y1": 144.951
+    }
+  },
+  {
+    "sentenceId": "P0004_L0006_S0009",
+    "page": 4,
+    "line": 6,
+    "sentence": 9,
+    "tokenIds": [
+      "P0004_L0006_S0009_T0038",
+      "P0004_L0006_S0009_T0039"
+    ],
+    "tokens": [
+      "महाप्रत्यवाया᳚त्प्रमु॒च्यते",
+      "।"
+    ],
+    "text": "महाप्रत्यवाया᳚त्प्रमु॒च्यते।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0004_L0006_S0009_T0039",
+    "wordCount": 1,
+    "punctCount": 1,
+    "svaraCount": 1,
+    "svaraRatio": 1.0,
+    "widthSumWords": 91.858,
+    "widthSumAll": 97.409,
+    "bbox": {
+      "x0": 36.0,
+      "y0": 141.998,
+      "x1": 135.47199999999998,
+      "y1": 163.40099999999998
+    }
+  },
+  {
+    "sentenceId": "P0004_L0006_S0010",
+    "page": 4,
+    "line": 6,
+    "sentence": 10,
+    "tokenIds": [
+      "P0004_L0006_S0010_T0040",
+      "P0004_L0006_S0010_T0041",
+      "P0004_L0006_S0010_T0042",
+      "P0004_L0006_S0010_T0043",
+      "P0004_L0006_S0010_T0044"
+    ],
+    "tokens": [
+      "स",
+      "सर्वविद्भवति",
+      "स",
+      "सर्व॑विद्भ॒वति",
+      "।"
+    ],
+    "text": "स सर्वविद्भवति स सर्व॑विद्भ॒वति।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0004_L0006_S0010_T0044",
+    "wordCount": 4,
+    "punctCount": 1,
+    "svaraCount": 1,
+    "svaraRatio": 0.25,
+    "widthSumWords": 105.91900000000001,
+    "widthSumAll": 111.47000000000001,
+    "bbox": {
+      "x0": 138.429,
+      "y0": 141.998,
+      "x1": 261.723,
+      "y1": 163.40099999999998
+    }
+  },
+  {
+    "sentenceId": "P0004_L0007_S0011",
+    "page": 4,
+    "line": 7,
+    "sentence": 11,
+    "tokenIds": [
+      "P0004_L0007_S0011_T0045",
+      "P0004_L0007_S0011_T0046",
+      "P0004_L0007_S0011_T0047",
+      "P0004_L0007_S0011_T0048"
+    ],
+    "tokens": [
+      "य",
+      "ए॑वं",
+      "वे॒द",
+      "।"
+    ],
+    "text": "य ए॑वं वे॒द।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0004_L0007_S0011_T0048",
+    "wordCount": 3,
+    "punctCount": 1,
+    "svaraCount": 2,
+    "svaraRatio": 0.6666666666666666,
+    "widthSumWords": 30.509,
+    "widthSumAll": 36.06,
+    "bbox": {
+      "x0": 36.0,
+      "y0": 160.449,
+      "x1": 80.554,
+      "y1": 181.852
+    }
+  },
+  {
+    "sentenceId": "P0004_L0007_S0012",
+    "page": 4,
+    "line": 7,
+    "sentence": 12,
+    "tokenIds": [
+      "P0004_L0007_S0012_T0049",
+      "P0004_L0007_S0012_T0050"
+    ],
+    "tokens": [
+      "इत्यु॑प॒निष॑त्",
+      "॥"
+    ],
+    "text": "इत्यु॑प॒निष॑त्॥",
+    "endsWith": "॥",
+    "endPunctTokenId": "P0004_L0007_S0012_T0050",
+    "wordCount": 1,
+    "punctCount": 1,
+    "svaraCount": 1,
+    "svaraRatio": 1.0,
+    "widthSumWords": 54.584,
+    "widthSumAll": 54.584,
+    "bbox": {
+      "x0": 83.51,
+      "y0": 160.449,
+      "x1": 138.094,
+      "y1": 181.852
+    }
+  },
+  {
+    "sentenceId": "P0004_L0007_S0013",
+    "page": 4,
+    "line": 7,
+    "sentence": 13,
+    "tokenIds": [
+      "P0004_L0007_S0013_T0051",
+      "P0004_L0007_S0013_T0052"
+    ],
+    "tokens": [
+      "१४",
+      "॥"
+    ],
+    "text": "१४॥",
+    "endsWith": "॥",
+    "endPunctTokenId": "P0004_L0007_S0013_T0052",
+    "wordCount": 0,
+    "punctCount": 2,
+    "svaraCount": 0,
+    "svaraRatio": 0.0,
+    "widthSumWords": 0.0,
+    "widthSumAll": 20.393,
+    "bbox": {
+      "x0": 141.053,
+      "y0": 160.449,
+      "x1": 161.446,
+      "y1": 181.852
+    }
+  },
+  {
+    "sentenceId": "P0004_L0008_S0014",
+    "page": 4,
+    "line": 8,
+    "sentence": 14,
+    "tokenIds": [
+      "P0004_L0008_S0014_T0053",
+      "P0004_L0008_S0014_T0054",
+      "P0004_L0008_S0014_T0055",
+      "P0004_L0008_S0014_T0056",
+      "P0004_L0008_S0014_T0057"
+    ],
+    "tokens": [
+      "ॐ",
+      "शान्तिः॒",
+      "शान्तिः॒",
+      "शान्तिः॑",
+      "॥"
+    ],
+    "text": "ॐ शान्तिः॒ शान्तिः॒ शान्तिः॑॥",
+    "endsWith": "॥",
+    "endPunctTokenId": "P0004_L0008_S0014_T0057",
+    "wordCount": 4,
+    "punctCount": 1,
+    "svaraCount": 3,
+    "svaraRatio": 0.75,
+    "widthSumWords": 95.20100000000001,
+    "widthSumAll": 104.042,
+    "bbox": {
+      "x0": 36.0,
+      "y0": 181.49,
+      "x1": 161.655,
+      "y1": 202.893
+    }
+  },
+  {
+    "sentenceId": "P0004_L0009_S0015",
+    "page": 4,
+    "line": 9,
+    "sentence": 15,
+    "tokenIds": [
+      "P0004_L0009_S0015_T0058",
+      "P0004_L0009_S0015_T0059",
+      "P0004_L0009_S0015_T0060",
+      "P0004_L0009_S0015_T0061"
+    ],
+    "tokens": [
+      "ॐ",
+      "स॒ह",
+      "ना॑ववतु",
+      "।"
+    ],
+    "text": "ॐ स॒ह ना॑ववतु।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0004_L0009_S0015_T0061",
+    "wordCount": 3,
+    "punctCount": 1,
+    "svaraCount": 2,
+    "svaraRatio": 0.6666666666666666,
+    "widthSumWords": 52.557,
+    "widthSumAll": 58.108000000000004,
+    "bbox": {
+      "x0": 36.0,
+      "y0": 202.531,
+      "x1": 101.86200000000001,
+      "y1": 223.934
+    }
+  },
+  {
+    "sentenceId": "P0004_L0009_S0016",
+    "page": 4,
+    "line": 9,
+    "sentence": 16,
+    "tokenIds": [
+      "P0004_L0009_S0016_T0062",
+      "P0004_L0009_S0016_T0063",
+      "P0004_L0009_S0016_T0064",
+      "P0004_L0009_S0016_T0065"
+    ],
+    "tokens": [
+      "स॒ह",
+      "नौ॑",
+      "भुनक्तु",
+      "।"
+    ],
+    "text": "स॒ह नौ॑ भुनक्तु।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0004_L0009_S0016_T0065",
+    "wordCount": 3,
+    "punctCount": 1,
+    "svaraCount": 2,
+    "svaraRatio": 0.6666666666666666,
+    "widthSumWords": 43.476,
+    "widthSumAll": 49.027,
+    "bbox": {
+      "x0": 104.818,
+      "y0": 202.531,
+      "x1": 167.309,
+      "y1": 223.934
+    }
+  },
+  {
+    "sentenceId": "P0004_L0010_S0017",
+    "page": 4,
+    "line": 10,
+    "sentence": 17,
+    "tokenIds": [
+      "P0004_L0010_S0017_T0066",
+      "P0004_L0010_S0017_T0067",
+      "P0004_L0010_S0017_T0068",
+      "P0004_L0010_S0017_T0069"
+    ],
+    "tokens": [
+      "स॒ह",
+      "वी॒र्यं॑",
+      "करवावहै",
+      "।"
+    ],
+    "text": "स॒ह वी॒र्यं॑ करवावहै।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0004_L0010_S0017_T0069",
+    "wordCount": 3,
+    "punctCount": 1,
+    "svaraCount": 2,
+    "svaraRatio": 0.6666666666666666,
+    "widthSumWords": 62.784000000000006,
+    "widthSumAll": 68.33500000000001,
+    "bbox": {
+      "x0": 36.0,
+      "y0": 220.982,
+      "x1": 115.903,
+      "y1": 242.385
+    }
+  },
+  {
+    "sentenceId": "P0004_L0011_S0018",
+    "page": 4,
+    "line": 11,
+    "sentence": 18,
+    "tokenIds": [
+      "P0004_L0011_S0018_T0070",
+      "P0004_L0011_S0018_T0071",
+      "P0004_L0011_S0018_T0072",
+      "P0004_L0011_S0018_T0073"
+    ],
+    "tokens": [
+      "ते॒ज॒स्विना॒वधी॑तमस्तु॒",
+      "मा",
+      "वि॑द्विषा॒वहै᳚",
+      "।"
+    ],
+    "text": "ते॒ज॒स्विना॒वधी॑तमस्तु॒ मा वि॑द्विषा॒वहै᳚।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0004_L0011_S0018_T0073",
+    "wordCount": 3,
+    "punctCount": 1,
+    "svaraCount": 2,
+    "svaraRatio": 0.6666666666666666,
+    "widthSumWords": 127.231,
+    "widthSumAll": 132.78199999999998,
+    "bbox": {
+      "x0": 36.0,
+      "y0": 239.433,
+      "x1": 182.512,
+      "y1": 260.836
+    }
+  },
+  {
+    "sentenceId": "P0004_L0012_S0019",
+    "page": 4,
+    "line": 12,
+    "sentence": 19,
+    "tokenIds": [
+      "P0004_L0012_S0019_T0074",
+      "P0004_L0012_S0019_T0075",
+      "P0004_L0012_S0019_T0076",
+      "P0004_L0012_S0019_T0077",
+      "P0004_L0012_S0019_T0078"
+    ],
+    "tokens": [
+      "ॐ",
+      "शान्तिः॒",
+      "शान्तिः॒",
+      "शान्तिः॑",
+      "॥"
+    ],
+    "text": "ॐ शान्तिः॒ शान्तिः॒ शान्तिः॑॥",
+    "endsWith": "॥",
+    "endPunctTokenId": "P0004_L0012_S0019_T0078",
+    "wordCount": 4,
+    "punctCount": 1,
+    "svaraCount": 3,
+    "svaraRatio": 0.75,
+    "widthSumWords": 95.20100000000001,
+    "widthSumAll": 104.042,
+    "bbox": {
+      "x0": 36.0,
+      "y0": 257.884,
+      "x1": 161.655,
+      "y1": 279.28700000000003
+    }
+  },
+  {
+    "sentenceId": "P0004_L0013_S0020",
+    "page": 4,
+    "line": 13,
+    "sentence": 20,
+    "tokenIds": [
+      "P0004_L0013_S0020_T0079",
+      "P0004_L0013_S0020_T0080",
+      "P0004_L0013_S0020_T0081",
+      "P0004_L0013_S0020_T0082",
+      "P0004_L0013_S0020_T0083",
+      "P0004_L0013_S0020_T0084"
+    ],
+    "tokens": [
+      "ॐ",
+      "भ॒द्रं",
+      "कर्णे॑भिः",
+      "श‍ृणु॒याम॑",
+      "देवाः",
+      "।"
+    ],
+    "text": "ॐ भ॒द्रं कर्णे॑भिः श‍ृणु॒याम॑ देवाः।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0004_L0013_S0020_T0084",
+    "wordCount": 5,
+    "punctCount": 1,
+    "svaraCount": 3,
+    "svaraRatio": 0.6,
+    "widthSumWords": 103.281,
+    "widthSumAll": 108.83200000000001,
+    "bbox": {
+      "x0": 36.0,
+      "y0": 278.925,
+      "x1": 163.23999999999998,
+      "y1": 300.32800000000003
+    }
+  },
+  {
+    "sentenceId": "P0004_L0013_S0021",
+    "page": 4,
+    "line": 13,
+    "sentence": 21,
+    "tokenIds": [
+      "P0004_L0013_S0021_T0085",
+      "P0004_L0013_S0021_T0086",
+      "P0004_L0013_S0021_T0087"
+    ],
+    "tokens": [
+      "भ॒द्रं",
+      "प॑श्येमा॒क्षभि॒र्यज॑त्राः",
+      "।"
+    ],
+    "text": "भ॒द्रं प॑श्येमा॒क्षभि॒र्यज॑त्राः।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0004_L0013_S0021_T0087",
+    "wordCount": 2,
+    "punctCount": 1,
+    "svaraCount": 2,
+    "svaraRatio": 1.0,
+    "widthSumWords": 85.334,
+    "widthSumAll": 90.885,
+    "bbox": {
+      "x0": 166.195,
+      "y0": 278.925,
+      "x1": 263.35699999999997,
+      "y1": 300.32800000000003
+    }
+  },
+  {
+    "sentenceId": "P0004_L0014_S0022",
+    "page": 4,
+    "line": 14,
+    "sentence": 22,
+    "tokenIds": [
+      "P0004_L0014_S0022_T0088",
+      "P0004_L0014_S0022_T0089",
+      "P0004_L0014_S0022_T0090"
+    ],
+    "tokens": [
+      "स्थि॒रैरङ्गै᳚स्तुष्टु॒वाꣳ",
+      "स॑स्त॒नूभिः॑",
+      "।"
+    ],
+    "text": "स्थि॒रैरङ्गै᳚स्तुष्टु॒वाꣳ स॑स्त॒नूभिः॑।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0004_L0014_S0022_T0090",
+    "wordCount": 2,
+    "punctCount": 1,
+    "svaraCount": 2,
+    "svaraRatio": 1.0,
+    "widthSumWords": 105.507,
+    "widthSumAll": 111.058,
+    "bbox": {
+      "x0": 36.0,
+      "y0": 297.375,
+      "x1": 156.225,
+      "y1": 319.55
+    }
+  },
+  {
+    "sentenceId": "P0004_L0014_S0023",
+    "page": 4,
+    "line": 14,
+    "sentence": 23,
+    "tokenIds": [
+      "P0004_L0014_S0023_T0091",
+      "P0004_L0014_S0023_T0092",
+      "P0004_L0014_S0023_T0093",
+      "P0004_L0014_S0023_T0094"
+    ],
+    "tokens": [
+      "व्यशे॑म",
+      "दे॒वहि॑तं॒",
+      "यदायुः॑",
+      "।"
+    ],
+    "text": "व्यशे॑म दे॒वहि॑तं॒ यदायुः॑।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0004_L0014_S0023_T0094",
+    "wordCount": 3,
+    "punctCount": 1,
+    "svaraCount": 3,
+    "svaraRatio": 1.0,
+    "widthSumWords": 78.245,
+    "widthSumAll": 83.796,
+    "bbox": {
+      "x0": 159.181,
+      "y0": 297.375,
+      "x1": 257.824,
+      "y1": 318.778
+    }
+  },
+  {
+    "sentenceId": "P0004_L0015_S0024",
+    "page": 4,
+    "line": 15,
+    "sentence": 24,
+    "tokenIds": [
+      "P0004_L0015_S0024_T0095",
+      "P0004_L0015_S0024_T0096",
+      "P0004_L0015_S0024_T0097",
+      "P0004_L0015_S0024_T0098",
+      "P0004_L0015_S0024_T0099"
+    ],
+    "tokens": [
+      "स्व॒स्ति",
+      "न॒",
+      "इन्द्रो॑",
+      "वृ॒द्धश्र॑वाः",
+      "।"
+    ],
+    "text": "स्व॒स्ति न॒ इन्द्रो॑ वृ॒द्धश्र॑वाः।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0004_L0015_S0024_T0099",
+    "wordCount": 4,
+    "punctCount": 1,
+    "svaraCount": 4,
+    "svaraRatio": 1.0,
+    "widthSumWords": 83.18,
+    "widthSumAll": 88.73100000000001,
+    "bbox": {
+      "x0": 36.0,
+      "y0": 315.826,
+      "x1": 143.081,
+      "y1": 337.22900000000004
+    }
+  },
+  {
+    "sentenceId": "P0004_L0015_S0025",
+    "page": 4,
+    "line": 15,
+    "sentence": 25,
+    "tokenIds": [
+      "P0004_L0015_S0025_T0100",
+      "P0004_L0015_S0025_T0101",
+      "P0004_L0015_S0025_T0102",
+      "P0004_L0015_S0025_T0103",
+      "P0004_L0015_S0025_T0104"
+    ],
+    "tokens": [
+      "स्व॒स्ति",
+      "नः॑",
+      "पू॒षा",
+      "वि॒श्ववे॑दाः",
+      "।"
+    ],
+    "text": "स्व॒स्ति नः॑ पू॒षा वि॒श्ववे॑दाः।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0004_L0015_S0025_T0104",
+    "wordCount": 4,
+    "punctCount": 1,
+    "svaraCount": 4,
+    "svaraRatio": 1.0,
+    "widthSumWords": 85.55600000000001,
+    "widthSumAll": 91.10700000000001,
+    "bbox": {
+      "x0": 146.036,
+      "y0": 315.826,
+      "x1": 252.23499999999999,
+      "y1": 337.22900000000004
+    }
+  },
+  {
+    "sentenceId": "P0004_L0016_S0026",
+    "page": 4,
+    "line": 16,
+    "sentence": 26,
+    "tokenIds": [
+      "P0004_L0016_S0026_T0105",
+      "P0004_L0016_S0026_T0106",
+      "P0004_L0016_S0026_T0107",
+      "P0004_L0016_S0026_T0108"
+    ],
+    "tokens": [
+      "स्व॒स्ति",
+      "न॒स्तार्क्ष्यो॒",
+      "अरि॑ष्टनेमिः",
+      "।"
+    ],
+    "text": "स्व॒स्ति न॒स्तार्क्ष्यो॒ अरि॑ष्टनेमिः।",
+    "endsWith": "।",
+    "endPunctTokenId": "P0004_L0016_S0026_T0108",
+    "wordCount": 3,
+    "punctCount": 1,
+    "svaraCount": 3,
+    "svaraRatio": 1.0,
+    "widthSumWords": 101.125,
+    "widthSumAll": 106.676,
+    "bbox": {
+      "x0": 36.0,
+      "y0": 334.277,
+      "x1": 154.808,
+      "y1": 355.68
+    }
+  },
+  {
+    "sentenceId": "P0004_L0016_S0027",
+    "page": 4,
+    "line": 16,
+    "sentence": 27,
+    "tokenIds": [
+      "P0004_L0016_S0027_T0109",
+      "P0004_L0016_S0027_T0110",
+      "P0004_L0016_S0027_T0111",
+      "P0004_L0016_S0027_T0112"
+    ],
+    "tokens": [
+      "स्व॒स्ति",
+      "नो॒",
+      "बृह॒स्पति॑र्दधातु",
+      "॥"
+    ],
+    "text": "स्व॒स्ति नो॒ बृह॒स्पति॑र्दधातु॥",
+    "endsWith": "॥",
+    "endPunctTokenId": "P0004_L0016_S0027_T0112",
+    "wordCount": 3,
+    "punctCount": 1,
+    "svaraCount": 3,
+    "svaraRatio": 1.0,
+    "widthSumWords": 88.987,
+    "widthSumAll": 97.82799999999999,
+    "bbox": {
+      "x0": 157.764,
+      "y0": 334.277,
+      "x1": 266.593,
+      "y1": 355.68
+    }
+  },
+  {
+    "sentenceId": "P0004_L0017_S0028",
+    "page": 4,
+    "line": 17,
+    "sentence": 28,
+    "tokenIds": [
+      "P0004_L0017_S0028_T0113",
+      "P0004_L0017_S0028_T0114",
+      "P0004_L0017_S0028_T0115",
+      "P0004_L0017_S0028_T0116",
+      "P0004_L0017_S0028_T0117"
+    ],
+    "tokens": [
+      "ॐ",
+      "शान्तिः॒",
+      "शान्तिः॒",
+      "शान्तिः॑",
+      "॥"
+    ],
+    "text": "ॐ शान्तिः॒ शान्तिः॒ शान्तिः॑॥",
+    "endsWith": "॥",
+    "endPunctTokenId": "P0004_L0017_S0028_T0117",
+    "wordCount": 4,
+    "punctCount": 1,
+    "svaraCount": 3,
+    "svaraRatio": 0.75,
+    "widthSumWords": 95.20100000000001,
+    "widthSumAll": 104.042,
+    "bbox": {
+      "x0": 36.0,
+      "y0": 355.318,
+      "x1": 161.655,
+      "y1": 376.721
+    }
+  },
+  {
+    "sentenceId": "P0004_L0018_S0029",
+    "page": 4,
+    "line": 18,
+    "sentence": 29,
+    "tokenIds": [
+      "P0004_L0018_S0029_T0118",
+      "P0004_L0018_S0029_T0119",
+      "P0004_L0018_S0029_T0120",
+      "P0004_L0018_S0029_T0121",
+      "P0004_L0018_S0029_T0122",
+      "P0004_L0018_S0029_T0123",
+      "P0004_L0018_S0029_T0124",
+      "P0004_L0018_S0029_T0125"
+    ],
+    "tokens": [
+      "Encoded",
+      "by",
+      "Sunder",
+      "Hattangadi",
+      "with",
+      "Vedic",
+      "accents",
+      "(Svaras.)"
+    ],
+    "text": "Encoded by Sunder Hattangadi with Vedic accents (Svaras.)",
+    "endsWith": null,
+    "endPunctTokenId": null,
+    "wordCount": 8,
+    "punctCount": 0,
+    "svaraCount": 0,
+    "svaraRatio": 0.0,
+    "widthSumWords": 215.23800000000003,
+    "widthSumAll": 215.23800000000003,
+    "bbox": {
+      "x0": 36.0,
+      "y0": 394.726,
+      "x1": 268.469,
+      "y1": 404.589
+    }
+  },
+  {
+    "sentenceId": "P0004_L0019_S0029",
+    "page": 4,
+    "line": 19,
+    "sentence": 29,
+    "tokenIds": [
+      "P0004_L0019_S0029_T0126",
+      "P0004_L0019_S0029_T0127",
+      "P0004_L0019_S0029_T0128",
+      "P0004_L0019_S0029_T0129",
+      "P0004_L0019_S0029_T0130",
+      "P0004_L0019_S0029_T0131",
+      "P0004_L0019_S0029_T0132",
+      "P0004_L0019_S0029_T0133",
+      "P0004_L0019_S0029_T0134",
+      "P0004_L0019_S0029_T0135"
+    ],
+    "tokens": [
+      "The",
+      "accents",
+      "and",
+      "re-proofreading",
+      "by",
+      "Kirk",
+      "Wortman,",
+      "Daya",
+      "Aithal,",
+      "NA"
+    ],
+    "text": "The accents and re-proofreading by Kirk Wortman, Daya Aithal, NA",
+    "endsWith": null,
+    "endPunctTokenId": null,
+    "wordCount": 10,
+    "punctCount": 0,
+    "svaraCount": 0,
+    "svaraRatio": 0.0,
+    "widthSumWords": 245.893,
+    "widthSumAll": 245.893,
+    "bbox": {
+      "x0": 36.0,
+      "y0": 410.666,
+      "x1": 304.026,
+      "y1": 420.529
+    }
+  },
+  {
+    "sentenceId": "P0004_L0020_S0029",
+    "page": 4,
+    "line": 20,
+    "sentence": 29,
+    "tokenIds": [
+      "P0004_L0020_S0029_T0136",
+      "P0004_L0020_S0029_T0137",
+      "P0004_L0020_S0029_T0138",
+      "P0004_L0020_S0029_T0139",
+      "P0004_L0020_S0029_T0140",
+      "P0004_L0020_S0029_T0141",
+      "P0004_L0020_S0029_T0142",
+      "P0004_L0020_S0029_T0143",
+      "P0004_L0020_S0029_T0144"
+    ],
+    "tokens": [
+      "Shri",
+      "Ganapati",
+      "Atharvashirsha",
+      "Upanishat",
+      "or",
+      "Ganapati",
+      "Upanishat",
+      "with",
+      "Accents"
+    ],
+    "text": "Shri Ganapati Atharvashirsha Upanishat or Ganapati Upanishat with Accents",
+    "endsWith": null,
+    "endPunctTokenId": null,
+    "wordCount": 9,
+    "punctCount": 0,
+    "svaraCount": 0,
+    "svaraRatio": 0.0,
+    "widthSumWords": 278.293,
+    "widthSumAll": 278.293,
+    "bbox": {
+      "x0": 60.769,
+      "y0": 474.196,
+      "x1": 358.76800000000003,
+      "y1": 484.059
+    }
+  },
+  {
+    "sentenceId": "P0004_L0021_S0029",
+    "page": 4,
+    "line": 21,
+    "sentence": 29,
+    "tokenIds": [
+      "P0004_L0021_S0029_T0145",
+      "P0004_L0021_S0029_T0146",
+      "P0004_L0021_S0029_T0147",
+      "P0004_L0021_S0029_T0148",
+      "P0004_L0021_S0029_T0149",
+      "P0004_L0021_S0029_T0150",
+      "P0004_L0021_S0029_T0151"
+    ],
+    "tokens": [
+      "pdf",
+      "was",
+      "typeset",
+      "on",
+      "February",
+      "1,",
+      "2026"
+    ],
+    "text": "pdf was typeset on February 1, 2026",
+    "endsWith": "2026",
+    "endPunctTokenId": "P0004_L0021_S0029_T0151",
+    "wordCount": 6,
+    "punctCount": 1,
+    "svaraCount": 0,
+    "svaraRatio": 0.0,
+    "widthSumWords": 107.496,
+    "widthSumAll": 127.222,
+    "bbox": {
+      "x0": 138.765,
+      "y0": 490.137,
+      "x1": 280.762,
+      "y1": 500.0
+    }
+  },
+  {
+    "sentenceId": "P0004_L0022_S0029",
+    "page": 4,
+    "line": 22,
+    "sentence": 29,
+    "tokenIds": [
+      "P0004_L0022_S0029_T0152",
+      "P0004_L0022_S0029_T0153",
+      "P0004_L0022_S0029_T0154",
+      "P0004_L0022_S0029_T0155",
+      "P0004_L0022_S0029_T0156"
+    ],
+    "tokens": [
+      "Please",
+      "send",
+      "corrections",
+      "to",
+      "sanskrit@cheerful.com"
+    ],
+    "text": "Please send corrections to sanskrit@cheerful.com",
+    "endsWith": null,
+    "endPunctTokenId": null,
+    "wordCount": 5,
+    "punctCount": 0,
+    "svaraCount": 0,
+    "svaraRatio": 0.0,
+    "widthSumWords": 179.18899999999996,
+    "widthSumAll": 179.18899999999996,
+    "bbox": {
+      "x0": 115.247,
+      "y0": 526.628,
+      "x1": 304.28,
+      "y1": 536.491
+    }
+  }
+]

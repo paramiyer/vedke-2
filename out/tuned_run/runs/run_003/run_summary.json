@@ -1,0 +1,12 @@
+{
+  "score": 0.30189455,
+  "conf_mean": 0.488314,
+  "conf_p10": 0.390936,
+  "zero_silence_frac": 0.071429,
+  "short_frac": 0.007937,
+  "drift_p95": 21538.702,
+  "spike_p95": 3030.386,
+  "original_K": 145,
+  "filtered_K": 126,
+  "meets_best_case_targets": false
+}

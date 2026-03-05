@@ -1,0 +1,6 @@
+{
+  "min_silence_boundary_ms": 300,
+  "min_seg_ms": 900,
+  "fill_gap_ms": 250,
+  "thr_pct": 30
+}

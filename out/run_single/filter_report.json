@@ -1,0 +1,816 @@
+{
+  "original_K": 145,
+  "filtered_K": 126,
+  "filtered_out_count": 19,
+  "filtered_out": [
+    {
+      "original_idx": 16,
+      "sentenceId": "P0002_L0011_S0017",
+      "text": "१॥",
+      "reasons": [
+        "NUMERIC_ONLY_MARKER"
+      ],
+      "ascii_ratio": 0.0
+    },
+    {
+      "original_idx": 19,
+      "sentenceId": "P0002_L0012_S0020",
+      "text": "२॥",
+      "reasons": [
+        "NUMERIC_ONLY_MARKER"
+      ],
+      "ascii_ratio": 0.0
+    },
+    {
+      "original_idx": 33,
+      "sentenceId": "P0002_L0016_S0034",
+      "text": "३॥",
+      "reasons": [
+        "NUMERIC_ONLY_MARKER"
+      ],
+      "ascii_ratio": 0.0
+    },
+    {
+      "original_idx": 39,
+      "sentenceId": "P0002_L0018_S0040",
+      "text": "४॥",
+      "reasons": [
+        "NUMERIC_ONLY_MARKER"
+      ],
+      "ascii_ratio": 0.0
+    },
+    {
+      "original_idx": 46,
+      "sentenceId": "P0002_L0021_S0047",
+      "text": "५॥",
+      "reasons": [
+        "NUMERIC_ONLY_MARKER"
+      ],
+      "ascii_ratio": 0.0
+    },
+    {
+      "original_idx": 56,
+      "sentenceId": "P0003_L0003_S0006",
+      "text": "६॥",
+      "reasons": [
+        "NUMERIC_ONLY_MARKER"
+      ],
+      "ascii_ratio": 0.0
+    },
+    {
+      "original_idx": 73,
+      "sentenceId": "P0003_L0008_S0023",
+      "text": "७॥",
+      "reasons": [
+        "NUMERIC_ONLY_MARKER"
+      ],
+      "ascii_ratio": 0.0
+    },
+    {
+      "original_idx": 76,
+      "sentenceId": "P0003_L0009_S0026",
+      "text": "८॥",
+      "reasons": [
+        "NUMERIC_ONLY_MARKER"
+      ],
+      "ascii_ratio": 0.0
+    },
+    {
+      "original_idx": 84,
+      "sentenceId": "P0003_L0013_S0034",
+      "text": "९॥",
+      "reasons": [
+        "NUMERIC_ONLY_MARKER"
+      ],
+      "ascii_ratio": 0.0
+    },
+    {
+      "original_idx": 89,
+      "sentenceId": "P0003_L0015_S0039",
+      "text": "१०॥",
+      "reasons": [
+        "NUMERIC_ONLY_MARKER"
+      ],
+      "ascii_ratio": 0.0
+    },
+    {
+      "original_idx": 103,
+      "sentenceId": "P0003_L0022_S0053",
+      "text": "११॥",
+      "reasons": [
+        "NUMERIC_ONLY_MARKER"
+      ],
+      "ascii_ratio": 0.0
+    },
+    {
+      "original_idx": 108,
+      "sentenceId": "P0003_L0025_S0058",
+      "text": "१२॥",
+      "reasons": [
+        "NUMERIC_ONLY_MARKER"
+      ],
+      "ascii_ratio": 0.0
+    },
+    {
+      "original_idx": 114,
+      "sentenceId": "P0004_L0002_S0003",
+      "text": "१३॥",
+      "reasons": [
+        "NUMERIC_ONLY_MARKER"
+      ],
+      "ascii_ratio": 0.0
+    },
+    {
+      "original_idx": 124,
+      "sentenceId": "P0004_L0007_S0013",
+      "text": "१४॥",
+      "reasons": [
+        "NUMERIC_ONLY_MARKER"
+      ],
+      "ascii_ratio": 0.0
+    },
+    {
+      "original_idx": 140,
+      "sentenceId": "P0004_L0018_S0029",
+      "text": "Encoded by Sunder Hattangadi with Vedic accents (Svaras.)",
+      "reasons": [
+        "ASCII_RATIO_GE_0_25",
+        "NO_DEVANAGARI_WITH_ALPHA"
+      ],
+      "ascii_ratio": 0.842105
+    },
+    {
+      "original_idx": 141,
+      "sentenceId": "P0004_L0019_S0029",
+      "text": "The accents and re-proofreading by Kirk Wortman, Daya Aithal, NA",
+      "reasons": [
+        "ASCII_RATIO_GE_0_25",
+        "NO_DEVANAGARI_WITH_ALPHA"
+      ],
+      "ascii_ratio": 0.828125
+    },
+    {
+      "original_idx": 142,
+      "sentenceId": "P0004_L0020_S0029",
+      "text": "Shri Ganapati Atharvashirsha Upanishat or Ganapati Upanishat with Accents",
+      "reasons": [
+        "ASCII_RATIO_GE_0_25",
+        "NO_DEVANAGARI_WITH_ALPHA"
+      ],
+      "ascii_ratio": 0.890411
+    },
+    {
+      "original_idx": 143,
+      "sentenceId": "P0004_L0021_S0029",
+      "text": "pdf was typeset on February 1, 2026",
+      "reasons": [
+        "ASCII_RATIO_GE_0_25",
+        "NO_DEVANAGARI_WITH_ALPHA"
+      ],
+      "ascii_ratio": 0.8
+    },
+    {
+      "original_idx": 144,
+      "sentenceId": "P0004_L0022_S0029",
+      "text": "Please send corrections to sanskrit@cheerful.com",
+      "reasons": [
+        "ASCII_RATIO_GE_0_25",
+        "EMAIL_OR_URL",
+        "NO_DEVANAGARI_WITH_ALPHA"
+      ],
+      "ascii_ratio": 0.916667
+    }
+  ],
+  "mapping": [
+    {
+      "filtered_idx": 0,
+      "original_idx": 0,
+      "sentenceId": "P0002_L0004_S0001"
+    },
+    {
+      "filtered_idx": 1,
+      "original_idx": 1,
+      "sentenceId": "P0002_L0004_S0002"
+    },
+    {
+      "filtered_idx": 2,
+      "original_idx": 2,
+      "sentenceId": "P0002_L0005_S0003"
+    },
+    {
+      "filtered_idx": 3,
+      "original_idx": 3,
+      "sentenceId": "P0002_L0005_S0004"
+    },
+    {
+      "filtered_idx": 4,
+      "original_idx": 4,
+      "sentenceId": "P0002_L0006_S0005"
+    },
+    {
+      "filtered_idx": 5,
+      "original_idx": 5,
+      "sentenceId": "P0002_L0006_S0006"
+    },
+    {
+      "filtered_idx": 6,
+      "original_idx": 6,
+      "sentenceId": "P0002_L0007_S0007"
+    },
+    {
+      "filtered_idx": 7,
+      "original_idx": 7,
+      "sentenceId": "P0002_L0007_S0008"
+    },
+    {
+      "filtered_idx": 8,
+      "original_idx": 8,
+      "sentenceId": "P0002_L0008_S0009"
+    },
+    {
+      "filtered_idx": 9,
+      "original_idx": 9,
+      "sentenceId": "P0002_L0009_S0010"
+    },
+    {
+      "filtered_idx": 10,
+      "original_idx": 10,
+      "sentenceId": "P0002_L0009_S0011"
+    },
+    {
+      "filtered_idx": 11,
+      "original_idx": 11,
+      "sentenceId": "P0002_L0010_S0012"
+    },
+    {
+      "filtered_idx": 12,
+      "original_idx": 12,
+      "sentenceId": "P0002_L0010_S0013"
+    },
+    {
+      "filtered_idx": 13,
+      "original_idx": 13,
+      "sentenceId": "P0002_L0010_S0014"
+    },
+    {
+      "filtered_idx": 14,
+      "original_idx": 14,
+      "sentenceId": "P0002_L0011_S0015"
+    },
+    {
+      "filtered_idx": 15,
+      "original_idx": 15,
+      "sentenceId": "P0002_L0011_S0016"
+    },
+    {
+      "filtered_idx": 16,
+      "original_idx": 17,
+      "sentenceId": "P0002_L0012_S0018"
+    },
+    {
+      "filtered_idx": 17,
+      "original_idx": 18,
+      "sentenceId": "P0002_L0012_S0019"
+    },
+    {
+      "filtered_idx": 18,
+      "original_idx": 20,
+      "sentenceId": "P0002_L0013_S0021"
+    },
+    {
+      "filtered_idx": 19,
+      "original_idx": 21,
+      "sentenceId": "P0002_L0013_S0022"
+    },
+    {
+      "filtered_idx": 20,
+      "original_idx": 22,
+      "sentenceId": "P0002_L0013_S0023"
+    },
+    {
+      "filtered_idx": 21,
+      "original_idx": 23,
+      "sentenceId": "P0002_L0013_S0024"
+    },
+    {
+      "filtered_idx": 22,
+      "original_idx": 24,
+      "sentenceId": "P0002_L0013_S0025"
+    },
+    {
+      "filtered_idx": 23,
+      "original_idx": 25,
+      "sentenceId": "P0002_L0014_S0026"
+    },
+    {
+      "filtered_idx": 24,
+      "original_idx": 26,
+      "sentenceId": "P0002_L0014_S0027"
+    },
+    {
+      "filtered_idx": 25,
+      "original_idx": 27,
+      "sentenceId": "P0002_L0014_S0028"
+    },
+    {
+      "filtered_idx": 26,
+      "original_idx": 28,
+      "sentenceId": "P0002_L0014_S0029"
+    },
+    {
+      "filtered_idx": 27,
+      "original_idx": 29,
+      "sentenceId": "P0002_L0015_S0030"
+    },
+    {
+      "filtered_idx": 28,
+      "original_idx": 30,
+      "sentenceId": "P0002_L0015_S0031"
+    },
+    {
+      "filtered_idx": 29,
+      "original_idx": 31,
+      "sentenceId": "P0002_L0015_S0032"
+    },
+    {
+      "filtered_idx": 30,
+      "original_idx": 32,
+      "sentenceId": "P0002_L0016_S0033"
+    },
+    {
+      "filtered_idx": 31,
+      "original_idx": 34,
+      "sentenceId": "P0002_L0017_S0035"
+    },
+    {
+      "filtered_idx": 32,
+      "original_idx": 35,
+      "sentenceId": "P0002_L0017_S0036"
+    },
+    {
+      "filtered_idx": 33,
+      "original_idx": 36,
+      "sentenceId": "P0002_L0017_S0037"
+    },
+    {
+      "filtered_idx": 34,
+      "original_idx": 37,
+      "sentenceId": "P0002_L0018_S0038"
+    },
+    {
+      "filtered_idx": 35,
+      "original_idx": 38,
+      "sentenceId": "P0002_L0018_S0039"
+    },
+    {
+      "filtered_idx": 36,
+      "original_idx": 40,
+      "sentenceId": "P0002_L0019_S0041"
+    },
+    {
+      "filtered_idx": 37,
+      "original_idx": 41,
+      "sentenceId": "P0002_L0019_S0042"
+    },
+    {
+      "filtered_idx": 38,
+      "original_idx": 42,
+      "sentenceId": "P0002_L0020_S0043"
+    },
+    {
+      "filtered_idx": 39,
+      "original_idx": 43,
+      "sentenceId": "P0002_L0020_S0044"
+    },
+    {
+      "filtered_idx": 40,
+      "original_idx": 44,
+      "sentenceId": "P0002_L0021_S0045"
+    },
+    {
+      "filtered_idx": 41,
+      "original_idx": 45,
+      "sentenceId": "P0002_L0021_S0046"
+    },
+    {
+      "filtered_idx": 42,
+      "original_idx": 47,
+      "sentenceId": "P0002_L0022_S0048"
+    },
+    {
+      "filtered_idx": 43,
+      "original_idx": 48,
+      "sentenceId": "P0002_L0022_S0049"
+    },
+    {
+      "filtered_idx": 44,
+      "original_idx": 49,
+      "sentenceId": "P0002_L0022_S0050"
+    },
+    {
+      "filtered_idx": 45,
+      "original_idx": 50,
+      "sentenceId": "P0003_L0001_S0001"
+    },
+    {
+      "filtered_idx": 46,
+      "original_idx": 51,
+      "sentenceId": "P0003_L0001_S0002"
+    },
+    {
+      "filtered_idx": 47,
+      "original_idx": 52,
+      "sentenceId": "P0003_L0001_S0003"
+    },
+    {
+      "filtered_idx": 48,
+      "original_idx": 53,
+      "sentenceId": "P0003_L0002_S0004"
+    },
+    {
+      "filtered_idx": 49,
+      "original_idx": 54,
+      "sentenceId": "P0003_L0002_S0005"
+    },
+    {
+      "filtered_idx": 50,
+      "original_idx": 55,
+      "sentenceId": "P0003_L0003_S0005"
+    },
+    {
+      "filtered_idx": 51,
+      "original_idx": 57,
+      "sentenceId": "P0003_L0004_S0007"
+    },
+    {
+      "filtered_idx": 52,
+      "original_idx": 58,
+      "sentenceId": "P0003_L0004_S0008"
+    },
+    {
+      "filtered_idx": 53,
+      "original_idx": 59,
+      "sentenceId": "P0003_L0004_S0009"
+    },
+    {
+      "filtered_idx": 54,
+      "original_idx": 60,
+      "sentenceId": "P0003_L0005_S0010"
+    },
+    {
+      "filtered_idx": 55,
+      "original_idx": 61,
+      "sentenceId": "P0003_L0005_S0011"
+    },
+    {
+      "filtered_idx": 56,
+      "original_idx": 62,
+      "sentenceId": "P0003_L0005_S0012"
+    },
+    {
+      "filtered_idx": 57,
+      "original_idx": 63,
+      "sentenceId": "P0003_L0005_S0013"
+    },
+    {
+      "filtered_idx": 58,
+      "original_idx": 64,
+      "sentenceId": "P0003_L0006_S0014"
+    },
+    {
+      "filtered_idx": 59,
+      "original_idx": 65,
+      "sentenceId": "P0003_L0006_S0015"
+    },
+    {
+      "filtered_idx": 60,
+      "original_idx": 66,
+      "sentenceId": "P0003_L0006_S0016"
+    },
+    {
+      "filtered_idx": 61,
+      "original_idx": 67,
+      "sentenceId": "P0003_L0006_S0017"
+    },
+    {
+      "filtered_idx": 62,
+      "original_idx": 68,
+      "sentenceId": "P0003_L0007_S0018"
+    },
+    {
+      "filtered_idx": 63,
+      "original_idx": 69,
+      "sentenceId": "P0003_L0007_S0019"
+    },
+    {
+      "filtered_idx": 64,
+      "original_idx": 70,
+      "sentenceId": "P0003_L0007_S0020"
+    },
+    {
+      "filtered_idx": 65,
+      "original_idx": 71,
+      "sentenceId": "P0003_L0008_S0021"
+    },
+    {
+      "filtered_idx": 66,
+      "original_idx": 72,
+      "sentenceId": "P0003_L0008_S0022"
+    },
+    {
+      "filtered_idx": 67,
+      "original_idx": 74,
+      "sentenceId": "P0003_L0009_S0024"
+    },
+    {
+      "filtered_idx": 68,
+      "original_idx": 75,
+      "sentenceId": "P0003_L0009_S0025"
+    },
+    {
+      "filtered_idx": 69,
+      "original_idx": 77,
+      "sentenceId": "P0003_L0010_S0027"
+    },
+    {
+      "filtered_idx": 70,
+      "original_idx": 78,
+      "sentenceId": "P0003_L0010_S0028"
+    },
+    {
+      "filtered_idx": 71,
+      "original_idx": 79,
+      "sentenceId": "P0003_L0011_S0029"
+    },
+    {
+      "filtered_idx": 72,
+      "original_idx": 80,
+      "sentenceId": "P0003_L0011_S0030"
+    },
+    {
+      "filtered_idx": 73,
+      "original_idx": 81,
+      "sentenceId": "P0003_L0012_S0031"
+    },
+    {
+      "filtered_idx": 74,
+      "original_idx": 82,
+      "sentenceId": "P0003_L0012_S0032"
+    },
+    {
+      "filtered_idx": 75,
+      "original_idx": 83,
+      "sentenceId": "P0003_L0013_S0033"
+    },
+    {
+      "filtered_idx": 76,
+      "original_idx": 85,
+      "sentenceId": "P0003_L0014_S0035"
+    },
+    {
+      "filtered_idx": 77,
+      "original_idx": 86,
+      "sentenceId": "P0003_L0014_S0036"
+    },
+    {
+      "filtered_idx": 78,
+      "original_idx": 87,
+      "sentenceId": "P0003_L0014_S0037"
+    },
+    {
+      "filtered_idx": 79,
+      "original_idx": 88,
+      "sentenceId": "P0003_L0015_S0038"
+    },
+    {
+      "filtered_idx": 80,
+      "original_idx": 90,
+      "sentenceId": "P0003_L0016_S0040"
+    },
+    {
+      "filtered_idx": 81,
+      "original_idx": 91,
+      "sentenceId": "P0003_L0016_S0041"
+    },
+    {
+      "filtered_idx": 82,
+      "original_idx": 92,
+      "sentenceId": "P0003_L0016_S0042"
+    },
+    {
+      "filtered_idx": 83,
+      "original_idx": 93,
+      "sentenceId": "P0003_L0017_S0043"
+    },
+    {
+      "filtered_idx": 84,
+      "original_idx": 94,
+      "sentenceId": "P0003_L0017_S0044"
+    },
+    {
+      "filtered_idx": 85,
+      "original_idx": 95,
+      "sentenceId": "P0003_L0018_S0045"
+    },
+    {
+      "filtered_idx": 86,
+      "original_idx": 96,
+      "sentenceId": "P0003_L0018_S0046"
+    },
+    {
+      "filtered_idx": 87,
+      "original_idx": 97,
+      "sentenceId": "P0003_L0019_S0047"
+    },
+    {
+      "filtered_idx": 88,
+      "original_idx": 98,
+      "sentenceId": "P0003_L0019_S0048"
+    },
+    {
+      "filtered_idx": 89,
+      "original_idx": 99,
+      "sentenceId": "P0003_L0020_S0049"
+    },
+    {
+      "filtered_idx": 90,
+      "original_idx": 100,
+      "sentenceId": "P0003_L0020_S0050"
+    },
+    {
+      "filtered_idx": 91,
+      "original_idx": 101,
+      "sentenceId": "P0003_L0021_S0051"
+    },
+    {
+      "filtered_idx": 92,
+      "original_idx": 102,
+      "sentenceId": "P0003_L0022_S0052"
+    },
+    {
+      "filtered_idx": 93,
+      "original_idx": 104,
+      "sentenceId": "P0003_L0023_S0054"
+    },
+    {
+      "filtered_idx": 94,
+      "original_idx": 105,
+      "sentenceId": "P0003_L0024_S0055"
+    },
+    {
+      "filtered_idx": 95,
+      "original_idx": 106,
+      "sentenceId": "P0003_L0024_S0056"
+    },
+    {
+      "filtered_idx": 96,
+      "original_idx": 107,
+      "sentenceId": "P0003_L0025_S0057"
+    },
+    {
+      "filtered_idx": 97,
+      "original_idx": 109,
+      "sentenceId": "P0003_L0026_S0059"
+    },
+    {
+      "filtered_idx": 98,
+      "original_idx": 110,
+      "sentenceId": "P0003_L0027_S0060"
+    },
+    {
+      "filtered_idx": 99,
+      "original_idx": 111,
+      "sentenceId": "P0003_L0027_S0061"
+    },
+    {
+      "filtered_idx": 100,
+      "original_idx": 112,
+      "sentenceId": "P0004_L0001_S0001"
+    },
+    {
+      "filtered_idx": 101,
+      "original_idx": 113,
+      "sentenceId": "P0004_L0002_S0002"
+    },
+    {
+      "filtered_idx": 102,
+      "original_idx": 115,
+      "sentenceId": "P0004_L0003_S0004"
+    },
+    {
+      "filtered_idx": 103,
+      "original_idx": 116,
+      "sentenceId": "P0004_L0004_S0005"
+    },
+    {
+      "filtered_idx": 104,
+      "original_idx": 117,
+      "sentenceId": "P0004_L0005_S0006"
+    },
+    {
+      "filtered_idx": 105,
+      "original_idx": 118,
+      "sentenceId": "P0004_L0005_S0007"
+    },
+    {
+      "filtered_idx": 106,
+      "original_idx": 119,
+      "sentenceId": "P0004_L0005_S0008"
+    },
+    {
+      "filtered_idx": 107,
+      "original_idx": 120,
+      "sentenceId": "P0004_L0006_S0009"
+    },
+    {
+      "filtered_idx": 108,
+      "original_idx": 121,
+      "sentenceId": "P0004_L0006_S0010"
+    },
+    {
+      "filtered_idx": 109,
+      "original_idx": 122,
+      "sentenceId": "P0004_L0007_S0011"
+    },
+    {
+      "filtered_idx": 110,
+      "original_idx": 123,
+      "sentenceId": "P0004_L0007_S0012"
+    },
+    {
+      "filtered_idx": 111,
+      "original_idx": 125,
+      "sentenceId": "P0004_L0008_S0014"
+    },
+    {
+      "filtered_idx": 112,
+      "original_idx": 126,
+      "sentenceId": "P0004_L0009_S0015"
+    },
+    {
+      "filtered_idx": 113,
+      "original_idx": 127,
+      "sentenceId": "P0004_L0009_S0016"
+    },
+    {
+      "filtered_idx": 114,
+      "original_idx": 128,
+      "sentenceId": "P0004_L0010_S0017"
+    },
+    {
+      "filtered_idx": 115,
+      "original_idx": 129,
+      "sentenceId": "P0004_L0011_S0018"
+    },
+    {
+      "filtered_idx": 116,
+      "original_idx": 130,
+      "sentenceId": "P0004_L0012_S0019"
+    },
+    {
+      "filtered_idx": 117,
+      "original_idx": 131,
+      "sentenceId": "P0004_L0013_S0020"
+    },
+    {
+      "filtered_idx": 118,
+      "original_idx": 132,
+      "sentenceId": "P0004_L0013_S0021"
+    },
+    {
+      "filtered_idx": 119,
+      "original_idx": 133,
+      "sentenceId": "P0004_L0014_S0022"
+    },
+    {
+      "filtered_idx": 120,
+      "original_idx": 134,
+      "sentenceId": "P0004_L0014_S0023"
+    },
+    {
+      "filtered_idx": 121,
+      "original_idx": 135,
+      "sentenceId": "P0004_L0015_S0024"
+    },
+    {
+      "filtered_idx": 122,
+      "original_idx": 136,
+      "sentenceId": "P0004_L0015_S0025"
+    },
+    {
+      "filtered_idx": 123,
+      "original_idx": 137,
+      "sentenceId": "P0004_L0016_S0026"
+    },
+    {
+      "filtered_idx": 124,
+      "original_idx": 138,
+      "sentenceId": "P0004_L0016_S0027"
+    },
+    {
+      "filtered_idx": 125,
+      "original_idx": 139,
+      "sentenceId": "P0004_L0017_S0028"
+    }
+  ]
+}
