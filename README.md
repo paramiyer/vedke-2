@@ -45,6 +45,16 @@ macOS:
 brew install poppler
 ```
 
+For ASR audio preparation from YouTube:
+- `yt-dlp`
+- `ffmpeg`
+
+macOS:
+
+```bash
+brew install yt-dlp ffmpeg
+```
+
 ## Setup
 
 ```bash
@@ -181,3 +191,82 @@ uv run extract-highlight-features \
   --in out/ganapati/highlights_cleaned.json \
   --out out/ganapati/extracted_features.json
 ```
+
+## Prepare ASR audio from YouTube
+
+Download best available audio from a YouTube URL, then generate:
+- `data/<experiment>/input/audio.mp3`
+- `data/<experiment>/input/audio.16k.wav` (mono, 16kHz)
+- `data/<experiment>/input/yt_link.txt`
+
+```bash
+uv run prepare-asr-audio \
+  --experiment ganapati_trial_01 \
+  --url "https://www.youtube.com/watch?v=<VIDEO_ID>" \
+  --overwrite
+```
+
+Notes:
+- The tool requires both `yt-dlp` and `ffmpeg` on PATH.
+
+## Sarvam STT CLI
+
+Set your API key in `.env` (repo root):
+
+```bash
+SARVAM_API_KEY="your_sarvam_key"
+```
+
+Run end-to-end Sarvam batch job for one audio file:
+
+```bash
+uv run run-sarvam-stt \
+  --experiment ganapati_trial_01 \
+  --with-timestamps \
+  --model saaras:v3 \
+  --mode translit \
+  --language-code sa-IN
+```
+
+Outputs:
+- `data/<experiment>/out/status.json`
+- downloaded Sarvam output files (for example `data/<experiment>/out/0.json`)
+- `data/<experiment>/out/manifest.json`
+
+## Agent 4: PDF Truth (Token-Level)
+
+Extract token-level PDF truth with fields:
+- `tokenId`
+- `token`
+- `kind` (`word` or `punc`)
+- `x`, `y`, `w`, `h`
+
+```bash
+uv run run-agent4-pdf-truth \
+  --experiment ganapati_trial_01 \
+  --pdf data/ganapatiaccent.pdf \
+  --pages 2,3,4 \
+  --trim-top-ratio 0.08 \
+  --trim-bottom-ratio 0.06
+```
+
+Output:
+- `data/<experiment>/out/pdf_tokens.json`
+
+## Run One Build Stage With Guardrails
+
+```bash
+uv run run-build-stage \
+  --stage source_intake \
+  --experiment ganapati_trial_01 \
+  --youtube-url "https://www.youtube.com/watch?v=<VIDEO_ID>" \
+  --pdf data/ganapatiaccent.pdf \
+  --pages 2,3,4
+```
+
+Available stages:
+- `source_intake`
+- `asr_preparation`
+- `pdf_truth`
+- `alignment_config`
+- `quality_gates`

@@ -9,6 +9,7 @@ dependencies = [
     "jupyter>=1.1.1",
     "numpy>=2.4.2",
     "openai>=2.24.0",
+    "requests>=2.32.0",
     "scipy>=1.17.1",
 ]
 
@@ -17,6 +18,10 @@ pdf-pages-to-svg = "scripts.pdf_pages_to_svg:main"
 build-highlights-json = "scripts.build_highlights_json:main"
 clean-highlights-json = "scripts.clean_highlights_json:main"
 extract-highlight-features = "scripts.extract_highlight_features:main"
+prepare-asr-audio = "scripts.prepare_asr_audio:main"
+run-sarvam-stt = "scripts.run_sarvam_stt:main"
+run-agent4-pdf-truth = "scripts.agent4_pdf_truth:main"
+run-build-stage = "scripts.stage_orchestrator:main"
 
 [build-system]
 requires = ["hatchling"]

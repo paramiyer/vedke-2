@@ -1,6 +1,0 @@
-{
-  "changepoints": [
-    3
-  ],
-  "method": "abs(diff(rolling_mean(drift_jump))) > p95, top6 with min separation 5"
-}
