@@ -233,25 +233,48 @@ Outputs:
 - downloaded Sarvam output files (for example `data/<experiment>/out/0.json`)
 - `data/<experiment>/out/manifest.json`
 
-## Agent 4: PDF Truth (Token-Level)
+## PDF Truth (OCR Token-Level)
 
-Extract token-level PDF truth with fields:
+Extract token-level PDF truth with OCR + cleanup rules:
 - `tokenId`
 - `token`
 - `kind` (`word` or `punc`)
 - `x`, `y`, `w`, `h`
 
 ```bash
-uv run run-agent4-pdf-truth \
+uv run run-build-stage \
+  --stage pdf_truth \
   --experiment ganapati_trial_01 \
   --pdf data/ganapatiaccent.pdf \
-  --pages 2,3,4 \
-  --trim-top-ratio 0.08 \
-  --trim-bottom-ratio 0.06
+  --pages 2,3,4
 ```
 
 Output:
 - `data/<experiment>/out/pdf_tokens.json`
+- `data/<experiment>/out/pdf_tokens_cleaned.json`
+- `data/<experiment>/out/check_extraction.json` (raw OCR artifact)
+
+## Alignment Config (LLM + Review CSV)
+
+Set OpenAI key in `.env` (repo root):
+
+```bash
+OPENAI_API_KEY="your_openai_key"
+```
+
+Run alignment stage:
+
+```bash
+uv run run-build-stage \
+  --stage alignment_config \
+  --experiment ganapati_trial_01
+```
+
+Outputs:
+- `data/<experiment>/out/pdf_tokens_enriched_with_timestamps.json`
+- `data/<experiment>/out/pdf_tokens_segment_mapping_review.csv`
+- `data/<experiment>/out/alignment_llm_manifest.json`
+- `data/<experiment>/out/alignment_config.json`
 
 ## Run One Build Stage With Guardrails
 

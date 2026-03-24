@@ -41,7 +41,7 @@ def test_asr_stage_guardrail_requires_audio(data_root: Path) -> None:
         so.run_stage("asr_preparation", experiment="exp1")
 
 
-def test_pdf_truth_stage_invokes_agent4(data_root: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+def test_pdf_truth_stage_invokes_ocr_builder(data_root: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     pdf_src = data_root.parent / "source.pdf"
     pdf_src.write_bytes(b"%PDF-1.4\n%fake\n")
     so.run_stage(
@@ -53,22 +53,31 @@ def test_pdf_truth_stage_invokes_agent4(data_root: Path, monkeypatch: pytest.Mon
     )
     (data_root / "exp2" / "input" / "audio.mp3").write_bytes(b"x")
 
-    called: dict[str, list[str]] = {}
+    called: dict[str, str | float | None] = {}
 
-    def _fake_agent4(argv: list[str] | None = None) -> int:
-        assert argv is not None
-        called["argv"] = argv
-        out_path = data_root / "exp2" / "out" / "pdf_tokens.json"
+    def _fake_ocr_runner(
+        *,
+        pdf_path: Path,
+        pages: str,
+        top_trim_ratio: float | None,
+        bottom_trim_ratio: float | None,
+        out_path: Path,
+        cleaned_out_path: Path,
+    ) -> None:
+        called["pdf_path"] = str(pdf_path)
+        called["pages"] = pages
+        called["top_trim_ratio"] = top_trim_ratio
+        called["bottom_trim_ratio"] = bottom_trim_ratio
         out_path.parent.mkdir(parents=True, exist_ok=True)
         out_path.write_text('{"pages":{}}', encoding="utf-8")
-        return 0
+        cleaned_out_path.write_text('{"pages":{}}', encoding="utf-8")
 
-    monkeypatch.setattr(so, "run_agent4_pdf_truth", _fake_agent4)
+    monkeypatch.setattr(so, "run_ocr_pdf_truth", _fake_ocr_runner)
     out = so.run_stage("pdf_truth", experiment="exp2", top_trim_ratio=0.08, bottom_trim_ratio=0.06)
     assert out.name == "pdf_tokens.json"
     assert out.exists()
-    assert "--experiment" in called["argv"]
-    assert "--pdf" in called["argv"]
+    assert called["pages"] == "2,3"
+    assert str(called["pdf_path"]).endswith("data/exp2/input/source.pdf")
 
 
 def test_alignment_config_stage_writes_file(data_root: Path) -> None:

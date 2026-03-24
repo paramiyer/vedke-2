@@ -58,11 +58,14 @@ with `8390 -> 22560 ms`:
 
 ---
 
-## 3) PDF Truth extraction (Agent 4)
+## 3) PDF Truth extraction (Stage 4 OCR)
 
 Primary output:
 - `pdf_tokens.json` with token-level bbox fields:
   - `tokenId`, `token`, `kind`, `x`, `y`, `w`, `h`
+
+Raw OCR artifact:
+- `check_extraction.json`
 
 Cleaned output:
 - `pdf_tokens_cleaned.json` with:
@@ -75,6 +78,11 @@ Cleaned output:
 For PDF truth stage, user PDF path is resolved and copied to:
 - `data/<experiment>/input/source.pdf`
 Then extraction runs on this local copy.
+Stage 4 now applies OCR cleanup rules from `build_ocr_check_extraction.py`:
+- skip bracketed spans
+- skip underlined lines
+- split dandas (`।`, `॥`)
+- add token metadata (`char_count`, confidence)
 
 ---
 

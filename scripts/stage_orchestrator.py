@@ -2,14 +2,15 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import shutil
 from dataclasses import dataclass
 from pathlib import Path
 
-from scripts.agent4_pdf_truth import main as run_agent4_pdf_truth
-
-
 STAGES = ("source_intake", "asr_preparation", "pdf_truth", "alignment_config", "quality_gates")
+DEFAULT_OCR_LANG = "san+script/Devanagari"
+DEFAULT_TOP_TRIM_RATIO = 0.08
+DEFAULT_BOTTOM_TRIM_RATIO = 0.06
 
 
 def _slugify(value: str) -> str:
@@ -79,6 +80,137 @@ def _copy_pdf_to_input(paths: BuildPaths, raw_pdf: str) -> Path:
     return dst
 
 
+def _is_devanagari_token(token: str) -> bool:
+    return any("\u0900" <= ch <= "\u097F" for ch in token)
+
+
+def _has_latin(token: str) -> bool:
+    return bool(re.search(r"[A-Za-z]", token))
+
+
+def _ocr_payload_to_pdf_tokens_payload(ocr_payload: dict) -> dict:
+    pages = [int(p) for p in ocr_payload.get("pages", [])]
+    payload_pages: dict[str, list[dict[str, object]]] = {}
+    results = ocr_payload.get("results", {})
+    for page in pages:
+        page_block = results.get(str(page), {}) if isinstance(results, dict) else {}
+        tokens = page_block.get("tokens", []) if isinstance(page_block, dict) else []
+        page_records: list[dict[str, object]] = []
+        if isinstance(tokens, list):
+            for token in tokens:
+                if not isinstance(token, dict):
+                    continue
+                page_records.append(
+                    {
+                        "tokenId": str(token.get("tokenId", "")),
+                        "token": str(token.get("token", "")),
+                        "kind": str(token.get("kind", "word")),
+                        "x": token.get("x", 0),
+                        "y": token.get("y", 0),
+                        "w": token.get("w", 0),
+                        "h": token.get("h", 0),
+                        "char_count": token.get("char_count"),
+                        "conf": token.get("conf"),
+                        "underlined": token.get("underlined", False),
+                    }
+                )
+        payload_pages[str(page)] = page_records
+
+    return {
+        "sourcePdf": str(ocr_payload.get("source_pdf", "")),
+        "extraction": {
+            "agent": "stage4_ocr_truth",
+            "engine": str(ocr_payload.get("method", "tesseract_tsv")),
+            "units": "px",
+            "language": ocr_payload.get("language"),
+            "sourceFilter": {
+                "pages": pages,
+                "trim": ocr_payload.get("trim", {}),
+            },
+            "postprocess": ocr_payload.get("postprocess", {}),
+            "fields": ["tokenId", "token", "kind", "x", "y", "w", "h"],
+            "notes": [
+                "Built from OCR extraction with bracket and underline cleanup rules.",
+                "Additional token metadata includes char_count, conf, and underlined.",
+            ],
+        },
+        "pages": payload_pages,
+    }
+
+
+def _build_cleaned_pdf_tokens_payload(full_payload: dict) -> dict:
+    cleaned_pages: dict[str, list[dict[str, object]]] = {}
+    pages = full_payload.get("pages", {})
+    if isinstance(pages, dict):
+        for page, records in pages.items():
+            out: list[dict[str, object]] = []
+            if isinstance(records, list):
+                for rec in records:
+                    if not isinstance(rec, dict):
+                        continue
+                    if str(rec.get("kind")) != "word":
+                        continue
+                    token = str(rec.get("token", "")).strip()
+                    if not token:
+                        continue
+                    if _has_latin(token):
+                        continue
+                    if not _is_devanagari_token(token):
+                        continue
+                    out.append({"token": token, "kind": "word", "char_count": len(token)})
+            cleaned_pages[str(page)] = out
+
+    return {
+        "sourcePdf": full_payload.get("sourcePdf"),
+        "extraction": {
+            "agent": "stage4_ocr_truth",
+            "artifact": "pdf_tokens_cleaned",
+            "filters": ["kind=word", "drop_latin", "keep_devanagari_only"],
+            "fields": ["token", "kind", "char_count"],
+        },
+        "pages": cleaned_pages,
+    }
+
+
+def run_ocr_pdf_truth(
+    *,
+    pdf_path: Path,
+    pages: str,
+    top_trim_ratio: float | None,
+    bottom_trim_ratio: float | None,
+    out_path: Path,
+    cleaned_out_path: Path,
+) -> None:
+    try:
+        from scripts.build_ocr_check_extraction import _parse_pages as _parse_ocr_pages
+        from scripts.build_ocr_check_extraction import build_extraction as build_ocr_extraction
+    except ModuleNotFoundError as exc:
+        if exc.name == "PIL":
+            raise RuntimeError("Missing dependency: Pillow (PIL). Run `uv sync` (recommended) or `python3 -m pip install pillow`.") from exc
+        raise
+
+    page_list = _parse_ocr_pages(pages)
+    if not page_list:
+        raise ValueError("pdf_truth requires at least one page")
+    ocr_payload = build_ocr_extraction(
+        pdf=pdf_path,
+        pages=page_list,
+        trim_top_ratio=top_trim_ratio if top_trim_ratio is not None else DEFAULT_TOP_TRIM_RATIO,
+        trim_bottom_ratio=bottom_trim_ratio if bottom_trim_ratio is not None else DEFAULT_BOTTOM_TRIM_RATIO,
+        lang=DEFAULT_OCR_LANG,
+        skip_brackets=True,
+        skip_underlined=True,
+    )
+    # Preserve the raw OCR artifact for debugging and tuning.
+    check_extraction_path = out_path.parent / "check_extraction.json"
+    check_extraction_path.write_text(json.dumps(ocr_payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+    payload = _ocr_payload_to_pdf_tokens_payload(ocr_payload)
+    out_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    cleaned_payload = _build_cleaned_pdf_tokens_payload(payload)
+    cleaned_out_path.write_text(json.dumps(cleaned_payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+
 def guardrails_for_stage(stage: str, paths: BuildPaths) -> list[str]:
     if stage not in STAGES:
         return [f"unknown stage: {stage}"]
@@ -117,6 +249,7 @@ def run_stage(
     bottom_trim_ratio: float | None = None,
     min_confidence: float = 0.78,
     max_edit_cost: float = 0.32,
+    anchor_token: str | None = None,
 ) -> Path:
     paths = build_paths(experiment)
     paths.input_dir.mkdir(parents=True, exist_ok=True)
@@ -174,28 +307,41 @@ def run_stage(
         if not pdf_path or not pages:
             raise ValueError("pdf_truth requires pdf_path and pages (or source files from source_intake)")
         local_pdf_path = _copy_pdf_to_input(paths, pdf_path)
-        args = [
-            "--experiment",
-            paths.experiment,
-            "--pdf",
-            str(local_pdf_path),
-            "--pages",
-            pages,
-        ]
-        if top_trim_ratio is not None:
-            args.extend(["--trim-top-ratio", str(top_trim_ratio)])
-        if bottom_trim_ratio is not None:
-            args.extend(["--trim-bottom-ratio", str(bottom_trim_ratio)])
-        run_agent4_pdf_truth(args)
+        out_path = paths.out_dir / "pdf_tokens.json"
+        cleaned_out_path = paths.out_dir / "pdf_tokens_cleaned.json"
+        run_ocr_pdf_truth(
+            pdf_path=local_pdf_path,
+            pages=pages,
+            top_trim_ratio=top_trim_ratio,
+            bottom_trim_ratio=bottom_trim_ratio,
+            out_path=out_path,
+            cleaned_out_path=cleaned_out_path,
+        )
         return paths.out_dir / "pdf_tokens.json"
 
     if stage == "alignment_config":
+        from scripts.run_alignment_llm import main as run_alignment_llm
+
+        if not str(anchor_token or "").strip():
+            raise ValueError("alignment_config requires --anchor-token")
+        run_alignment_llm(["--experiment", paths.experiment, "--anchor-token", anchor_token])
+        llm_manifest_path = paths.out_dir / "alignment_llm_manifest.json"
+        llm_manifest: dict[str, object] = {}
+        if llm_manifest_path.exists():
+            loaded = json.loads(llm_manifest_path.read_text(encoding="utf-8"))
+            if isinstance(loaded, dict):
+                llm_manifest = loaded
         payload = {
             "stage": stage,
             "experiment": paths.experiment,
-            "strategy": "merge-split-aware-dp",
+            "strategy": "llm_alignment_with_review_loop",
             "thresholds": {"minConfidence": min_confidence, "maxEditCost": max_edit_cost},
             "inputs": {"sarvam": str(paths.out_dir / "0.json"), "pdf_tokens": str(paths.out_dir / "pdf_tokens.json")},
+            "outputs": {
+                "enriched_pdf_tokens": str(paths.out_dir / "pdf_tokens_enriched_with_timestamps.json"),
+                "review_csv": str(paths.out_dir / "pdf_tokens_segment_mapping_review.csv"),
+            },
+            "summary": llm_manifest.get("summary", {}),
         }
         out = paths.out_dir / "alignment_config.json"
         out.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
@@ -237,6 +383,7 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--trim-bottom-ratio", type=float, default=None)
     p.add_argument("--min-confidence", type=float, default=0.78)
     p.add_argument("--max-edit-cost", type=float, default=0.32)
+    p.add_argument("--anchor-token", default=None)
     return p
 
 
@@ -255,6 +402,7 @@ def main(argv: list[str] | None = None) -> int:
         bottom_trim_ratio=args.trim_bottom_ratio,
         min_confidence=args.min_confidence,
         max_edit_cost=args.max_edit_cost,
+        anchor_token=args.anchor_token,
     )
     print(f"stage={args.stage}")
     print(f"output={out}")
