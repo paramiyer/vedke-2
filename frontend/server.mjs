@@ -82,6 +82,25 @@ function runCommandRaw(command, args) {
   };
 }
 
+function runCommandNoTrim(command, args) {
+  const rendered = [command, ...args].join(" ");
+  // eslint-disable-next-line no-console
+  console.log(`[api] run-full:start ${rendered}`);
+  const result = spawnSync(command, args, {
+    cwd: REPO_ROOT,
+    encoding: "utf-8",
+    maxBuffer: 20 * 1024 * 1024
+  });
+  // eslint-disable-next-line no-console
+  console.log(`[api] run-full:end status=${result.status ?? 1} cmd=${rendered}`);
+  return {
+    ok: result.status === 0,
+    status: result.status ?? 1,
+    stdout: result.stdout || "",
+    stderr: result.stderr || ""
+  };
+}
+
 function runCommandAsync(command, args) {
   return new Promise((resolve) => {
     const rendered = [command, ...args].join(" ");
@@ -244,6 +263,27 @@ function readTextIfExists(filePath) {
   }
 }
 
+function parsePageSpec(raw) {
+  const text = String(raw || "").trim();
+  if (!text) return [];
+  const out = new Set();
+  for (const chunkRaw of text.split(",")) {
+    const chunk = chunkRaw.trim();
+    if (!chunk) continue;
+    if (chunk.includes("-")) {
+      const [a, b] = chunk.split("-", 2).map((x) => Number(x.trim()));
+      if (!Number.isFinite(a) || !Number.isFinite(b)) continue;
+      const start = Math.min(a, b);
+      const end = Math.max(a, b);
+      for (let p = start; p <= end; p += 1) out.add(p);
+    } else {
+      const p = Number(chunk);
+      if (Number.isFinite(p)) out.add(p);
+    }
+  }
+  return Array.from(out).sort((a, b) => a - b);
+}
+
 function deriveStageStatus(experiment) {
   const inputDir = path.join(REPO_ROOT, "data", experiment, "input");
   const outDir = path.join(REPO_ROOT, "data", experiment, "out");
@@ -257,6 +297,7 @@ function deriveStageStatus(experiment) {
         ? "done"
         : "idle",
     gate: fs.existsSync(path.join(outDir, "quality_gates.json")) ? "done" : "idle",
+    karaokeDone: fs.existsSync(path.join(outDir, "karaoke_status.json")),
     inputDir: path.relative(REPO_ROOT, inputDir),
     outDir: path.relative(REPO_ROOT, outDir)
   };
@@ -302,6 +343,144 @@ function listExperiments() {
     experiment: slug,
     stageStatus: deriveStageStatus(slug)
   }));
+}
+
+function runKaraokeBuild(form) {
+  const experiment = slugify(form.experimentName);
+  if (!experiment) return { ok: false, message: "Experiment name is required" };
+  const inputDir = path.join(REPO_ROOT, "data", experiment, "input");
+  const outDir = path.join(REPO_ROOT, "data", experiment, "out");
+  const required = [
+    path.join(outDir, "quality_gates.json"),
+    path.join(outDir, "pdf_tokens_enriched_with_timestamps.json"),
+    path.join(inputDir, "audio.mp3"),
+    path.join(inputDir, "pages.txt")
+  ];
+  for (const f of required) {
+    if (!fs.existsSync(f)) return { ok: false, message: `Missing required file: ${path.relative(REPO_ROOT, f)}` };
+  }
+  const sourcePdf = path.join(inputDir, "source.pdf");
+  if (!fs.existsSync(sourcePdf)) {
+    return { ok: false, message: `Missing required file: ${path.relative(REPO_ROOT, sourcePdf)}` };
+  }
+  const pages = parsePageSpec(readTextIfExists(path.join(inputDir, "pages.txt")));
+  if (pages.length === 0) return { ok: false, message: "pages.txt has no valid pages" };
+
+  const pagesDir = path.join(outDir, "karaoke_pages");
+  fs.mkdirSync(pagesDir, { recursive: true });
+  for (const f of fs.readdirSync(pagesDir)) {
+    if (f.toLowerCase().endsWith(".png")) fs.unlinkSync(path.join(pagesDir, f));
+  }
+  const logs = [];
+  for (const p of pages) {
+    const prefix = path.join(pagesDir, `page_${String(p).padStart(4, "0")}`);
+    const args = ["-f", String(p), "-singlefile", "-png", sourcePdf, prefix];
+    const r = runCommandNoTrim("pdftoppm", args);
+    logs.push({ command: ["pdftoppm", ...args].join(" "), ...r });
+    if (!r.ok) {
+      return {
+        ok: false,
+        message: "Failed generating karaoke page images",
+        logs,
+        experiment,
+        inputDir: path.relative(REPO_ROOT, inputDir),
+        outDir: path.relative(REPO_ROOT, outDir)
+      };
+    }
+  }
+
+  const statusPath = path.join(outDir, "karaoke_status.json");
+  const payload = {
+    ok: true,
+    experiment,
+    status: "done",
+    builtAt: new Date().toISOString(),
+    pages,
+    sourcePdf: path.relative(REPO_ROOT, sourcePdf),
+    audio: path.relative(REPO_ROOT, path.join(inputDir, "audio.mp3")),
+    enriched: path.relative(REPO_ROOT, path.join(outDir, "pdf_tokens_enriched_with_timestamps.json")),
+    pagesDir: path.relative(REPO_ROOT, pagesDir)
+  };
+  fs.writeFileSync(statusPath, `${JSON.stringify(payload, null, 2)}\n`, "utf-8");
+  return {
+    ok: true,
+    stage: "karaoke",
+    experiment,
+    logs,
+    inputDir: path.relative(REPO_ROOT, inputDir),
+    outDir: path.relative(REPO_ROOT, outDir),
+    files: [...walkFiles(inputDir), ...walkFiles(outDir)]
+  };
+}
+
+function getKaraokeViewPayload(experiment) {
+  const inputDir = path.join(REPO_ROOT, "data", experiment, "input");
+  const outDir = path.join(REPO_ROOT, "data", experiment, "out");
+  const statusPath = path.join(outDir, "karaoke_status.json");
+  const enrichedPath = path.join(outDir, "pdf_tokens_enriched_with_timestamps.json");
+  if (!fs.existsSync(statusPath)) throw new Error("karaoke_status.json not found");
+  if (!fs.existsSync(enrichedPath)) throw new Error("pdf_tokens_enriched_with_timestamps.json not found");
+  const status = JSON.parse(fs.readFileSync(statusPath, "utf-8"));
+  const enrichedRaw = JSON.parse(fs.readFileSync(enrichedPath, "utf-8"));
+  const enriched = enrichedRaw?.enriched_pdf_tokens && typeof enrichedRaw.enriched_pdf_tokens === "object" ? enrichedRaw.enriched_pdf_tokens : enrichedRaw;
+  const pagesObj = enriched?.pages && typeof enriched.pages === "object" ? enriched.pages : {};
+  const trimTopRatio = Number(enriched?.extraction?.sourceFilter?.trim?.top_ratio || 0);
+  const trimBottomRatio = Number(enriched?.extraction?.sourceFilter?.trim?.bottom_ratio || 0);
+  const pages = Array.isArray(status.pages) ? status.pages.map((x) => Number(x)).filter((x) => Number.isFinite(x)) : [];
+  const tokensByPage = {};
+  const pageImageUrls = {};
+  const pageImageData = {};
+  const pageBoundsByPage = {};
+  for (const p of pages) {
+    const recs = pagesObj[String(p)] || [];
+    if (!Array.isArray(recs)) continue;
+    let maxRight = 0;
+    let maxBottom = 0;
+    recs.forEach((r) => {
+      const x = Number(r?.x || 0);
+      const y = Number(r?.y || 0);
+      const w = Number(r?.w || 0);
+      const h = Number(r?.h || 0);
+      if (Number.isFinite(x) && Number.isFinite(w)) maxRight = Math.max(maxRight, x + w);
+      if (Number.isFinite(y) && Number.isFinite(h)) maxBottom = Math.max(maxBottom, y + h);
+    });
+    pageBoundsByPage[String(p)] = { maxRight, maxBottom };
+    tokensByPage[String(p)] = recs
+      .filter((r) => r && typeof r === "object" && Number.isFinite(Number(r.start_time_seconds)) && Number.isFinite(Number(r.end_time_seconds)))
+      .map((r) => ({
+        tokenId: String(r.tokenId || ""),
+        token: String(r.token || ""),
+        x: Number(r.x || 0),
+        y: Number(r.y || 0),
+        w: Number(r.w || 0),
+        h: Number(r.h || 0),
+        start_s: Number(r.start_time_seconds),
+        end_s: Number(r.end_time_seconds)
+      }));
+    pageImageUrls[String(p)] = `/api/karaoke-page?experiment=${encodeURIComponent(experiment)}&page=${encodeURIComponent(String(p))}`;
+    const pagePng = path.join(outDir, "karaoke_pages", `page_${String(p).padStart(4, "0")}.png`);
+    if (fs.existsSync(pagePng)) {
+      const b64 = fs.readFileSync(pagePng).toString("base64");
+      pageImageData[String(p)] = `data:image/png;base64,${b64}`;
+    }
+  }
+  return {
+    experiment,
+    pages,
+    tokensByPage,
+    pageImageUrls,
+    pageImageData,
+    pageBoundsByPage,
+    trimTopRatio,
+    trimBottomRatio,
+    audioUrl: `/api/karaoke-audio?experiment=${encodeURIComponent(experiment)}`,
+    pageImageBaseUrl: `/api/karaoke-page?experiment=${encodeURIComponent(experiment)}&page=`,
+    files: {
+      audio: path.relative(REPO_ROOT, path.join(inputDir, "audio.mp3")),
+      enriched: path.relative(REPO_ROOT, enrichedPath),
+      status: path.relative(REPO_ROOT, statusPath)
+    }
+  };
 }
 
 function runStage(stage, form) {
@@ -730,12 +909,21 @@ function runAlignmentManualImport(form, uploaded) {
 }
 
 const server = http.createServer(async (req, res) => {
+  const parsedUrl = new URL(req.url || "/", `http://localhost:${PORT}`);
+  const reqPath = parsedUrl.pathname;
+
   if (req.method === "OPTIONS") {
     sendJson(res, 200, {});
     return;
   }
 
-  if (req.method === "POST" && req.url === "/api/run-stage") {
+  if (req.method === "GET" && reqPath === "/favicon.ico") {
+    res.writeHead(204, { "Access-Control-Allow-Origin": "*" });
+    res.end();
+    return;
+  }
+
+  if (req.method === "POST" && reqPath === "/api/run-stage") {
     try {
       const body = await parseBody(req);
       const stage = String(body.stage || "");
@@ -748,7 +936,23 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
-  if (req.method === "POST" && req.url === "/api/run-stage-async") {
+  // Accept legacy misspelling (`karoke`) for backward compatibility with stale frontend bundles.
+  if (
+    req.method === "POST" &&
+    (reqPath === "/api/karaoke-build" || reqPath === "/api/karoke-build")
+  ) {
+    try {
+      const body = await parseBody(req);
+      const form = body.form || {};
+      const result = runKaraokeBuild(form);
+      sendJson(res, result.ok ? 200 : 400, result);
+    } catch (err) {
+      sendJson(res, 500, { ok: false, message: String(err) });
+    }
+    return;
+  }
+
+  if (req.method === "POST" && reqPath === "/api/run-stage-async") {
     try {
       const body = await parseBody(req);
       const stage = String(body.stage || "");
@@ -765,8 +969,8 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
-  if (req.method === "GET" && req.url?.startsWith("/api/job-status")) {
-    const u = new URL(req.url, `http://localhost:${PORT}`);
+  if (req.method === "GET" && reqPath === "/api/job-status") {
+    const u = parsedUrl;
     const jobId = String(u.searchParams.get("jobId") || "");
     if (!jobId) {
       sendJson(res, 400, { ok: false, message: "jobId query param required" });
@@ -781,7 +985,7 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
-  if (req.method === "POST" && req.url === "/api/alignment-feedback") {
+  if (req.method === "POST" && reqPath === "/api/alignment-feedback") {
     try {
       const body = await parseBody(req);
       const form = body.form || {};
@@ -794,7 +998,7 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
-  if (req.method === "POST" && req.url === "/api/alignment-manual-prompt") {
+  if (req.method === "POST" && reqPath === "/api/alignment-manual-prompt") {
     try {
       const body = await parseBody(req);
       const form = body.form || {};
@@ -806,7 +1010,7 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
-  if (req.method === "POST" && req.url === "/api/alignment-manual-import") {
+  if (req.method === "POST" && reqPath === "/api/alignment-manual-import") {
     try {
       const body = await parseBody(req);
       const form = body.form || {};
@@ -819,8 +1023,8 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
-  if (req.method === "GET" && req.url?.startsWith("/api/files")) {
-    const u = new URL(req.url, `http://localhost:${PORT}`);
+  if (req.method === "GET" && reqPath === "/api/files") {
+    const u = parsedUrl;
     const experiment = slugify(u.searchParams.get("experiment") || "");
     if (!experiment) {
       sendJson(res, 400, { ok: false, message: "experiment query param required" });
@@ -838,13 +1042,93 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
-  if (req.method === "GET" && req.url === "/api/experiments") {
+  if (req.method === "GET" && reqPath === "/api/experiments") {
     sendJson(res, 200, { ok: true, experiments: listExperiments() });
     return;
   }
 
-  if (req.method === "GET" && req.url?.startsWith("/api/experiment")) {
-    const u = new URL(req.url, `http://localhost:${PORT}`);
+  if (req.method === "GET" && reqPath === "/api/karaoke-view") {
+    try {
+      const u = parsedUrl;
+      const experiment = slugify(u.searchParams.get("experiment") || "");
+      console.log(`[api] karaoke-view:get experiment=${experiment}`);
+      if (!experiment) {
+        sendJson(res, 400, { ok: false, message: "experiment query param required" });
+        return;
+      }
+      const payload = getKaraokeViewPayload(experiment);
+      sendJson(res, 200, { ok: true, ...payload });
+    } catch (err) {
+      sendJson(res, 400, { ok: false, message: String(err) });
+    }
+    return;
+  }
+
+  if (req.method === "GET" && reqPath === "/api/karaoke-audio") {
+    const u = parsedUrl;
+    const experiment = slugify(u.searchParams.get("experiment") || "");
+    if (!experiment) {
+      sendJson(res, 400, { ok: false, message: "experiment query param required" });
+      return;
+    }
+    const audioPath = path.join(REPO_ROOT, "data", experiment, "input", "audio.mp3");
+    if (!fs.existsSync(audioPath)) {
+      sendJson(res, 404, { ok: false, message: "audio file not found" });
+      return;
+    }
+    res.writeHead(200, {
+      "Content-Type": "audio/mpeg",
+      "Access-Control-Allow-Origin": "*"
+    });
+    fs.createReadStream(audioPath).pipe(res);
+    return;
+  }
+
+  if (req.method === "GET" && (reqPath === "/api/karaoke-page" || reqPath === "/api/karoke-page")) {
+    const u = parsedUrl;
+    const experiment = slugify(u.searchParams.get("experiment") || "");
+    const page = Number(u.searchParams.get("page") || "0");
+    if (!experiment || !Number.isFinite(page) || page <= 0) {
+      sendJson(res, 400, { ok: false, message: "experiment and positive page are required" });
+      return;
+    }
+    const p = path.join(REPO_ROOT, "data", experiment, "out", "karaoke_pages", `page_${String(page).padStart(4, "0")}.png`);
+    console.log(`[api] karaoke-page:get experiment=${experiment} page=${page} path=${p}`);
+    if (!fs.existsSync(p)) {
+      console.log(`[api] karaoke-page:missing experiment=${experiment} page=${page}`);
+      sendJson(res, 404, { ok: false, message: "karaoke page image not found; run Karoke Build first" });
+      return;
+    }
+    res.writeHead(200, {
+      "Content-Type": "image/png",
+      "Access-Control-Allow-Origin": "*"
+    });
+    fs.createReadStream(p).pipe(res);
+    return;
+  }
+
+  if (req.method === "GET" && reqPath === "/api/karaoke-page-data") {
+    const u = parsedUrl;
+    const experiment = slugify(u.searchParams.get("experiment") || "");
+    const page = Number(u.searchParams.get("page") || "0");
+    if (!experiment || !Number.isFinite(page) || page <= 0) {
+      sendJson(res, 400, { ok: false, message: "experiment and positive page are required" });
+      return;
+    }
+    const p = path.join(REPO_ROOT, "data", experiment, "out", "karaoke_pages", `page_${String(page).padStart(4, "0")}.png`);
+    console.log(`[api] karaoke-page-data:get experiment=${experiment} page=${page} path=${p}`);
+    if (!fs.existsSync(p)) {
+      console.log(`[api] karaoke-page-data:missing experiment=${experiment} page=${page}`);
+      sendJson(res, 404, { ok: false, message: "karaoke page image not found; run Karoke Build first" });
+      return;
+    }
+    const b64 = fs.readFileSync(p).toString("base64");
+    sendJson(res, 200, { ok: true, mime: "image/png", data: b64 });
+    return;
+  }
+
+  if (req.method === "GET" && reqPath === "/api/experiment") {
+    const u = parsedUrl;
     const experiment = slugify(u.searchParams.get("name") || "");
     if (!experiment) {
       sendJson(res, 400, { ok: false, message: "name query param required" });
@@ -860,8 +1144,8 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
-  if (req.method === "GET" && req.url?.startsWith("/api/stage-artifacts")) {
-    const u = new URL(req.url, `http://localhost:${PORT}`);
+  if (req.method === "GET" && reqPath === "/api/stage-artifacts") {
+    const u = parsedUrl;
     const experiment = slugify(u.searchParams.get("experiment") || "");
     const stage = String(u.searchParams.get("stage") || "");
     if (!experiment || !stage) {
