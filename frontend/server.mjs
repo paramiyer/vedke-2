@@ -312,10 +312,12 @@ function loadExperimentSnapshot(experiment) {
   const pdf = pdfLocal || readTextIfExists(path.join(inputDir, "source_pdf.txt"));
   const alignManifestPath = path.join(outDir, "alignment_llm_manifest.json");
   let anchorToken = "";
+  let anchorSegmentIndex = "0";
   if (fs.existsSync(alignManifestPath)) {
     try {
       const parsed = JSON.parse(fs.readFileSync(alignManifestPath, "utf-8"));
       if (parsed && typeof parsed.anchor_token === "string") anchorToken = parsed.anchor_token.trim();
+      if (parsed && typeof parsed.anchor_segment_index === "number") anchorSegmentIndex = String(parsed.anchor_segment_index);
     } catch {
       anchorToken = "";
     }
@@ -327,7 +329,8 @@ function loadExperimentSnapshot(experiment) {
       youtubeUrl: yt,
       pdfPath: pdf,
       pages,
-      anchorToken
+      anchorToken,
+      anchorSegmentIndex
     },
     stageStatus: deriveStageStatus(experiment),
     files: [...walkFiles(inputDir), ...walkFiles(outDir)]
@@ -368,24 +371,38 @@ function runKaraokeBuild(form) {
 
   const pagesDir = path.join(outDir, "karaoke_pages");
   fs.mkdirSync(pagesDir, { recursive: true });
-  for (const f of fs.readdirSync(pagesDir)) {
-    if (f.toLowerCase().endsWith(".png")) fs.unlinkSync(path.join(pagesDir, f));
-  }
+
+  // If Stage 3 (pdf_truth) already produced frozen page images for all pages,
+  // reuse them rather than re-rendering from the PDF.  This preserves the
+  // canonical coordinate space established at OCR time.
+  const missingPages = pages.filter((p) => {
+    const png = path.join(pagesDir, `page_${String(p).padStart(4, "0")}.png`);
+    return !fs.existsSync(png);
+  });
+
   const logs = [];
-  for (const p of pages) {
-    const prefix = path.join(pagesDir, `page_${String(p).padStart(4, "0")}`);
-    const args = ["-f", String(p), "-singlefile", "-png", sourcePdf, prefix];
-    const r = runCommandNoTrim("pdftoppm", args);
-    logs.push({ command: ["pdftoppm", ...args].join(" "), ...r });
-    if (!r.ok) {
-      return {
-        ok: false,
-        message: "Failed generating karaoke page images",
-        logs,
-        experiment,
-        inputDir: path.relative(REPO_ROOT, inputDir),
-        outDir: path.relative(REPO_ROOT, outDir)
-      };
+  if (missingPages.length > 0) {
+    // Only regenerate pages that are missing.  Clear any stale PNGs for those
+    // pages first so we don't mix artifacts from different render passes.
+    for (const p of missingPages) {
+      const stale = path.join(pagesDir, `page_${String(p).padStart(4, "0")}.png`);
+      if (fs.existsSync(stale)) fs.unlinkSync(stale);
+    }
+    for (const p of missingPages) {
+      const prefix = path.join(pagesDir, `page_${String(p).padStart(4, "0")}`);
+      const args = ["-f", String(p), "-singlefile", "-png", sourcePdf, prefix];
+      const r = runCommandNoTrim("pdftoppm", args);
+      logs.push({ command: ["pdftoppm", ...args].join(" "), ...r });
+      if (!r.ok) {
+        return {
+          ok: false,
+          message: "Failed generating karaoke page images",
+          logs,
+          experiment,
+          inputDir: path.relative(REPO_ROOT, inputDir),
+          outDir: path.relative(REPO_ROOT, outDir)
+        };
+      }
     }
   }
 
@@ -427,6 +444,49 @@ function getKaraokeViewPayload(experiment) {
   const trimTopRatio = Number(enriched?.extraction?.sourceFilter?.trim?.top_ratio || 0);
   const trimBottomRatio = Number(enriched?.extraction?.sourceFilter?.trim?.bottom_ratio || 0);
   const pages = Array.isArray(status.pages) ? status.pages.map((x) => Number(x)).filter((x) => Number.isFinite(x)) : [];
+
+  // ---------------------------------------------------------------------------
+  // Resolve canonical page dimensions (OCR source space, px).
+  //
+  // Token x/y/w/h coordinates are defined in the coordinate space of the
+  // full-page PNG rendered at 300 DPI by pdftoppm during Stage 3.  We MUST
+  // use those exact page dimensions—not the max token extent—as the reference
+  // when mapping token coordinates to any display space.
+  //
+  // Priority:
+  //   1. pdf_tokens.json "pageImageSizes" (written by stage_orchestrator since
+  //      the coordinate-fix was applied)
+  //   2. check_extraction.json "results[page].image_size_px" (always present;
+  //      fixes rendering for runs produced before the coordinate-fix)
+  //   3. Fallback: compute from max token extent (old behaviour, inaccurate).
+  // ---------------------------------------------------------------------------
+  let canonicalPageDims = {};
+  // Priority 1: pdf_tokens.json pageImageSizes
+  const pdfTokensPath = path.join(outDir, "pdf_tokens.json");
+  if (fs.existsSync(pdfTokensPath)) {
+    try {
+      const pt = JSON.parse(fs.readFileSync(pdfTokensPath, "utf-8"));
+      if (pt.pageImageSizes && typeof pt.pageImageSizes === "object") {
+        canonicalPageDims = pt.pageImageSizes;
+      }
+    } catch (_) { /* ignore parse errors */ }
+  }
+  // Priority 2: check_extraction.json results[page].image_size_px
+  if (Object.keys(canonicalPageDims).length === 0) {
+    const checkExtrPath = path.join(outDir, "check_extraction.json");
+    if (fs.existsSync(checkExtrPath)) {
+      try {
+        const ce = JSON.parse(fs.readFileSync(checkExtrPath, "utf-8"));
+        const ceResults = ce.results || {};
+        for (const [pno, pdata] of Object.entries(ceResults)) {
+          if (pdata && pdata.image_size_px && pdata.image_size_px.w > 0 && pdata.image_size_px.h > 0) {
+            canonicalPageDims[String(pno)] = { w: pdata.image_size_px.w, h: pdata.image_size_px.h };
+          }
+        }
+      } catch (_) { /* ignore parse errors */ }
+    }
+  }
+
   const tokensByPage = {};
   const pageImageUrls = {};
   const pageImageData = {};
@@ -434,17 +494,28 @@ function getKaraokeViewPayload(experiment) {
   for (const p of pages) {
     const recs = pagesObj[String(p)] || [];
     if (!Array.isArray(recs)) continue;
-    let maxRight = 0;
-    let maxBottom = 0;
-    recs.forEach((r) => {
-      const x = Number(r?.x || 0);
-      const y = Number(r?.y || 0);
-      const w = Number(r?.w || 0);
-      const h = Number(r?.h || 0);
-      if (Number.isFinite(x) && Number.isFinite(w)) maxRight = Math.max(maxRight, x + w);
-      if (Number.isFinite(y) && Number.isFinite(h)) maxBottom = Math.max(maxBottom, y + h);
-    });
-    pageBoundsByPage[String(p)] = { maxRight, maxBottom };
+
+    // Determine canonical page bounds for coordinate mapping.
+    // Use stored OCR source image dimensions when available; fall back to
+    // computing from token extents only if no better source exists.
+    const dims = canonicalPageDims[String(p)];
+    if (dims && dims.w > 0 && dims.h > 0) {
+      pageBoundsByPage[String(p)] = { maxRight: dims.w, maxBottom: dims.h };
+    } else {
+      // Legacy fallback: compute from token extent (inaccurate but safe).
+      let maxRight = 0;
+      let maxBottom = 0;
+      recs.forEach((r) => {
+        const x = Number(r?.x || 0);
+        const y = Number(r?.y || 0);
+        const w = Number(r?.w || 0);
+        const h = Number(r?.h || 0);
+        if (Number.isFinite(x) && Number.isFinite(w)) maxRight = Math.max(maxRight, x + w);
+        if (Number.isFinite(y) && Number.isFinite(h)) maxBottom = Math.max(maxBottom, y + h);
+      });
+      pageBoundsByPage[String(p)] = { maxRight, maxBottom };
+    }
+
     tokensByPage[String(p)] = recs
       .filter((r) => r && typeof r === "object" && Number.isFinite(Number(r.start_time_seconds)) && Number.isFinite(Number(r.end_time_seconds)))
       .map((r) => ({
@@ -594,6 +665,7 @@ function runStage(stage, form) {
     if (!anchorToken) {
       return { ok: false, message: "anchorToken is required for alignment stage" };
     }
+    const anchorSeg = String(Number.isFinite(parseInt(form.anchorSegmentIndex, 10)) ? parseInt(form.anchorSegmentIndex, 10) : 0);
     commands.push([
       pythonCmd(),
       [
@@ -608,7 +680,9 @@ function runStage(stage, form) {
         "--max-edit-cost",
         String(form.maxEditCost || "0.32"),
         "--anchor-token",
-        anchorToken
+        anchorToken,
+        "--anchor-segment",
+        anchorSeg
       ]
     ]);
   } else if (stage === "gate") {
@@ -1076,11 +1150,33 @@ const server = http.createServer(async (req, res) => {
       sendJson(res, 404, { ok: false, message: "audio file not found" });
       return;
     }
-    res.writeHead(200, {
-      "Content-Type": "audio/mpeg",
-      "Access-Control-Allow-Origin": "*"
-    });
-    fs.createReadStream(audioPath).pipe(res);
+    const fileSize = fs.statSync(audioPath).size;
+    const rangeHeader = req.headers["range"];
+    if (rangeHeader) {
+      // Support HTTP Range requests so the browser can buffer and seek without
+      // re-fetching the entire file from the beginning (which caused the audio
+      // to reset to t=0 mid-playback).
+      const [startStr, endStr] = rangeHeader.replace(/bytes=/, "").split("-");
+      const start = parseInt(startStr, 10);
+      const end = endStr ? parseInt(endStr, 10) : fileSize - 1;
+      const chunkSize = end - start + 1;
+      res.writeHead(206, {
+        "Content-Range": `bytes ${start}-${end}/${fileSize}`,
+        "Accept-Ranges": "bytes",
+        "Content-Length": chunkSize,
+        "Content-Type": "audio/mpeg",
+        "Access-Control-Allow-Origin": "*"
+      });
+      fs.createReadStream(audioPath, { start, end }).pipe(res);
+    } else {
+      res.writeHead(200, {
+        "Content-Length": fileSize,
+        "Accept-Ranges": "bytes",
+        "Content-Type": "audio/mpeg",
+        "Access-Control-Allow-Origin": "*"
+      });
+      fs.createReadStream(audioPath).pipe(res);
+    }
     return;
   }
 
@@ -1156,6 +1252,157 @@ const server = http.createServer(async (req, res) => {
     const outDir = path.join(REPO_ROOT, "data", experiment, "out");
     const artifacts = stageArtifactPaths(stage, experiment, inputDir, outDir).map((p) => readArtifactPreview(p));
     sendJson(res, 200, { ok: true, experiment, stage, artifacts });
+    return;
+  }
+
+  if (req.method === "GET" && reqPath === "/api/alignment-enriched-tokens") {
+    const u = parsedUrl;
+    const experiment = slugify(u.searchParams.get("experiment") || "");
+    if (!experiment) {
+      sendJson(res, 400, { ok: false, message: "experiment required" });
+      return;
+    }
+    const enrichedPath = path.join(REPO_ROOT, "data", experiment, "out", "pdf_tokens_enriched_with_timestamps.json");
+    if (!fs.existsSync(enrichedPath)) {
+      sendJson(res, 404, { ok: false, message: "enriched file not found" });
+      return;
+    }
+    try {
+      const content = JSON.parse(fs.readFileSync(enrichedPath, "utf-8"));
+      sendJson(res, 200, { ok: true, ...content });
+    } catch (err) {
+      sendJson(res, 500, { ok: false, message: String(err) });
+    }
+    return;
+  }
+
+  if (req.method === "POST" && reqPath === "/api/alignment-realign") {
+    try {
+      const body = await parseBody(req);
+      const form = body.form || {};
+      const segments = body.segments || [];
+      const experiment = slugify(form.experimentName || "");
+      if (!experiment) {
+        sendJson(res, 400, { ok: false, message: "experimentName required" });
+        return;
+      }
+
+      const enrichedPath = path.join(REPO_ROOT, "data", experiment, "out", "pdf_tokens_enriched_with_timestamps.json");
+      if (!fs.existsSync(enrichedPath)) {
+        sendJson(res, 404, { ok: false, message: "enriched file not found" });
+        return;
+      }
+
+      const enriched = JSON.parse(fs.readFileSync(enrichedPath, "utf-8"));
+
+      // Build flat token map: tokenId -> token record
+      const tokenMap = new Map();
+      for (const toks of Object.values(enriched.pages)) {
+        for (const tok of toks) tokenMap.set(tok.tokenId, tok);
+      }
+
+      // Clear all existing timestamps and reset match state
+      for (const tok of tokenMap.values()) {
+        delete tok.start_time_seconds;
+        delete tok.end_time_seconds;
+        delete tok.timing_segment_index;
+        delete tok.timing_match_ratio;
+        delete tok.timing_manual_fallback;
+        delete tok.matched_segment_index;
+        // Explicitly mark all eligible tokens as unmatched; stamping below sets kept ones to true
+        if (tok.is_eligible) tok.is_matched = false;
+        else delete tok.is_matched;
+      }
+
+      const minSeconds = Math.max(0.05, parseFloat(form.minSeconds) || 0.4);
+
+      // Redistribute timestamps per segment using floor-and-redistribute algorithm
+      for (const seg of segments) {
+        const { segmentIndex, keptTokenIds, audioStartS, audioEndS, timeReductionS } = seg;
+        if (!keptTokenIds || keptTokenIds.length === 0) continue;
+        // Subtract user-specified time reduction (extra audio words not in OCR)
+        // before distributing the remaining duration across kept tokens.
+        const reduction = parseFloat(timeReductionS) || 0;
+        const duration = Math.max(0.1, (audioEndS - audioStartS) - reduction);
+        const toks = keptTokenIds.map(id => tokenMap.get(id)).filter(Boolean);
+        if (toks.length === 0) continue;
+
+        // Compute char weights
+        const weights = toks.map(t => t.char_count || t.token.length || 1);
+
+        // Iterative floor-and-redistribute:
+        // Pin any token whose proportional time < minSeconds, then redistribute
+        // the remaining duration among free tokens. Repeat until stable.
+        const allocated = new Array(toks.length).fill(null); // null = free, number = pinned
+        let remainingDuration = duration;
+        let changed = true;
+        while (changed) {
+          changed = false;
+          const freeIndices = toks.map((_, i) => i).filter(i => allocated[i] === null);
+          if (freeIndices.length === 0) break;
+          const freeWeightTotal = freeIndices.reduce((s, i) => s + weights[i], 0);
+          if (freeWeightTotal <= 0) break;
+          for (const i of freeIndices) {
+            const proportional = (weights[i] / freeWeightTotal) * remainingDuration;
+            if (proportional < minSeconds) {
+              allocated[i] = minSeconds;
+              remainingDuration -= minSeconds;
+              changed = true;
+            }
+          }
+          // Safety: if pinning everything exhausts duration, fall back to equal split
+          if (remainingDuration <= 0) {
+            const equalShare = duration / toks.length;
+            for (let i = 0; i < toks.length; i++) allocated[i] = equalShare;
+            break;
+          }
+        }
+        // Assign remaining free tokens proportionally from remaining duration
+        const stillFree = toks.map((_, i) => i).filter(i => allocated[i] === null);
+        if (stillFree.length > 0) {
+          const freeWeightTotal = stillFree.reduce((s, i) => s + weights[i], 0);
+          for (const i of stillFree) {
+            allocated[i] = freeWeightTotal > 0
+              ? (weights[i] / freeWeightTotal) * remainingDuration
+              : remainingDuration / stillFree.length;
+          }
+        }
+
+        // Stamp tokens with monotonic timestamps from allocations
+        let cursor = audioStartS;
+        for (let i = 0; i < toks.length; i++) {
+          const tok = toks[i];
+          const dur = allocated[i] ?? (duration / toks.length);
+          tok.start_time_seconds = Math.round(cursor * 1000) / 1000;
+          tok.end_time_seconds = Math.round((cursor + dur) * 1000) / 1000;
+          tok.timing_segment_index = segmentIndex;
+          tok.timing_match_ratio = 0.0;
+          tok.timing_manual_fallback = true;
+          tok.is_matched = true;
+          tok.matched_segment_index = segmentIndex;
+          cursor += dur;
+        }
+      }
+
+      // Persist time reductions so the review editor can restore them on reopen.
+      enriched.segmentTimeReductions = enriched.segmentTimeReductions || {};
+      for (const seg of segments) {
+        const r = parseFloat(seg.timeReductionS) || 0;
+        if (r !== 0) enriched.segmentTimeReductions[String(seg.segmentIndex)] = r;
+        else delete enriched.segmentTimeReductions[String(seg.segmentIndex)];
+      }
+
+      fs.writeFileSync(enrichedPath, JSON.stringify(enriched, null, 2), "utf-8");
+
+      // Read back updated review CSV if it exists
+      const reviewCsvPath = path.join(REPO_ROOT, "data", experiment, "out", "pdf_tokens_segment_mapping_review.csv");
+      let alignmentReviewCsv = "";
+      if (fs.existsSync(reviewCsvPath)) alignmentReviewCsv = fs.readFileSync(reviewCsvPath, "utf-8");
+
+      sendJson(res, 200, { ok: true, experiment, alignmentReviewCsv });
+    } catch (err) {
+      sendJson(res, 500, { ok: false, message: String(err) });
+    }
     return;
   }
 

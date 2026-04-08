@@ -126,19 +126,25 @@ def _augment_review_rows_with_token_text(
     return out_rows
 
 
-def _extract_first_segment_start(audio_payload: dict[str, Any]) -> float:
+def _extract_anchor_segment_start(audio_payload: dict[str, Any], anchor_segment_index: int) -> float:
     ts = audio_payload.get("timestamps") if isinstance(audio_payload, dict) else None
     starts = ts.get("start_time_seconds", []) if isinstance(ts, dict) else []
     if not isinstance(starts, list) or not starts:
         raise RuntimeError("0.json missing timestamps.start_time_seconds")
+    if anchor_segment_index < 0 or anchor_segment_index >= len(starts):
+        raise RuntimeError(
+            f"anchor_segment_index={anchor_segment_index} is out of range "
+            f"(0.json has {len(starts)} segments)"
+        )
     try:
-        return float(starts[0])
+        return float(starts[anchor_segment_index])
     except (TypeError, ValueError) as exc:
-        raise RuntimeError("Invalid first timestamp in 0.json") from exc
+        raise RuntimeError(f"Invalid timestamp at segment {anchor_segment_index} in 0.json") from exc
 
 
 def _assert_anchor_guardrail(
-    enriched: dict[str, Any], anchor_token_id: str, expected_first_start: float, tolerance_s: float = 1.5
+    enriched: dict[str, Any], anchor_token_id: str, expected_first_start: float,
+    anchor_segment_index: int = 0, tolerance_s: float = 1.5
 ) -> None:
     pages = enriched.get("pages")
     if not isinstance(pages, dict):
@@ -162,9 +168,9 @@ def _assert_anchor_guardrail(
         seg_idx_int = int(seg_idx)
     except (TypeError, ValueError):
         raise RuntimeError("Guardrail failed: anchor token has invalid timing_segment_index") from None
-    if seg_idx_int != 0:
+    if seg_idx_int != anchor_segment_index:
         raise RuntimeError(
-            f"Guardrail failed: anchor token {anchor_token_id} mapped to segment {seg_idx_int}, expected segment 0"
+            f"Guardrail failed: anchor token {anchor_token_id} mapped to segment {seg_idx_int}, expected segment {anchor_segment_index}"
         )
     try:
         st = float(anchor.get("start_time_seconds"))
@@ -228,6 +234,7 @@ def _build_prompt(
     ocr_json_text: str,
     audio_json_text: str,
     anchor_token_id: str,
+    anchor_segment_index: int,
     feedback: str | None,
     *,
     include_embedded_inputs: bool,
@@ -277,6 +284,7 @@ Do NOT redesign how they are passed.
 
 For this run:
 - `first_anchor_token_id = "{anchor_token_id}"`
+- `anchor_segment_index = {anchor_segment_index}`
 
 ==================================================
 OBJECTIVE
@@ -327,7 +335,9 @@ OCR tokens are already in reading order across pages.
 
 3. `first_anchor_token_id`
 Already supplied by the application.
-This OCR token maps to the first spoken token of segment 0.
+This OCR token is the first OCR-matchable token within audio segment {anchor_segment_index}.
+Audio words spoken before this OCR token in segment {anchor_segment_index} (if any) have no matching OCR entry and must be skipped.
+Audio segments 0 through {anchor_segment_index - 1} (if any) have no matching OCR tokens at all.
 
 ==================================================
 NON-NEGOTIABLE RULES
@@ -337,7 +347,7 @@ NON-NEGOTIABLE RULES
 2. Preserve monotonic forward order only.
 3. Never go backward in OCR.
 4. Never assume the next segment starts at previous OCR end + 1.
-5. For segment 0, use `first_anchor_token_id` as the OCR start anchor.
+5. For segment {anchor_segment_index}, use `first_anchor_token_id` as the OCR start anchor. Do not assign OCR tokens to any segment before segment {anchor_segment_index}.
 6. For later segments, always search forward beyond the previous matched OCR end.
 7. Only OCR tokens with `kind == "word"` are eligible for matching and timestamp distribution.
 8. Exclude from matching:
@@ -514,7 +524,7 @@ Audio tokenization rules:
 Stage B: Find coarse OCR start
 --------------------------------------------------
 
-For segment 0:
+For segment {anchor_segment_index}:
 - coarse start must begin at `first_anchor_token_id`
 - do not use earlier OCR tokens before that anchor
 
@@ -643,10 +653,11 @@ Timestamp rules:
 - never assign timestamps to punctuation
 - never assign timestamps to dropped eligible tokens
 
-Each stamped OCR token should get at least:
-- `audio_start_s`
-- `audio_end_s`
-or equivalent timestamp fields expected by the workflow
+Each stamped OCR token MUST have EXACTLY these two timestamp fields written into the token object:
+- `start_time_seconds`  ← the token's start time in seconds (float)
+- `end_time_seconds`    ← the token's end time in seconds (float)
+
+Do NOT use `audio_start_s` or `audio_end_s` as token-level field names. Those are segment-level variable names used in earlier stages. The token-level fields must always be `start_time_seconds` and `end_time_seconds`.
 
 Do not invent unsupported fine precision.
 But do maintain strict monotonic order.
@@ -824,7 +835,7 @@ SUCCESS CRITERIA
 ==================================================
 
 A successful run does all of the following:
-- starts segment 0 exactly at `first_anchor_token_id`
+- starts segment {anchor_segment_index} exactly at `first_anchor_token_id`
 - stays monotonic and forward-only
 - uses coarse spans only provisionally
 - performs token-level cleanup before timestamping
@@ -1045,10 +1056,10 @@ def _extract_review_rows(payload: dict[str, Any]) -> list[dict[str, Any]]:
 
 
 def _validate_enriched_payload(
-    enriched: dict[str, Any], anchor_token_id: str, expected_first_start: float
+    enriched: dict[str, Any], anchor_token_id: str, expected_first_start: float, anchor_segment_index: int = 0
 ) -> tuple[bool, str]:
     try:
-        _assert_anchor_guardrail(enriched, anchor_token_id=anchor_token_id, expected_first_start=expected_first_start)
+        _assert_anchor_guardrail(enriched, anchor_token_id=anchor_token_id, expected_first_start=expected_first_start, anchor_segment_index=anchor_segment_index)
         _assert_monotonicity_guardrail(enriched)
         return True, ""
     except RuntimeError as exc:
@@ -1101,6 +1112,39 @@ def _find_token_record(enriched: dict[str, Any], token_id: str) -> dict[str, Any
     return None
 
 
+def _normalize_token_timestamp_field_names_in_place(enriched: dict[str, Any]) -> int:
+    """Rename audio_start_s/audio_end_s → start_time_seconds/end_time_seconds on token objects.
+
+    Some model versions write the segment-level variable names (audio_start_s, audio_end_s)
+    into token objects instead of the canonical pipeline field names. This normalizer fixes
+    that in place so all downstream guardrails and the karaoke renderer see consistent names.
+    Returns number of tokens corrected.
+    """
+    corrected = 0
+    for _, rec in _iter_tokens_in_reading_order(enriched):
+        if not isinstance(rec, dict):
+            continue
+        changed = False
+        if "audio_start_s" in rec and "start_time_seconds" not in rec:
+            rec["start_time_seconds"] = rec.pop("audio_start_s")
+            changed = True
+        elif "audio_start_s" in rec:
+            rec.pop("audio_start_s")
+            changed = True
+        if "audio_end_s" in rec and "end_time_seconds" not in rec:
+            rec["end_time_seconds"] = rec.pop("audio_end_s")
+            changed = True
+        elif "audio_end_s" in rec:
+            rec.pop("audio_end_s")
+            changed = True
+        if "matched_segment_index" in rec and "timing_segment_index" not in rec:
+            rec["timing_segment_index"] = rec["matched_segment_index"]
+            changed = True
+        if changed:
+            corrected += 1
+    return corrected
+
+
 def _strip_ineligible_timestamps_in_place(enriched: dict[str, Any]) -> int:
     changed = 0
     for _, rec in _iter_tokens_in_reading_order(enriched):
@@ -1121,7 +1165,7 @@ def _strip_ineligible_timestamps_in_place(enriched: dict[str, Any]) -> int:
     return changed
 
 
-def _ensure_anchor_stamped_in_place(enriched: dict[str, Any], anchor_token_id: str, expected_first_start: float) -> int:
+def _ensure_anchor_stamped_in_place(enriched: dict[str, Any], anchor_token_id: str, expected_first_start: float, anchor_segment_index: int = 0) -> int:
     rec = _find_token_record(enriched, anchor_token_id)
     if rec is None:
         raise RuntimeError(f"Guardrail failed: anchor token {anchor_token_id} not found in enriched payload")
@@ -1131,7 +1175,7 @@ def _ensure_anchor_stamped_in_place(enriched: dict[str, Any], anchor_token_id: s
     if not (had_start and had_end):
         rec["start_time_seconds"] = round(float(expected_first_start), 3)
         rec["end_time_seconds"] = round(float(expected_first_start) + 0.001, 3)
-        rec["timing_segment_index"] = 0
+        rec["timing_segment_index"] = anchor_segment_index
         rec.setdefault("timing_match_ratio", 0.0)
         rec["timing_manual_fallback"] = True
         changed += 1
@@ -1156,29 +1200,31 @@ def _ensure_anchor_stamped_in_place(enriched: dict[str, Any], anchor_token_id: s
     try:
         seg = int(rec.get("timing_segment_index"))
     except (TypeError, ValueError):
-        seg = 0
-    if seg != 0:
-        rec["timing_segment_index"] = 0
+        seg = anchor_segment_index
+    if seg != anchor_segment_index or "timing_segment_index" not in rec:
+        rec["timing_segment_index"] = anchor_segment_index
         changed += 1
     rec.setdefault("timing_match_ratio", rec.get("timing_match_ratio", 0.0))
     rec.setdefault("timing_manual_fallback", rec.get("timing_manual_fallback", False))
     return changed
 
 
-def _apply_output_guardrails_in_place(enriched: dict[str, Any], anchor_token_id: str, expected_first_start: float) -> dict[str, int]:
+def _apply_output_guardrails_in_place(enriched: dict[str, Any], anchor_token_id: str, expected_first_start: float, anchor_segment_index: int = 0) -> dict[str, int]:
     pages = enriched.get("pages")
     if not isinstance(pages, dict) or not pages:
         raise RuntimeError("enriched payload missing pages object")
 
+    field_names_normalized = _normalize_token_timestamp_field_names_in_place(enriched)
     ineligible_unstamped = _strip_ineligible_timestamps_in_place(enriched)
     anchor_fixed = _ensure_anchor_stamped_in_place(
-        enriched, anchor_token_id=anchor_token_id, expected_first_start=expected_first_start
+        enriched, anchor_token_id=anchor_token_id, expected_first_start=expected_first_start, anchor_segment_index=anchor_segment_index
     )
     monotonic_fixed = _repair_monotonic_timestamps_in_place(enriched)
-    ok, err = _validate_enriched_payload(enriched, anchor_token_id=anchor_token_id, expected_first_start=expected_first_start)
+    ok, err = _validate_enriched_payload(enriched, anchor_token_id=anchor_token_id, expected_first_start=expected_first_start, anchor_segment_index=anchor_segment_index)
     if not ok:
         raise RuntimeError(err or "guardrail validation failed after repair")
     return {
+        "field_names_normalized": field_names_normalized,
         "ineligible_unstamped": ineligible_unstamped,
         "anchor_fixed": anchor_fixed,
         "monotonic_fixed": monotonic_fixed,
@@ -1193,6 +1239,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--experiment", required=True, help="Experiment name used as folder slug under data/")
     parser.add_argument("--model", default=None, help="OpenAI model name override")
     parser.add_argument("--anchor-token", required=True, help="First mapped OCR anchor tokenId (required)")
+    parser.add_argument("--anchor-segment", type=int, default=0, help="Audio segment index (0-based) that the anchor token belongs to (default: 0)")
     parser.add_argument("--feedback", default=None, help="Optional reviewer feedback for iterative correction")
     parser.add_argument("--max-completion-tokens", type=int, default=120000, help="Max completion tokens for model output")
     parser.add_argument("--emit-prompt-only", action="store_true", help="Print resolved prompt and exit")
@@ -1219,7 +1266,8 @@ def main(argv: list[str] | None = None) -> int:
     audio_payload = json.loads(audio_text)
     if not isinstance(audio_payload, dict):
         raise RuntimeError("Invalid 0.json payload")
-    first_audio_start = _extract_first_segment_start(audio_payload)
+    anchor_segment_index = max(0, int(args.anchor_segment or 0))
+    first_audio_start = _extract_anchor_segment_start(audio_payload, anchor_segment_index)
     anchor_token_id = str(args.anchor_token or "").strip()
     if not anchor_token_id:
         raise RuntimeError("Missing required --anchor-token for alignment run")
@@ -1227,6 +1275,7 @@ def main(argv: list[str] | None = None) -> int:
         ocr_json_text=ocr_text,
         audio_json_text=audio_text,
         anchor_token_id=anchor_token_id,
+        anchor_segment_index=anchor_segment_index,
         feedback=args.feedback,
         include_embedded_inputs=not args.emit_prompt_only,
     )
@@ -1242,6 +1291,7 @@ def main(argv: list[str] | None = None) -> int:
     print(f"[alignment] experiment={slug}")
     print(f"[alignment] model={model}")
     print(f"[alignment] anchor_token={anchor_token_id}")
+    print(f"[alignment] anchor_segment_index={anchor_segment_index}")
     print(f"[alignment] audio_path={audio_path} bytes={len(audio_text.encode('utf-8'))}")
     print(f"[alignment] ocr_path={ocr_path} bytes={len(ocr_text.encode('utf-8'))}")
     print("[alignment] prompt:begin")
@@ -1270,7 +1320,7 @@ def main(argv: list[str] | None = None) -> int:
                         + "- Do not return empty {} for enriched payload.\n"
                         + "- Do not return zeroed summary unless inputs are actually empty.\n"
                         + f"- Previous attempt failed validation: {last_error or 'unknown'}\n"
-                        + f"- Anchor token `{anchor_token_id}` MUST be stamped in segment 0.\n"
+                        + f"- Anchor token `{anchor_token_id}` MUST be stamped in segment {anchor_segment_index}.\n"
                         + f"- Anchor start_time_seconds must be close to {first_audio_start:.3f}.\n"
                     ),
                 }
@@ -1300,7 +1350,7 @@ def main(argv: list[str] | None = None) -> int:
 
         try:
             fixes = _apply_output_guardrails_in_place(
-                enriched_try, anchor_token_id=anchor_token_id, expected_first_start=first_audio_start
+                enriched_try, anchor_token_id=anchor_token_id, expected_first_start=first_audio_start, anchor_segment_index=anchor_segment_index
             )
         except RuntimeError as exc:
             last_error = str(exc)
@@ -1326,6 +1376,24 @@ def main(argv: list[str] | None = None) -> int:
             f"Inspect debug file: {raw_response_path}"
         )
 
+    # Backfill timing_segment_index from review_rows for any stamped token missing it.
+    # The LLM sometimes writes start_time_seconds/end_time_seconds correctly but omits
+    # timing_segment_index; review_rows is the authoritative source for segment membership.
+    for rrow in (r for r in review_rows if isinstance(r, dict)):
+        seg_idx = int(rrow.get("segment_index", 0))
+        kept_str = str(rrow.get("kept_token_ids", ""))
+        for tid in (s.strip() for s in kept_str.split(";") if s.strip()):
+            rec = _find_token_record(enriched, tid)
+            if rec is not None and "timing_segment_index" not in rec:
+                rec["timing_segment_index"] = seg_idx
+
+    # Backfill is_eligible on every token so the Review Editor can identify left-out tokens.
+    # The LLM does not write this field; we compute it from the same eligibility function
+    # used everywhere else in the pipeline.
+    for _, rec in _iter_tokens_in_reading_order(enriched):
+        if "is_eligible" not in rec:
+            rec["is_eligible"] = _eligible_non_punctuation_token(rec)
+
     enriched_path = out_dir / "pdf_tokens_enriched_with_timestamps.json"
     review_csv_path = out_dir / "pdf_tokens_segment_mapping_review.csv"
     left_out_csv_path = out_dir / "pdf_tokens_left_out_non_punctuation.csv"
@@ -1346,6 +1414,7 @@ def main(argv: list[str] | None = None) -> int:
         "experiment": slug,
         "model": model,
         "anchor_token": anchor_token_id,
+        "anchor_segment_index": anchor_segment_index,
         "inputs": {"audio": str(audio_path), "ocr": str(ocr_path)},
         "outputs": {
             "enriched_json": str(enriched_path),

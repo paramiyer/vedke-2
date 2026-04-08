@@ -75,7 +75,8 @@ def _resolve_user_pdf_path(raw_pdf: str) -> Path:
 def _copy_pdf_to_input(paths: BuildPaths, raw_pdf: str) -> Path:
     src = _resolve_user_pdf_path(raw_pdf)
     dst = paths.input_dir / "source.pdf"
-    shutil.copy2(src, dst)
+    if src.resolve() != dst.resolve():
+        shutil.copy2(src, dst)
     (paths.input_dir / "source_pdf_local.txt").write_text(str(dst) + "\n", encoding="utf-8")
     return dst
 
@@ -91,6 +92,12 @@ def _has_latin(token: str) -> bool:
 def _ocr_payload_to_pdf_tokens_payload(ocr_payload: dict) -> dict:
     pages = [int(p) for p in ocr_payload.get("pages", [])]
     payload_pages: dict[str, list[dict[str, object]]] = {}
+    # Canonical page dimensions in OCR source space (300 DPI pixel coordinates).
+    # These are the authoritative reference dimensions for all token x/y/w/h
+    # values stored in this artifact.  Downstream consumers MUST use these
+    # dimensions (not computed max-token-extent) when mapping token coordinates
+    # to any display coordinate space.
+    page_image_sizes: dict[str, dict[str, int]] = {}
     results = ocr_payload.get("results", {})
     for page in pages:
         page_block = results.get(str(page), {}) if isinstance(results, dict) else {}
@@ -115,6 +122,14 @@ def _ocr_payload_to_pdf_tokens_payload(ocr_payload: dict) -> dict:
                     }
                 )
         payload_pages[str(page)] = page_records
+        # Carry image_size_px from OCR results into the tokens artifact.
+        if isinstance(page_block, dict):
+            img_size = page_block.get("image_size_px")
+            if isinstance(img_size, dict):
+                w_px = img_size.get("w")
+                h_px = img_size.get("h")
+                if isinstance(w_px, int) and isinstance(h_px, int) and w_px > 0 and h_px > 0:
+                    page_image_sizes[str(page)] = {"w": w_px, "h": h_px}
 
     return {
         "sourcePdf": str(ocr_payload.get("source_pdf", "")),
@@ -132,8 +147,11 @@ def _ocr_payload_to_pdf_tokens_payload(ocr_payload: dict) -> dict:
             "notes": [
                 "Built from OCR extraction with bracket and underline cleanup rules.",
                 "Additional token metadata includes char_count, conf, and underlined.",
+                "pageImageSizes contains canonical page dimensions in OCR source space (px).",
+                "All token x/y/w/h coordinates are in this same pixel coordinate space.",
             ],
         },
+        "pageImageSizes": page_image_sizes,
         "pages": payload_pages,
     }
 
@@ -192,6 +210,10 @@ def run_ocr_pdf_truth(
     page_list = _parse_ocr_pages(pages)
     if not page_list:
         raise ValueError("pdf_truth requires at least one page")
+    # Stage 3 produces frozen karaoke page images alongside OCR artifacts.
+    # These 300 DPI PNG images define the canonical coordinate space that all
+    # downstream token bounding boxes reference.
+    karaoke_pages_dir = out_path.parent / "karaoke_pages"
     ocr_payload = build_ocr_extraction(
         pdf=pdf_path,
         pages=page_list,
@@ -200,6 +222,7 @@ def run_ocr_pdf_truth(
         lang=DEFAULT_OCR_LANG,
         skip_brackets=True,
         skip_underlined=True,
+        page_images_dir=karaoke_pages_dir,
     )
     # Preserve the raw OCR artifact for debugging and tuning.
     check_extraction_path = out_path.parent / "check_extraction.json"
@@ -250,6 +273,7 @@ def run_stage(
     min_confidence: float = 0.78,
     max_edit_cost: float = 0.32,
     anchor_token: str | None = None,
+    anchor_segment: int = 0,
 ) -> Path:
     paths = build_paths(experiment)
     paths.input_dir.mkdir(parents=True, exist_ok=True)
@@ -324,7 +348,7 @@ def run_stage(
 
         if not str(anchor_token or "").strip():
             raise ValueError("alignment_config requires --anchor-token")
-        run_alignment_llm(["--experiment", paths.experiment, "--anchor-token", anchor_token])
+        run_alignment_llm(["--experiment", paths.experiment, "--anchor-token", anchor_token, "--anchor-segment", str(anchor_segment)])
         llm_manifest_path = paths.out_dir / "alignment_llm_manifest.json"
         llm_manifest: dict[str, object] = {}
         if llm_manifest_path.exists():
@@ -384,6 +408,7 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--min-confidence", type=float, default=0.78)
     p.add_argument("--max-edit-cost", type=float, default=0.32)
     p.add_argument("--anchor-token", default=None)
+    p.add_argument("--anchor-segment", type=int, default=0)
     return p
 
 
@@ -403,6 +428,7 @@ def main(argv: list[str] | None = None) -> int:
         min_confidence=args.min_confidence,
         max_edit_cost=args.max_edit_cost,
         anchor_token=args.anchor_token,
+        anchor_segment=args.anchor_segment,
     )
     print(f"stage={args.stage}")
     print(f"output={out}")

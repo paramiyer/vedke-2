@@ -11,6 +11,11 @@ from PIL import Image
 
 OPEN_BRACKETS = set("([{<（［｛")
 CLOSE_BRACKETS = set(")]}>）］｝")
+DEVANAGARI_RANGE = range(0x0900, 0x0980)  # U+0900–U+097F
+
+
+def _has_devanagari(text: str) -> bool:
+    return any(ord(ch) in DEVANAGARI_RANGE for ch in text)
 DANDAS = {"।", "॥"}
 PUNC_CHARS = set(".,;:!?-—()[]{}<>/\\'\"`|।॥")
 
@@ -64,9 +69,17 @@ def _split_dandas(token: str) -> list[str]:
     return [x for x in out if x.strip()]
 
 
-def _strip_bracketed_parts(token: str, depth: int) -> tuple[list[str], int]:
+def _strip_bracketed_parts(
+    token: str, depth: int, bracket_buf: list[str]
+) -> tuple[list[str], int, list[str]]:
+    """Drop content inside brackets unless it contains Devanagari.
+
+    bracket_buf carries buffered bracket content across token boundaries so that
+    multi-token parenthetical spans are evaluated as a whole when the closing
+    bracket is finally encountered.
+    """
     out: list[str] = []
-    buf: list[str] = []
+    buf: list[str] = []  # content outside brackets
     d = depth
     for ch in token:
         if ch in OPEN_BRACKETS:
@@ -78,12 +91,21 @@ def _strip_bracketed_parts(token: str, depth: int) -> tuple[list[str], int]:
         if ch in CLOSE_BRACKETS:
             if d > 0:
                 d -= 1
+                if d == 0:
+                    # Bracket closed — decide keep or drop based on content
+                    content = "".join(bracket_buf)
+                    if _has_devanagari(content):
+                        # Devanagari inside brackets → keep the text (without brackets)
+                        buf.extend(bracket_buf)
+                    bracket_buf.clear()
             continue
         if d == 0:
             buf.append(ch)
+        else:
+            bracket_buf.append(ch)
     if buf and d == 0:
         out.append("".join(buf))
-    return [x for x in out if x.strip()], d
+    return [x for x in out if x.strip()], d, bracket_buf
 
 
 def _line_has_underline(crop_img: Image.Image, x0: int, y0: int, x1: int, y1: int) -> bool:
@@ -178,7 +200,16 @@ def build_extraction(
     lang: str,
     skip_brackets: bool,
     skip_underlined: bool,
+    page_images_dir: Path | None = None,
 ) -> dict:
+    """Run OCR extraction on *pages* of *pdf*.
+
+    If *page_images_dir* is given the full-resolution page PNG rendered for OCR
+    (before trimming, at 300 DPI) is saved there as ``page_NNNN.png``.  These
+    images are the canonical frozen visualization artifacts whose pixel
+    dimensions define the coordinate space used by all downstream token
+    ``x/y/w/h`` fields.
+    """
     results: dict[str, dict] = {}
 
     with tempfile.TemporaryDirectory() as td:
@@ -207,6 +238,12 @@ def build_extraction(
         for page_no, img_path in zip(pages, images):
             im = Image.open(img_path)
             w, h = im.size
+            # Save full-page image as frozen karaoke visualization artifact.
+            # This image defines the canonical coordinate space: token x/y/w/h
+            # values are in these exact pixel dimensions.
+            if page_images_dir is not None:
+                page_images_dir.mkdir(parents=True, exist_ok=True)
+                im.save(page_images_dir / f"page_{page_no:04d}.png")
             top_trim = int(round(h * trim_top_ratio))
             bottom_keep = int(round(h * (1.0 - trim_bottom_ratio)))
             cropped = im.crop((0, top_trim, w, bottom_keep))
@@ -231,6 +268,7 @@ def build_extraction(
 
             page_tokens: list[dict] = []
             bracket_depth = 0
+            bracket_buf: list[str] = []
             token_id = 0
             for rt in raw_tokens:
                 line_key = (rt.block_num, rt.par_num, rt.line_num)
@@ -242,8 +280,18 @@ def build_extraction(
                 final_parts: list[str] = []
                 for part in parts:
                     if skip_brackets:
-                        kept, bracket_depth = _strip_bracketed_parts(part, bracket_depth)
-                        final_parts.extend(kept)
+                        part_has_bracket = any(ch in OPEN_BRACKETS or ch in CLOSE_BRACKETS for ch in part)
+                        if bracket_depth > 0 and not part_has_bracket:
+                            # Token is entirely inside an open bracket span.
+                            # Keep it with original rt coordinates if it has Devanagari;
+                            # otherwise drop without touching bracket_buf or depth.
+                            if _has_devanagari(part):
+                                final_parts.append(part)
+                        else:
+                            # Token opens/closes a bracket or is outside brackets entirely —
+                            # process character-by-character to handle the transition.
+                            kept, bracket_depth, bracket_buf = _strip_bracketed_parts(part, bracket_depth, bracket_buf)
+                            final_parts.extend(kept)
                     else:
                         final_parts.append(part)
 

@@ -529,6 +529,48 @@ textarea:focus {
   display: flex;
   gap: 10px;
   margin: 12px 0;
+  align-items: center;
+}
+
+.zoom-controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+  background: #ffffff8a;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 4px 10px;
+}
+
+.zoom-btn {
+  border: 0;
+  background: transparent;
+  font-size: 16px;
+  font-weight: 700;
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  cursor: pointer;
+  color: var(--ink);
+  line-height: 1;
+}
+
+.zoom-btn:hover:not(:disabled) {
+  background: #d8ece5;
+}
+
+.zoom-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.zoom-label {
+  font-size: 13px;
+  font-weight: 600;
+  min-width: 36px;
+  text-align: center;
+  color: var(--ink);
 }
 
 .karaoke-player-wrap {
@@ -554,6 +596,7 @@ textarea:focus {
   overflow-x: auto;
   overflow-y: auto;
   min-height: 72vh;
+  flex-shrink: 0;
 }
 
 .karaoke-page-layer {
@@ -581,31 +624,67 @@ textarea:focus {
   pointer-events: none;
 }
 
-.karaoke-token {
+/* Invisible scroll anchor — positions a zero-visual div at each token bbox.
+   The canvas overlay handles all visible highlighting. */
+.karaoke-token-anchor {
   position: absolute;
-  --reveal: 0%;
-  background: linear-gradient(
-    90deg,
-    rgba(31, 138, 118, 0.95) 0%,
-    rgba(31, 138, 118, 0.95) var(--reveal),
-    rgba(31, 138, 118, 0.15) var(--reveal),
-    rgba(31, 138, 118, 0.15) 100%
-  );
-  border-radius: 2px;
   pointer-events: none;
-  opacity: 0;
-  transition: opacity 70ms linear, background 70ms linear;
 }
 
-.karaoke-token.active {
+.review-editor-table td {
+  vertical-align: top;
+  padding: 8px 6px;
+}
+
+.token-cell {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  min-height: 28px;
+}
+
+.token-card {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  border-radius: 8px;
+  padding: 3px 6px 3px 8px;
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.token-kept {
+  background: #e4f5ee;
+  border: 1px solid #9ed8bc;
+  color: #164e36;
+}
+
+.token-leftout {
+  background: #fdf2e3;
+  border: 1px solid #f0c98a;
+  color: #6b3e0a;
+}
+
+.token-card-actions {
+  display: flex;
+  gap: 2px;
+}
+
+.token-card-actions button {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  font-size: 11px;
+  padding: 0 2px;
+  line-height: 1;
+  border-radius: 4px;
+  opacity: 0.65;
+}
+
+.token-card-actions button:hover {
   opacity: 1;
-  box-shadow: 0 0 0 2px rgba(31, 138, 118, 0.45);
-}
-
-.karaoke-token.completed {
-  opacity: 0.55;
-  --reveal: 100%;
-  box-shadow: none;
+  background: rgba(0,0,0,0.08);
 }
 
 @media (max-width: 1180px) {
