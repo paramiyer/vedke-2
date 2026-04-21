@@ -245,8 +245,10 @@ def guardrails_for_stage(stage: str, paths: BuildPaths) -> list[str]:
         if not paths.out_dir.exists():
             errors.append(f"missing out dir: {paths.out_dir}")
     if stage in {"asr_preparation", "pdf_truth", "alignment_config", "quality_gates"}:
-        if not (paths.input_dir / "yt_link.txt").exists():
-            errors.append("missing yt_link.txt in input dir")
+        has_yt = (paths.input_dir / "yt_link.txt").exists()
+        has_mp3 = (paths.input_dir / "audio.mp3").exists()
+        if not has_yt and not has_mp3:
+            errors.append("missing yt_link.txt (YouTube mode) or audio.mp3 (MP3 upload mode) in input dir")
     if stage in {"asr_preparation", "alignment_config", "quality_gates"}:
         if not (paths.input_dir / "audio.mp3").exists():
             errors.append("missing audio.mp3 in input dir")
@@ -274,19 +276,19 @@ def run_stage(
     max_edit_cost: float = 0.32,
     anchor_token: str | None = None,
     anchor_segment: int = 0,
+    last_token: str | None = None,
 ) -> Path:
     paths = build_paths(experiment)
     paths.input_dir.mkdir(parents=True, exist_ok=True)
     paths.out_dir.mkdir(parents=True, exist_ok=True)
 
     if stage == "source_intake":
-        if not youtube_url:
-            raise ValueError("source_intake requires youtube_url")
         if not pdf_path:
             raise ValueError("source_intake requires pdf_path")
         if not pages:
             raise ValueError("source_intake requires pages")
-        (paths.input_dir / "yt_link.txt").write_text(youtube_url.strip() + "\n", encoding="utf-8")
+        if youtube_url and youtube_url.strip():
+            (paths.input_dir / "yt_link.txt").write_text(youtube_url.strip() + "\n", encoding="utf-8")
         (paths.input_dir / "source_pdf.txt").write_text(pdf_path.strip() + "\n", encoding="utf-8")
         (paths.input_dir / "pages.txt").write_text(pages.strip() + "\n", encoding="utf-8")
         manifest = {
@@ -348,7 +350,10 @@ def run_stage(
 
         if not str(anchor_token or "").strip():
             raise ValueError("alignment_config requires --anchor-token")
-        run_alignment_llm(["--experiment", paths.experiment, "--anchor-token", anchor_token, "--anchor-segment", str(anchor_segment)])
+        llm_args = ["--experiment", paths.experiment, "--anchor-token", anchor_token, "--anchor-segment", str(anchor_segment)]
+        if last_token and str(last_token).strip():
+            llm_args += ["--last-token", str(last_token).strip()]
+        run_alignment_llm(llm_args)
         llm_manifest_path = paths.out_dir / "alignment_llm_manifest.json"
         llm_manifest: dict[str, object] = {}
         if llm_manifest_path.exists():
@@ -409,6 +414,7 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--max-edit-cost", type=float, default=0.32)
     p.add_argument("--anchor-token", default=None)
     p.add_argument("--anchor-segment", type=int, default=0)
+    p.add_argument("--last-token", default=None, help="Optional last OCR tokenId for alignment range (Stage 4 only)")
     return p
 
 
@@ -429,6 +435,7 @@ def main(argv: list[str] | None = None) -> int:
         max_edit_cost=args.max_edit_cost,
         anchor_token=args.anchor_token,
         anchor_segment=args.anchor_segment,
+        last_token=args.last_token,
     )
     print(f"stage={args.stage}")
     print(f"output={out}")

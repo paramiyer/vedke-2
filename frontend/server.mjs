@@ -156,6 +156,71 @@ function pythonCmd() {
   return fs.existsSync(venvPy) ? venvPy : "python3";
 }
 
+// Mātrā counter for Devanagari tokens.
+// Each syllable is laghu (1 mātrā) or guru (2 mātrās):
+//   guru = long vowel, OR short vowel in closed syllable (followed by C+virama cluster,
+//          anusvāra ं, or visarga ः).
+// This gives a phonetically grounded weight that reflects actual chant duration better
+// than pixel width or character count, especially for Sanskrit where beat duration is
+// governed by the mātrā system rather than syllable count alone.
+function countMatras(token) {
+  const SHORT_V_SIGNS = new Set([0x093F, 0x0941, 0x0943, 0x0946, 0x094A]); // ि ु ृ ॆ ॊ
+  const LONG_V_SIGNS  = new Set([0x093E, 0x0940, 0x0942, 0x0944, 0x0947, 0x0948, 0x094B, 0x094C]); // ा ी ू ॄ े ै ो ौ
+  const SHORT_IND     = new Set([0x0905, 0x0907, 0x0909, 0x090B, 0x090C]); // अ इ उ ऋ ऌ
+  const LONG_IND      = new Set([0x0906, 0x0908, 0x090A, 0x0960, 0x090F, 0x0910, 0x0913, 0x0914]); // आ ई ऊ ॠ ए ऐ ओ औ
+  const VIRAMA   = 0x094D; // ् — halant, closes previous syllable (makes it guru)
+  const ANUSVARA = 0x0902; // ं — nasalises and closes syllable (guru)
+  const VISARGA  = 0x0903; // ः — closes syllable (guru)
+
+  const cps = [...token].map(c => c.codePointAt(0));
+  const syllables = []; // each entry: { heavy: boolean }
+
+  let i = 0;
+  while (i < cps.length) {
+    const cp = cps[i];
+    if (SHORT_IND.has(cp)) {
+      const next = cps[i + 1];
+      syllables.push({ heavy: next === ANUSVARA || next === VISARGA });
+      i++;
+    } else if (LONG_IND.has(cp)) {
+      syllables.push({ heavy: true });
+      i++;
+    } else if (cp >= 0x0915 && cp <= 0x0939) { // consonant क–ह
+      const next = cps[i + 1];
+      if (next === VIRAMA) {
+        // Halant: this consonant closes the previous syllable, making it guru.
+        // No new syllable is opened here.
+        if (syllables.length > 0) syllables[syllables.length - 1].heavy = true;
+        i += 2;
+      } else if (SHORT_V_SIGNS.has(next)) {
+        const next2 = cps[i + 2];
+        syllables.push({ heavy: next2 === ANUSVARA || next2 === VISARGA });
+        i += 2;
+      } else if (LONG_V_SIGNS.has(next)) {
+        syllables.push({ heavy: true });
+        i += 2;
+      } else if (next === ANUSVARA || next === VISARGA) {
+        // Consonant + inherent-a closed by anusvāra/visarga = guru
+        syllables.push({ heavy: true });
+        i += 2;
+      } else {
+        // Consonant with inherent short 'a' — laghu
+        syllables.push({ heavy: false });
+        i++;
+      }
+    } else if (cp === ANUSVARA || cp === VISARGA) {
+      // Stray marker: make previous syllable heavy
+      if (syllables.length > 0) syllables[syllables.length - 1].heavy = true;
+      i++;
+    } else {
+      i++; // punctuation, digits, zero-width chars, etc.
+    }
+  }
+
+  const total = syllables.reduce((s, syl) => s + (syl.heavy ? 2 : 1), 0);
+  return Math.max(1, total);
+}
+
 function walkFiles(dir, maxItems = 300) {
   const out = [];
   if (!fs.existsSync(dir)) return out;
@@ -568,26 +633,24 @@ function runStage(stage, form) {
 
   const commands = [];
   if (stage === "input") {
-    commands.push([
-      pythonCmd(),
-      [
-        "-m",
-        "scripts.stage_orchestrator",
-        "--stage",
-        "source_intake",
-        "--experiment",
-        experiment,
-        "--youtube-url",
-        yt,
-        "--pdf",
-        pdf,
-        "--pages",
-        pages
-      ]
-    ]);
+    const intakeArgs = [
+      "-m",
+      "scripts.stage_orchestrator",
+      "--stage",
+      "source_intake",
+      "--experiment",
+      experiment,
+      "--pdf",
+      pdf,
+      "--pages",
+      pages
+    ];
+    if (yt) {
+      intakeArgs.push("--youtube-url", yt);
+    }
+    commands.push([pythonCmd(), intakeArgs]);
   } else if (stage === "asr") {
     const mode = String(form.asrMode || "verbatim");
-    const prepareArgs = ["-m", "scripts.prepare_asr_audio", "--experiment", experiment, "--url", yt, "--overwrite"];
     const sttArgs = [
       "-m",
       "scripts.run_sarvam_stt",
@@ -604,18 +667,39 @@ function runStage(stage, form) {
       mode
     ];
 
-    const prep = runCommand(pythonCmd(), prepareArgs);
-    const logs = [{ command: [pythonCmd(), ...prepareArgs].join(" "), ...prep }];
-    if (!prep.ok) {
-      return {
-        ok: false,
-        message: `Command failed: ${pythonCmd()}`,
-        logs,
-        experiment,
-        inputDir: path.relative(REPO_ROOT, inputDir),
-        outDir: path.relative(REPO_ROOT, outDir),
-        files: [...walkFiles(inputDir), ...walkFiles(outDir)]
-      };
+    const logs = [];
+
+    // MP3 direct upload path: skip prepare_asr_audio, write uploaded file straight to input/audio.mp3
+    const audioInputMode = String(form.audioInputMode || "youtube");
+    if (audioInputMode === "mp3") {
+      const mp3B64 = String(form.mp3FileData || "");
+      if (!mp3B64) {
+        return { ok: false, message: "No MP3 file data provided for direct upload" };
+      }
+      fs.mkdirSync(inputDir, { recursive: true });
+      const mp3Dest = path.join(inputDir, "audio.mp3");
+      try {
+        fs.writeFileSync(mp3Dest, Buffer.from(mp3B64, "base64"));
+        logs.push({ command: `write uploaded MP3 -> ${path.relative(REPO_ROOT, mp3Dest)}`, ok: true, stdout: "", stderr: "" });
+      } catch (err) {
+        return { ok: false, message: `Failed to write uploaded MP3: ${String(err)}` };
+      }
+    } else {
+      // YouTube path: run prepare_asr_audio first
+      const prepareArgs = ["-m", "scripts.prepare_asr_audio", "--experiment", experiment, "--url", yt, "--overwrite"];
+      const prep = runCommand(pythonCmd(), prepareArgs);
+      logs.push({ command: [pythonCmd(), ...prepareArgs].join(" "), ...prep });
+      if (!prep.ok) {
+        return {
+          ok: false,
+          message: `Command failed: ${pythonCmd()}`,
+          logs,
+          experiment,
+          inputDir: path.relative(REPO_ROOT, inputDir),
+          outDir: path.relative(REPO_ROOT, outDir),
+          files: [...walkFiles(inputDir), ...walkFiles(outDir)]
+        };
+      }
     }
 
     const stt = runCommand(pythonCmd(), sttArgs);
@@ -666,25 +750,27 @@ function runStage(stage, form) {
       return { ok: false, message: "anchorToken is required for alignment stage" };
     }
     const anchorSeg = String(Number.isFinite(parseInt(form.anchorSegmentIndex, 10)) ? parseInt(form.anchorSegmentIndex, 10) : 0);
-    commands.push([
-      pythonCmd(),
-      [
-        "-m",
-        "scripts.stage_orchestrator",
-        "--stage",
-        "alignment_config",
-        "--experiment",
-        experiment,
-        "--min-confidence",
-        String(form.minConfidence || "0.78"),
-        "--max-edit-cost",
-        String(form.maxEditCost || "0.32"),
-        "--anchor-token",
-        anchorToken,
-        "--anchor-segment",
-        anchorSeg
-      ]
-    ]);
+    const lastToken = String(form.lastToken || "").trim();
+    const alignArgs = [
+      "-m",
+      "scripts.stage_orchestrator",
+      "--stage",
+      "alignment_config",
+      "--experiment",
+      experiment,
+      "--min-confidence",
+      String(form.minConfidence || "0.78"),
+      "--max-edit-cost",
+      String(form.maxEditCost || "0.32"),
+      "--anchor-token",
+      anchorToken,
+      "--anchor-segment",
+      anchorSeg
+    ];
+    if (lastToken) {
+      alignArgs.push("--last-token", lastToken);
+    }
+    commands.push([pythonCmd(), alignArgs]);
   } else if (stage === "gate") {
     commands.push([
       pythonCmd(),
@@ -796,6 +882,7 @@ function startAsyncAlignmentJob(form) {
   if (!anchorToken) {
     return { ok: false, message: "anchorToken is required for alignment stage" };
   }
+  const lastToken = String(form.lastToken || "").trim();
   const args = [
     "-m",
     "scripts.stage_orchestrator",
@@ -810,6 +897,9 @@ function startAsyncAlignmentJob(form) {
     "--anchor-token",
     anchorToken
   ];
+  if (lastToken) {
+    args.push("--last-token", lastToken);
+  }
   const jobId = randomUUID();
   jobs.set(jobId, {
     ok: true,
@@ -849,6 +939,7 @@ function runAlignmentManualPrompt(form) {
   if (!experiment) return { ok: false, message: "Experiment name is required" };
   const anchorToken = String(form.anchorToken || "").trim();
   if (!anchorToken) return { ok: false, message: "anchorToken is required for manual alignment prompt" };
+  const lastToken = String(form.lastToken || "").trim();
   const inputDir = path.join(REPO_ROOT, "data", experiment, "input");
   const outDir = path.join(REPO_ROOT, "data", experiment, "out");
   const args = [
@@ -860,6 +951,9 @@ function runAlignmentManualPrompt(form) {
     anchorToken,
     "--emit-prompt-only"
   ];
+  if (lastToken) {
+    args.push("--last-token", lastToken);
+  }
   const r = runCommandRaw(pythonCmd(), args);
   if (!r.ok) {
     return {
@@ -1327,8 +1421,28 @@ const server = http.createServer(async (req, res) => {
         const toks = keptTokenIds.map(id => tokenMap.get(id)).filter(Boolean);
         if (toks.length === 0) continue;
 
-        // Compute char weights
-        const weights = toks.map(t => t.char_count || t.token.length || 1);
+        // Compute normalized weights: for each measure, express each token as a
+        // fractional share of the segment total, then take the max across measures.
+        // This puts all three measures on the same [0,1] scale before comparing.
+        //   w_norm_i     = w_i / Σw           (glyph pixel width share)
+        //   char_norm_i  = char_i / Σchar      (character count share)
+        //   matra_norm_i = matra_i / Σmatra    (mātrā count share — actual phonetic beats)
+        //   weight_i     = max(w_norm_i, char_norm_i, matra_norm_i)
+        // mātrā count is the most phonetically grounded measure for Sanskrit/Vedic chant
+        // (short vowel = 1 mātrā, long vowel or closed syllable = 2 mātrās).
+        // Taking the max across all three lets each token fall back to whichever measure
+        // best captures its actual pronunciation weight.
+        const rawW     = toks.map(t => t.w          || t.token.length || 1);
+        const rawChar  = toks.map(t => t.char_count || t.token.length || 1);
+        const rawMatra = toks.map(t => countMatras(t.token));
+        const sumW     = rawW.reduce((s, v) => s + v, 0);
+        const sumChar  = rawChar.reduce((s, v) => s + v, 0);
+        const sumMatra = rawMatra.reduce((s, v) => s + v, 0);
+        const weights  = toks.map((_, i) => Math.max(
+          rawW[i]     / sumW,
+          rawChar[i]  / sumChar,
+          rawMatra[i] / sumMatra,
+        ));
 
         // Iterative floor-and-redistribute:
         // Pin any token whose proportional time < minSeconds, then redistribute

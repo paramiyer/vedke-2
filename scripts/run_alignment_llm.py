@@ -238,12 +238,27 @@ def _build_prompt(
     feedback: str | None,
     *,
     include_embedded_inputs: bool,
+    last_token_id: str | None = None,
 ) -> str:
     feedback_block = ""
     if feedback and feedback.strip():
         feedback_block = f"""
 Additional reviewer feedback for this run:
 {feedback.strip()}
+"""
+    last_token_context = ""
+    if last_token_id:
+        last_token_context = f"""
+- `last_token_id = "{last_token_id}"`
+  The OCR tokens supplied end at `{last_token_id}` (inclusive). This is a deliberate partial range.
+  Do NOT attempt to align audio segments that extend beyond this token.
+  Do NOT treat tokens missing after `{last_token_id}` as left-out; they are simply outside scope.
+  The eligible left-out rate target applies only to tokens within the anchor→last_token range.
+"""
+    else:
+        last_token_context = """
+- `last_token_id` is not set. The OCR covers all tokens from the anchor to the end of the document.
+  Align all audio segments that have matching OCR tokens within this range.
 """
     base = f"""
 You are running a MANUAL OVERRIDE for an existing prompt-based audio-to-OCR alignment pipeline.
@@ -285,6 +300,7 @@ Do NOT redesign how they are passed.
 For this run:
 - `first_anchor_token_id = "{anchor_token_id}"`
 - `anchor_segment_index = {anchor_segment_index}`
+{last_token_context}
 
 ==================================================
 OBJECTIVE
@@ -919,17 +935,21 @@ def _is_numeric_only_token(token: str) -> bool:
     return bool(re.fullmatch(r"[0-9०-९]+", t))
 
 
+_DEVANAGARI_RE = re.compile(r"[\u0900-\u097F]")
+
+
 def _eligible_non_punctuation_token(rec: dict[str, Any]) -> bool:
     if str(rec.get("kind", "")).strip() != "word":
         return False
     token = str(rec.get("token", "")).strip()
     if not token:
         return False
-    if _is_roman_only_token(token):
-        return False
-    if _is_numeric_only_token(token):
-        return False
-    return True
+    # Only tokens containing at least one Devanagari character are eligible.
+    # This correctly excludes OCR noise like section markers (1.1, 1.2), ASCII
+    # symbols (_, =), roman letters, and pure numerals — while preserving tokens
+    # where OCR misread a Devanagari glyph as a digit (e.g. य → १) since those
+    # still contain Devanagari characters alongside the misread.
+    return bool(_DEVANAGARI_RE.search(token))
 
 
 def _iter_tokens_in_reading_order(enriched: dict[str, Any]) -> list[tuple[str, dict[str, Any]]]:
@@ -1231,6 +1251,57 @@ def _apply_output_guardrails_in_place(enriched: dict[str, Any], anchor_token_id:
     }
 
 
+def _slice_ocr_to_range(ocr_data: dict[str, Any], anchor_token_id: str, last_token_id: str) -> dict[str, Any]:
+    """Return a copy of ocr_data with only the pages/tokens from anchor_token_id to last_token_id (inclusive, reading order)."""
+    pages = ocr_data.get("pages", {})
+    if not isinstance(pages, dict):
+        return ocr_data
+
+    def page_sort_key(x: str) -> tuple[int, str]:
+        try:
+            return (0, f"{int(x):08d}")
+        except ValueError:
+            return (1, x)
+
+    # Build a flat list of (page_key, token_index, record) in reading order.
+    ordered: list[tuple[str, int, dict[str, Any]]] = []
+    for pg in sorted(pages.keys(), key=page_sort_key):
+        recs = pages.get(pg, [])
+        if not isinstance(recs, list):
+            continue
+        for idx, rec in enumerate(recs):
+            if isinstance(rec, dict):
+                ordered.append((pg, idx, rec))
+
+    anchor_pos = -1
+    last_pos = len(ordered) - 1
+    for i, (_, _, rec) in enumerate(ordered):
+        tid = str(rec.get("tokenId", ""))
+        if tid == anchor_token_id and anchor_pos == -1:
+            anchor_pos = i
+        if tid == last_token_id:
+            last_pos = i
+
+    if anchor_pos == -1:
+        return ocr_data  # anchor not found — return unchanged
+
+    # Keep set: (page_key, token_index) for positions in [anchor_pos, last_pos]
+    keep: set[tuple[str, int]] = {(pg, idx) for pg, idx, _ in ordered[anchor_pos : last_pos + 1]}
+
+    new_pages: dict[str, Any] = {}
+    for pg in sorted(pages.keys(), key=page_sort_key):
+        recs = pages.get(pg, [])
+        if not isinstance(recs, list):
+            continue
+        filtered = [rec for idx, rec in enumerate(recs) if (pg, idx) in keep]
+        if filtered:
+            new_pages[pg] = filtered
+
+    result = {k: v for k, v in ocr_data.items() if k != "pages"}
+    result["pages"] = new_pages
+    return result
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="run-alignment-llm",
@@ -1239,6 +1310,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--experiment", required=True, help="Experiment name used as folder slug under data/")
     parser.add_argument("--model", default=None, help="OpenAI model name override")
     parser.add_argument("--anchor-token", required=True, help="First mapped OCR anchor tokenId (required)")
+    parser.add_argument("--last-token", default=None, help="Optional last OCR tokenId to include in alignment. If omitted, all tokens from anchor to end are considered.")
     parser.add_argument("--anchor-segment", type=int, default=0, help="Audio segment index (0-based) that the anchor token belongs to (default: 0)")
     parser.add_argument("--feedback", default=None, help="Optional reviewer feedback for iterative correction")
     parser.add_argument("--max-completion-tokens", type=int, default=120000, help="Max completion tokens for model output")
@@ -1271,6 +1343,12 @@ def main(argv: list[str] | None = None) -> int:
     anchor_token_id = str(args.anchor_token or "").strip()
     if not anchor_token_id:
         raise RuntimeError("Missing required --anchor-token for alignment run")
+    last_token_id = str(args.last_token or "").strip() or None
+    if last_token_id:
+        ocr_data = json.loads(ocr_text)
+        ocr_data_sliced = _slice_ocr_to_range(ocr_data, anchor_token_id, last_token_id)
+        ocr_text = json.dumps(ocr_data_sliced, ensure_ascii=False)
+        print(f"[alignment] last_token={last_token_id} (OCR sliced to anchor→last range)")
     prompt = _build_prompt(
         ocr_json_text=ocr_text,
         audio_json_text=audio_text,
@@ -1278,6 +1356,7 @@ def main(argv: list[str] | None = None) -> int:
         anchor_segment_index=anchor_segment_index,
         feedback=args.feedback,
         include_embedded_inputs=not args.emit_prompt_only,
+        last_token_id=last_token_id,
     )
     if args.emit_prompt_only:
         print(prompt)
@@ -1387,12 +1466,13 @@ def main(argv: list[str] | None = None) -> int:
             if rec is not None and "timing_segment_index" not in rec:
                 rec["timing_segment_index"] = seg_idx
 
-    # Backfill is_eligible on every token so the Review Editor can identify left-out tokens.
-    # The LLM does not write this field; we compute it from the same eligibility function
-    # used everywhere else in the pipeline.
+    # Overwrite is_eligible on every token using the canonical Python eligibility function.
+    # The LLM sometimes sets is_eligible=false for tokens it deemed ineligible (e.g. tokens
+    # with leading Devanagari numerals like "१पापकाहिनी") but the Python rule is authoritative:
+    # any kind=="word" token that is not roman-only and not purely numeric is eligible.
+    # We do not trust the LLM's value — always recompute from source.
     for _, rec in _iter_tokens_in_reading_order(enriched):
-        if "is_eligible" not in rec:
-            rec["is_eligible"] = _eligible_non_punctuation_token(rec)
+        rec["is_eligible"] = _eligible_non_punctuation_token(rec)
 
     enriched_path = out_dir / "pdf_tokens_enriched_with_timestamps.json"
     review_csv_path = out_dir / "pdf_tokens_segment_mapping_review.csv"
@@ -1414,6 +1494,7 @@ def main(argv: list[str] | None = None) -> int:
         "experiment": slug,
         "model": model,
         "anchor_token": anchor_token_id,
+        "last_token": last_token_id,
         "anchor_segment_index": anchor_segment_index,
         "inputs": {"audio": str(audio_path), "ocr": str(ocr_path)},
         "outputs": {

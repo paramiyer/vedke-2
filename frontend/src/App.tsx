@@ -21,7 +21,10 @@ type ArtifactPreview = {
 
 type BuildForm = {
   experimentName: string;
+  audioInputMode: "youtube" | "mp3";
   youtubeUrl: string;
+  mp3FileData: string;
+  mp3FileName: string;
   pdfPath: string;
   pages: string;
   aiModel: string;
@@ -34,6 +37,7 @@ type BuildForm = {
   maxEditCost: string;
   anchorToken: string;
   anchorSegmentIndex: string;
+  lastToken: string;
   minSeconds: string;
 };
 
@@ -82,6 +86,8 @@ type ReviewEditorToken = {
   tokenId: string;
   token: string;
   charCount: number;
+  w: number;
+  matraCount: number;
   globalIdx: number;
   isEligible: boolean;
   hasTimestamp: boolean;
@@ -102,9 +108,61 @@ type ReviewEditorRow = {
   timeReductionS: number;
 };
 
+// Mātrā counter — mirrors the logic in server.mjs countMatras().
+// short vowel in open syllable = 1 mātrā (laghu); long vowel or closed syllable = 2 mātrās (guru).
+function countMatras(token: string): number {
+  const SHORT_V_SIGNS = new Set([0x093F, 0x0941, 0x0943, 0x0946, 0x094A]);
+  const LONG_V_SIGNS  = new Set([0x093E, 0x0940, 0x0942, 0x0944, 0x0947, 0x0948, 0x094B, 0x094C]);
+  const SHORT_IND     = new Set([0x0905, 0x0907, 0x0909, 0x090B, 0x090C]);
+  const LONG_IND      = new Set([0x0906, 0x0908, 0x090A, 0x0960, 0x090F, 0x0910, 0x0913, 0x0914]);
+  const VIRAMA = 0x094D, ANUSVARA = 0x0902, VISARGA = 0x0903;
+  const cps = [...token].map(c => c.codePointAt(0) as number);
+  const syllables: { heavy: boolean }[] = [];
+  let i = 0;
+  while (i < cps.length) {
+    const cp = cps[i];
+    if (SHORT_IND.has(cp)) {
+      const next = cps[i + 1];
+      syllables.push({ heavy: next === ANUSVARA || next === VISARGA });
+      i++;
+    } else if (LONG_IND.has(cp)) {
+      syllables.push({ heavy: true });
+      i++;
+    } else if (cp >= 0x0915 && cp <= 0x0939) {
+      const next = cps[i + 1];
+      if (next === VIRAMA) {
+        if (syllables.length > 0) syllables[syllables.length - 1].heavy = true;
+        i += 2;
+      } else if (SHORT_V_SIGNS.has(next)) {
+        const next2 = cps[i + 2];
+        syllables.push({ heavy: next2 === ANUSVARA || next2 === VISARGA });
+        i += 2;
+      } else if (LONG_V_SIGNS.has(next)) {
+        syllables.push({ heavy: true });
+        i += 2;
+      } else if (next === ANUSVARA || next === VISARGA) {
+        syllables.push({ heavy: true });
+        i += 2;
+      } else {
+        syllables.push({ heavy: false });
+        i++;
+      }
+    } else if (cp === ANUSVARA || cp === VISARGA) {
+      if (syllables.length > 0) syllables[syllables.length - 1].heavy = true;
+      i++;
+    } else {
+      i++;
+    }
+  }
+  return Math.max(1, syllables.reduce((s, syl) => s + (syl.heavy ? 2 : 1), 0));
+}
+
 const INITIAL_FORM: BuildForm = {
   experimentName: "",
+  audioInputMode: "youtube",
   youtubeUrl: "",
+  mp3FileData: "",
+  mp3FileName: "",
   pdfPath: "data/ganapatiaccent.pdf",
   pages: "2,3,4",
   aiModel: "saaras:v3",
@@ -117,6 +175,7 @@ const INITIAL_FORM: BuildForm = {
   maxEditCost: "0.32",
   anchorToken: "",
   anchorSegmentIndex: "0",
+  lastToken: "",
   minSeconds: "0.4"
 };
 
@@ -138,6 +197,7 @@ const FIELD_HELP: Record<string, string> = {
   maxEditCost: "0 to 1. Lower = tighter text matching, higher = more tolerant.",
   anchorToken: "Alignment anchor tokenId from pdf_tokens.json (example: P0008_T0007).",
   anchorSegmentIndex: "0-based index of the audio segment that contains the anchor token. Default 0 means anchor is in the first segment. Set to 1 if the first segment starts with audio words that have no OCR match (e.g. an introductory syllable before the first OCR token).",
+  lastToken: "Optional. Last OCR tokenId to include in alignment (example: P0010_T0042). If left blank, all tokens from the anchor token to the end of the PDF are considered. If set, only tokens between anchor and last token (inclusive) are sent to the LLM.",
   minSeconds: "Minimum time (seconds) guaranteed to each token during Review Realign timestamp redistribution. Tokens that would receive less than this are pinned to this floor, and the remaining duration is redistributed among longer tokens. Default 0.4s."
 };
 
@@ -337,7 +397,11 @@ function App() {
   const validations = useMemo(() => {
     return [
       { key: "exp", label: "Experiment name is set", ok: experimentSlug.length > 0 },
-      { key: "yt", label: "YouTube URL is set", ok: form.youtubeUrl.trim().length > 0 },
+      {
+        key: "yt",
+        label: form.audioInputMode === "mp3" ? "MP3 file selected" : "YouTube URL is set",
+        ok: form.audioInputMode === "mp3" ? form.mp3FileData.length > 0 : form.youtubeUrl.trim().length > 0,
+      },
       { key: "pdf", label: "PDF path is set", ok: form.pdfPath.trim().length > 4 },
       { key: "pages", label: "Page spec is set", ok: form.pages.trim().length > 0 },
       {
@@ -483,11 +547,13 @@ function App() {
     setForm((prev) => ({
       ...prev,
       experimentName: String(loadedForm.experimentName || slug),
+      audioInputMode: (loadedForm.audioInputMode === "mp3" ? "mp3" : "youtube") as "youtube" | "mp3",
       youtubeUrl: String(loadedForm.youtubeUrl || ""),
       pdfPath: String(loadedForm.pdfPath || ""),
       pages: String(loadedForm.pages || ""),
       anchorToken: String(loadedForm.anchorToken || ""),
       anchorSegmentIndex: String(loadedForm.anchorSegmentIndex ?? "0"),
+      lastToken: String(loadedForm.lastToken || ""),
       minSeconds: String(loadedForm.minSeconds ?? "0.4"),
     }));
     if (snapshot.stageStatus) {
@@ -784,6 +850,8 @@ function App() {
             tokenId: String(tok.tokenId || ""),
             token: String(tok.token || ""),
             charCount: Number(tok.char_count ?? (tok.token ? String(tok.token).length : 0)),
+            w: Number(tok.w ?? 0),
+            matraCount: countMatras(String(tok.token || "")),
             globalIdx: flat.length,
             isEligible: !!tok.is_eligible,
             // Source of truth: enriched file's timestamps, not the CSV's kept_token_ids
@@ -1350,14 +1418,59 @@ function App() {
                   {openInfo === "experimentName" ? <InfoBlob text={FIELD_HELP.experimentName} /> : null}
                 </label>
                 <label>
-                  <FieldTitle title="YouTube URL" fieldKey="youtubeUrl" openInfo={openInfo} onInfoToggle={setOpenInfo} />
-                  <input
-                    value={form.youtubeUrl}
-                    onChange={(e) => setForm((f) => ({ ...f, youtubeUrl: e.target.value }))}
-                    placeholder="https://www.youtube.com/watch?v=..."
-                    readOnly={experimentMode === "load"}
-                  />
-                  {openInfo === "youtubeUrl" ? <InfoBlob text={FIELD_HELP.youtubeUrl} /> : null}
+                  <span className="field-title">Audio Input</span>
+                  <div style={{ display: "flex", gap: "0.5rem", marginBottom: "0.4rem" }}>
+                    <button
+                      type="button"
+                      className={form.audioInputMode === "youtube" ? "primary-run" : "ghost"}
+                      style={{ padding: "0.2rem 0.7rem", fontSize: "0.85rem" }}
+                      onClick={() => setForm((f) => ({ ...f, audioInputMode: "youtube" }))}
+                      disabled={experimentMode === "load"}
+                    >
+                      YouTube URL
+                    </button>
+                    <button
+                      type="button"
+                      className={form.audioInputMode === "mp3" ? "primary-run" : "ghost"}
+                      style={{ padding: "0.2rem 0.7rem", fontSize: "0.85rem" }}
+                      onClick={() => setForm((f) => ({ ...f, audioInputMode: "mp3" }))}
+                      disabled={experimentMode === "load"}
+                    >
+                      Upload MP3
+                    </button>
+                  </div>
+                  {form.audioInputMode === "youtube" ? (
+                    <>
+                      <input
+                        value={form.youtubeUrl}
+                        onChange={(e) => setForm((f) => ({ ...f, youtubeUrl: e.target.value }))}
+                        placeholder="https://www.youtube.com/watch?v=..."
+                        readOnly={experimentMode === "load"}
+                      />
+                      {openInfo === "youtubeUrl" ? <InfoBlob text={FIELD_HELP.youtubeUrl} /> : null}
+                    </>
+                  ) : (
+                    <>
+                      <input
+                        type="file"
+                        accept="audio/mpeg,audio/mp3,.mp3"
+                        disabled={experimentMode === "load"}
+                        onChange={(e) => {
+                          const file = e.target.files?.[0];
+                          if (!file) return;
+                          const reader = new FileReader();
+                          reader.onload = () => {
+                            const b64 = (reader.result as string).split(",")[1] ?? "";
+                            setForm((f) => ({ ...f, mp3FileData: b64, mp3FileName: file.name }));
+                          };
+                          reader.readAsDataURL(file);
+                        }}
+                      />
+                      {form.mp3FileName ? (
+                        <span style={{ fontSize: "0.8rem", color: "#888" }}>{form.mp3FileName}</span>
+                      ) : null}
+                    </>
+                  )}
                 </label>
                 <label>
                   <FieldTitle title="PDF Path" fieldKey="pdfPath" openInfo={openInfo} onInfoToggle={setOpenInfo} />
@@ -1476,6 +1589,15 @@ function App() {
                       placeholder="P0008_T0007"
                     />
                     {openInfo === "anchorToken" ? <InfoBlob text={FIELD_HELP.anchorToken} /> : null}
+                </label>
+                <label>
+                  <FieldTitle title="Last Token" fieldKey="lastToken" openInfo={openInfo} onInfoToggle={setOpenInfo} />
+                    <input
+                      value={form.lastToken}
+                      onChange={(e) => setForm((f) => ({ ...f, lastToken: e.target.value }))}
+                      placeholder="Optional — leave blank to use all tokens after anchor"
+                    />
+                    {openInfo === "lastToken" ? <InfoBlob text={FIELD_HELP.lastToken} /> : null}
                 </label>
                 <label>
                   <FieldTitle title="Anchor Segment Index" fieldKey="anchorSegmentIndex" openInfo={openInfo} onInfoToggle={setOpenInfo} />
@@ -1747,6 +1869,9 @@ function App() {
                     <th style={{width:90}}>Time Reduction (s)</th>
                     <th style={{width:55}}>Start</th>
                     <th style={{width:55}}>End</th>
+                    <th style={{width:65}} title="Effective duration ÷ kept token count (s/token)">s/token</th>
+                    <th style={{width:65}} title="Effective duration ÷ total pixel width of kept tokens (s/px)">s/px</th>
+                    <th style={{width:65}} title="Effective duration ÷ total mātrā count of kept tokens (s/mātrā) — phonetic beat weight">s/mātrā</th>
                     <th style={{width:60}}>Status</th>
                     <th style={{width:65}}>Coverage</th>
                   </tr>
@@ -1786,7 +1911,7 @@ function App() {
                           ))}
                         </div>
                       </td>
-                      <td style={{textAlign:"center"}}>
+                      <td style={{textAlign:"center", minWidth: 160}}>
                         <input
                           type="number"
                           step={0.5}
@@ -1802,6 +1927,27 @@ function App() {
                       </td>
                       <td style={{fontSize:12}}>{row.audioStartS}</td>
                       <td style={{fontSize:12}}>{row.audioEndS}</td>
+                      <td style={{fontSize:12, textAlign:"center", color:"var(--muted)"}}>
+                        {(() => {
+                          const eff = (row.audioEndS - row.audioStartS) - row.timeReductionS;
+                          const n = row.keptTokens.length;
+                          return n > 0 ? (eff / n).toFixed(3) : "-";
+                        })()}
+                      </td>
+                      <td style={{fontSize:12, textAlign:"center", color:"var(--muted)"}}>
+                        {(() => {
+                          const eff = (row.audioEndS - row.audioStartS) - row.timeReductionS;
+                          const totalW = row.keptTokens.reduce((s, t) => s + t.w, 0);
+                          return totalW > 0 ? (eff / totalW).toFixed(4) : "-";
+                        })()}
+                      </td>
+                      <td style={{fontSize:12, textAlign:"center", color:"var(--muted)"}}>
+                        {(() => {
+                          const eff = (row.audioEndS - row.audioStartS) - row.timeReductionS;
+                          const totalM = row.keptTokens.reduce((s, t) => s + t.matraCount, 0);
+                          return totalM > 0 ? (eff / totalM).toFixed(4) : "-";
+                        })()}
+                      </td>
                       <td style={{fontSize:12}}>{row.status}</td>
                       <td style={{fontSize:12}}>{row.coverage}</td>
                     </tr>
