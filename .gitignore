@@ -1,5 +1,28 @@
+# Secrets
 .env
 .env.*
+
+# Research data and archives — inputs, audio, OCR output and experiment runs.
+# Large, regenerable, and not the point of the repository.
 archive/
 data/
+
+# Generated pipeline output. Belongs under data/; committed by accident, and
+# check_extraction.json additionally embedded an absolute local path.
+check_extraction.json
+
+# Python build artifacts
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.pytest_cache/
+.venv/
+
+# Node and frontend build output — rebuilt by `npm run build` (tsc -b && vite build)
 **/node_modules/
+frontend/dist/
+*.tsbuildinfo
+
+# macOS and editor cruft
+.DS_Store
+*.mov
